@@ -1,0 +1,68 @@
+{
+  "id": "camera_movement",
+  "options": [
+    {
+      "id": "static",
+      "label_zh": "固定",
+      "label_en": "Static",
+      "prompt_phrase": "固定机位,稳定画面",
+      "enabled": true,
+      "notes": "最稳定的拍摄方式",
+      "default": true
+    },
+    {
+      "id": "push_in",
+      "label_zh": "推进",
+      "label_en": "Push In / Dolly In",
+      "prompt_phrase": "镜头推进,逐渐靠近主体",
+      "enabled": true,
+      "notes": "制造紧张/聚焦",
+      "default": false
+    },
+    {
+      "id": "pull_out",
+      "label_zh": "拉远",
+      "label_en": "Pull Out / Dolly Out",
+      "prompt_phrase": "镜头拉远,揭示全貌",
+      "enabled": true,
+      "notes": "场景交代/情绪释放",
+      "default": false
+    },
+    {
+      "id": "pan",
+      "label_zh": "横移",
+      "label_en": "Pan / Tracking",
+      "prompt_phrase": "横移跟拍,水平运镜",
+      "enabled": true,
+      "notes": "跟随动作/场景扫描",
+      "default": false
+    },
+    {
+      "id": "tilt",
+      "label_zh": "升降",
+      "label_en": "Tilt / Crane",
+      "prompt_phrase": "升降镜头,垂直运镜",
+      "enabled": true,
+      "notes": "建筑/风景/气势展现",
+      "default": false
+    },
+    {
+      "id": "orbit",
+      "label_zh": "环绕",
+      "label_en": "Orbit / Arc",
+      "prompt_phrase": "环绕运镜,360度旋转",
+      "enabled": true,
+      "notes": "角色展示/氛围营造",
+      "default": false
+    },
+    {
+      "id": "handheld",
+      "label_zh": "手持跟拍",
+      "label_en": "Handheld Follow",
+      "prompt_phrase": "手持跟拍,轻微晃动,临场感",
+      "enabled": true,
+      "notes": "纪实/Vlog风格",
+      "default": false
+    }
+  ]
+}

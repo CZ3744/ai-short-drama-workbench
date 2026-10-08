@@ -1,0 +1,72 @@
+{
+  "id": "promo_30s",
+  "label": "30s 产品宣传",
+  "preview_image": "/images/templates/promo.png",
+  "description": "30 秒产品/品牌快闪宣传片。适合信息流广告、品牌露出、产品上新。高冲击力，强转化引导。",
+  "defaults": {
+    "content_type": "promo",
+    "platform": "douyin",
+    "aspect_ratio": "9:16",
+    "visual_style": "商业广告质感",
+    "audience": "潜在消费者",
+    "tone": "高能、冲击力、转化导向",
+    "pacing": "快闪节奏",
+    "camera_style": "运动镜头 + 特写",
+    "ending_type": "CTA",
+    "max_retake_per_shot": 3,
+    "max_video_seconds_per_job": 30,
+    "max_parallel_tasks": 3
+  },
+  "character_placeholders": [
+    {
+      "slot_id": "spokesperson",
+      "role": "代言人/主播",
+      "hint": "产品代言形象，真人或虚拟"
+    },
+    {
+      "slot_id": "target_user",
+      "role": "目标用户",
+      "hint": "使用产品的典型用户形象，可选"
+    }
+  ],
+  "scene_placeholders": [
+    {
+      "slot_id": "product_stage",
+      "hint": "产品展示场景，如展示台/使用环境"
+    },
+    {
+      "slot_id": "lifestyle",
+      "hint": "生活方式场景，如健身房/办公室/户外"
+    }
+  ],
+  "storyboard_skeleton": {
+    "episodes": [
+      {
+        "index": 1,
+        "title_template": "30s 快闪宣传",
+        "shots_skeleton": [
+          {
+            "action_template": "痛点画面 + hook 文字：「还在为 XX 烦恼吗？」",
+            "duration": 4
+          },
+          {
+            "action_template": "产品在{product_stage}特写亮相，旋转展示",
+            "duration": 5
+          },
+          {
+            "action_template": "用户使用场景快切：{lifestyle}中验证效果",
+            "duration": 8
+          },
+          {
+            "action_template": "代言人出镜推荐 + 核心卖点字幕",
+            "duration": 8
+          },
+          {
+            "action_template": "限时优惠/促销信息 + 点击引导 CTA",
+            "duration": 5
+          }
+        ]
+      }
+    ]
+  }
+}

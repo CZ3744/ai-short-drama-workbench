@@ -1,0 +1,50 @@
+{
+  "id": "camera_style",
+  "options": [
+    {
+      "id": "cinematic",
+      "label_zh": "电影感",
+      "label_en": "Cinematic",
+      "prompt_phrase": "电影感运镜,浅景深,光影层次丰富",
+      "enabled": true,
+      "notes": "电影级画面质感",
+      "default": false
+    },
+    {
+      "id": "vertical_short_drama",
+      "label_zh": "抖音竖屏叙事",
+      "label_en": "Douyin Vertical Drama",
+      "prompt_phrase": "竖屏叙事构图,人物居中,上半身为主",
+      "enabled": true,
+      "notes": "竖屏短剧标准构图",
+      "default": true
+    },
+    {
+      "id": "straightforward",
+      "label_zh": "平铺直叙",
+      "label_en": "Straightforward",
+      "prompt_phrase": "平铺直叙,正面机位,稳定画面",
+      "enabled": true,
+      "notes": "信息传达清晰",
+      "default": false
+    },
+    {
+      "id": "handheld_follow",
+      "label_zh": "手持跟拍",
+      "label_en": "Handheld Follow",
+      "prompt_phrase": "手持跟拍风格,轻微晃动,临场感强",
+      "enabled": true,
+      "notes": "纪实/Vlog风格",
+      "default": false
+    },
+    {
+      "id": "fancy_movement",
+      "label_zh": "运镜华丽",
+      "label_en": "Fancy Camera Movement",
+      "prompt_phrase": "华丽运镜,多角度切换,转场流畅",
+      "enabled": true,
+      "notes": "高端制作感",
+      "default": false
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "subtitle_style",
+  "options": [
+    {
+      "id": "vertical_big",
+      "label_zh": "竖屏大字",
+      "label_en": "Vertical Big Text",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "竖屏短视频标配,字大醒目",
+      "default": true,
+      "font_family": "Noto Sans SC",
+      "font_size_ratio": 0.06,
+      "stroke_width": 3,
+      "primary_color": "#FFFFFF",
+      "outline_color": "#000000"
+    },
+    {
+      "id": "horizontal_cinema",
+      "label_zh": "横屏影院",
+      "label_en": "Horizontal Cinema",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "横屏电影风格字幕,底部居中",
+      "default": false,
+      "font_family": "Noto Sans SC",
+      "font_size_ratio": 0.035,
+      "stroke_width": 2,
+      "primary_color": "#FFFFFF",
+      "outline_color": "#000000"
+    },
+    {
+      "id": "bilingual",
+      "label_zh": "双语字幕",
+      "label_en": "Bilingual Subtitle",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "中英双语字幕",
+      "default": false,
+      "font_family": "Noto Sans SC",
+      "font_size_ratio": 0.03,
+      "stroke_width": 2,
+      "primary_color": "#FFFFFF",
+      "outline_color": "#000000"
+    },
+    {
+      "id": "annotation",
+      "label_zh": "注释风",
+      "label_en": "Annotation Style",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "注释/弹幕风格,字体较小",
+      "default": false,
+      "font_family": "Noto Sans SC",
+      "font_size_ratio": 0.025,
+      "stroke_width": 1,
+      "primary_color": "#FFFF00",
+      "outline_color": "#000000"
+    }
+  ]
+}

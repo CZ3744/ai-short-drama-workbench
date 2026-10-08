@@ -1,0 +1,43 @@
+{
+  "id": "scene_ref_count",
+  "label": "场景参考图张数",
+  "description": "场景候选参考图每次再生的张数选项",
+  "options": [
+    {
+      "id": "1",
+      "label_zh": "1 张",
+      "label_en": "1 image",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "2",
+      "label_zh": "2 张",
+      "label_en": "2 images",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "4",
+      "label_zh": "4 张",
+      "label_en": "4 images",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": true
+    },
+    {
+      "id": "6",
+      "label_zh": "6 张",
+      "label_en": "6 images",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    }
+  ]
+}

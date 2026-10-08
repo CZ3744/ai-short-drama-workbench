@@ -1,0 +1,410 @@
+/* ============================================
+   v24 Shell & Layout Classes
+   基于 design-skill/spec.md 第 7 节布局原则
+   与旧 CSS 类 (.wb-shell, .wb-rail 等) 共存
+   ============================================ */
+
+/* ── Shell: 页面顶层容器 ── */
+.v24-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-canvas);
+}
+
+/* ── Topbar: 顶栏 56-60px ── */
+.v24-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  height: 56px;
+  padding: 0 var(--sp-6);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ink-100);
+  border-radius: var(--r-xl);
+}
+
+/* ── Sidenav: 侧导航 220px ── */
+.v24-sidenav {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface-card);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+  overflow-y: auto;
+}
+
+/* ── Rail: 左侧导航轨道 ── */
+.v24-rail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-card);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Content Area: 内容主区域 ── */
+.v24-content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  background: var(--surface-canvas);
+}
+
+/* ── Page Header: 页面标题栏 ── */
+.v24-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: var(--sp-6) var(--sp-8) var(--sp-4);
+  gap: var(--sp-4);
+}
+
+.v24-page-header h1,
+.v24-page-title {
+  font-family: "Noto Serif SC", "Plus Jakarta Sans", "PingFang SC", serif;
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--ink-950);
+  letter-spacing: -0.015em;
+}
+
+/* ── Toolbar: 工具栏/过滤栏 ── */
+.v24-toolbar {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: var(--sp-2) var(--sp-6);
+  gap: var(--sp-2);
+  border-bottom: 1px solid var(--ink-100);
+  background: var(--surface-card);
+  flex-wrap: wrap;
+}
+
+/* ── Body: 页面主体滚动区 ── */
+.v24-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-6);
+  background: var(--surface-canvas);
+}
+
+.v24-body--padded {
+  padding: var(--sp-8);
+}
+
+/* ── Kanban: 看板列容器 ── */
+.v24-kanban {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+  min-height: 320px;
+}
+
+@media (max-width: 1024px) {
+  .v24-kanban {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .v24-kanban {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Kanban Column ── */
+.v24-kanban-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-radius: var(--r-lg);
+  background: var(--ink-50);
+  border: 1px solid var(--ink-100);
+  min-height: 200px;
+}
+
+.v24-kanban-col__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-1);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+/* ── Section: 页面区块 ── */
+.v24-section {
+  margin-bottom: var(--sp-6);
+}
+
+.v24-section__header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+
+.v24-section__title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+/* ── Grid layouts ── */
+.v24-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); }
+.v24-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+.v24-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); }
+.v24-grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--sp-3); }
+
+/* ── Three-column layout (Shot Detail / Compose) ── */
+.v24-three-col {
+  display: grid;
+  grid-template-columns: 260px 1fr 300px;
+  gap: var(--sp-4);
+}
+
+@media (max-width: 1200px) {
+  .v24-three-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Split Pane (Inbox / SceneList / CharacterList) ── */
+.v24-split-pane {
+  display: flex;
+  height: 100%;
+}
+
+.v24-split-pane__left {
+  flex-shrink: 0;
+  border-right: 1px solid var(--ink-100);
+  background: var(--surface-card);
+}
+
+.v24-split-pane__right {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ── Episode list row ── */
+.v24-ep-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.v24-ep-row:hover {
+  background: var(--ink-50);
+}
+
+/* ── Empty state ── */
+.v24-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-12) var(--sp-6);
+  text-align: center;
+  color: var(--ink-400);
+}
+
+.v24-empty__icon {
+  margin-bottom: var(--sp-4);
+  color: var(--ink-200);
+}
+
+.v24-empty__text {
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-2);
+}
+
+/* ── Bottom bar (批量操作) ── */
+.v24-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: var(--sp-3) var(--sp-6);
+  border-top: 1px solid var(--ink-100);
+  background: var(--surface-card);
+}
+
+/* ── Settings drawer sections (保留 .settings-section Playwright 选择器) ── */
+.v24-settings-section {
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--ink-100);
+}
+
+.v24-settings-section__title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-900);
+  margin-bottom: var(--sp-3);
+}
+
+/* ── Drawer overlay scrim ── */
+.v24-drawer-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: var(--surface-overlay);
+}
+
+/* ── Dashboard KPI card ── */
+.v24-kpi-card {
+  padding: var(--sp-4);
+  background: var(--surface-card);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Progress pulse bar ── */
+.v24-progress-bar {
+  height: 4px;
+  border-radius: var(--r-full);
+  background: var(--ink-100);
+  overflow: hidden;
+}
+
+.v24-progress-bar__fill {
+  height: 100%;
+  border-radius: var(--r-full);
+  transition: width var(--dur-med) var(--ease-out);
+}
+
+/* ── Inline filter tabs ── */
+.v24-filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.v24-filter-tab {
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+/* ── Stat badge ── */
+.v24-stat-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+}
+
+/* ── Cover header gradient card ── */
+.v24-cover-header {
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-8) var(--sp-10);
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
+  color: #fff;
+}
+
+/* ── Timeline track lane ── */
+.v24-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  overflow-x: auto;
+}
+
+.v24-timeline__track {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 28px;
+}
+
+.v24-timeline__track-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  flex-shrink: 0;
+  border-radius: var(--r-sm);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* ── Provider matrix card ── */
+.v24-provider-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--sp-3);
+}
+
+/* ── Card with title + content pattern ── */
+.v24-card {
+  background: var(--surface-card);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+}
+
+.v24-card__header {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-600);
+  margin-bottom: var(--sp-3);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+/* ── Mood board grid ── */
+.v24-mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--sp-3);
+}
+
+/* ── Collage item ── */
+.v24-collage-item {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--ink-100);
+  aspect-ratio: 1;
+  position: relative;
+}
+
+/* ── Keyword cloud ── */
+.v24-keyword-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  padding: var(--sp-3) 0;
+}
+
+/* ── Color palette swatches ── */
+.v24-color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--ink-100);
+  flex-shrink: 0;
+}

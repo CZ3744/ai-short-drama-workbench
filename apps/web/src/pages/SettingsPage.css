@@ -1,0 +1,15 @@
+.settings-provider-card .mk-pill {
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .settings-provider-title {
+    flex-basis: 100%;
+  }
+
+  .settings-provider-heading > span:empty {
+    display: none;
+  }
+}

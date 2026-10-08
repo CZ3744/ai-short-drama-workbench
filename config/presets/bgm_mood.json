@@ -1,0 +1,68 @@
+{
+  "id": "bgm_mood",
+  "options": [
+    {
+      "id": "warm",
+      "label_zh": "温馨",
+      "label_en": "Warm",
+      "prompt_phrase": "温馨舒缓的背景音乐",
+      "enabled": true,
+      "notes": "亲情/治愈/日常",
+      "default": true
+    },
+    {
+      "id": "tense",
+      "label_zh": "紧张",
+      "label_en": "Tense",
+      "prompt_phrase": "紧张悬疑的背景音乐",
+      "enabled": true,
+      "notes": "悬疑/推理/追逐",
+      "default": false
+    },
+    {
+      "id": "funny",
+      "label_zh": "搞笑",
+      "label_en": "Funny",
+      "prompt_phrase": "轻松搞笑的背景音乐",
+      "enabled": true,
+      "notes": "喜剧/搞笑/吐槽",
+      "default": false
+    },
+    {
+      "id": "epic",
+      "label_zh": "史诗",
+      "label_en": "Epic",
+      "prompt_phrase": "史诗磅礴的背景音乐",
+      "enabled": true,
+      "notes": "战争/奇幻/大场面",
+      "default": false
+    },
+    {
+      "id": "healing",
+      "label_zh": "治愈",
+      "label_en": "Healing",
+      "prompt_phrase": "治愈系轻柔背景音乐",
+      "enabled": true,
+      "notes": "治愈/冥想/减压",
+      "default": false
+    },
+    {
+      "id": "emo",
+      "label_zh": "emo",
+      "label_en": "Emotional",
+      "prompt_phrase": "伤感忧郁的背景音乐",
+      "enabled": true,
+      "notes": "伤感/怀旧/虐心",
+      "default": false
+    },
+    {
+      "id": "battle",
+      "label_zh": "战斗",
+      "label_en": "Battle",
+      "prompt_phrase": "热血战斗的背景音乐",
+      "enabled": true,
+      "notes": "战斗/热血/竞技",
+      "default": false
+    }
+  ]
+}

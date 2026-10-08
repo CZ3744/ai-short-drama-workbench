@@ -1,0 +1,77 @@
+{
+  "id": "audience",
+  "options": [
+    {
+      "id": "general",
+      "label_zh": "通用",
+      "label_en": "General",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "不限定特定人群",
+      "default": true
+    },
+    {
+      "id": "female",
+      "label_zh": "女性向",
+      "label_en": "Female Targeted",
+      "prompt_phrase": "女性受众偏好,情感细腻",
+      "enabled": true,
+      "notes": "甜宠/言情/美妆",
+      "default": false
+    },
+    {
+      "id": "male",
+      "label_zh": "男性向",
+      "label_en": "Male Targeted",
+      "prompt_phrase": "男性受众偏好,热血/战斗",
+      "enabled": true,
+      "notes": "战神/逆袭/热血",
+      "default": false
+    },
+    {
+      "id": "children",
+      "label_zh": "儿童",
+      "label_en": "Children",
+      "prompt_phrase": "儿童友好,色彩明亮,内容积极",
+      "enabled": true,
+      "notes": "6-12岁",
+      "default": false
+    },
+    {
+      "id": "teenager",
+      "label_zh": "青少年",
+      "label_en": "Teenager",
+      "prompt_phrase": "青少年风格,潮流元素,校园场景",
+      "enabled": true,
+      "notes": "13-18岁",
+      "default": false
+    },
+    {
+      "id": "middle_aged",
+      "label_zh": "中老年",
+      "label_en": "Middle-aged & Senior",
+      "prompt_phrase": "中老年受众,节奏舒缓,传统审美",
+      "enabled": true,
+      "notes": "45岁以上",
+      "default": false
+    },
+    {
+      "id": "developer",
+      "label_zh": "开发者",
+      "label_en": "Developer",
+      "prompt_phrase": "技术向,代码/架构展示",
+      "enabled": true,
+      "notes": "技术社区",
+      "default": false
+    },
+    {
+      "id": "student",
+      "label_zh": "学生",
+      "label_en": "Student",
+      "prompt_phrase": "学生群体,学习/考试/校园",
+      "enabled": true,
+      "notes": "大学生为主",
+      "default": false
+    }
+  ]
+}

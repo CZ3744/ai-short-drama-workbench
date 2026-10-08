@@ -1,0 +1,884 @@
+/* v24-* 命名空间: 设计稿工具类 (mk-card / mk-pill / mk-btn / mk-thumb / mk-chip / mk-kbd 等)
+   基于 design-skill/reference/styles/mock.css, 与旧 CSS 类共存 */
+
+/* === Card === */
+/* 2026-05-26 App Store 质感升级 — 用户原话"做出卡片质感, 像 app store 那样, 不是单纯画个框".
+   - 微妙渐变背景 (顶部白 → 底部更暖白), 不再单色塑料感
+   - 多层柔和阴影: 贴近层 (1px 3px) + 远扩散层 (8px 24px), 像悬浮在桌面
+   - 边框降到几乎不见 (rgba 0.04), 让阴影承担"卡可辨"职责
+   - 顶部 inset 高光保留, 模拟玻璃表面反光
+   - 圆角 r-xl (14px), 跟全局节奏一致
+   - 119 处 .mk-card 一次升级, 全项目同步获得新质感 */
+.mk-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fcfbf8 100%);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: var(--r-xl);
+  box-shadow:
+    0 1px 3px rgba(120, 100, 80, 0.05),
+    0 8px 24px rgba(120, 100, 80, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+/* 嵌套卡 / sub-section — 给浅米底融入感, 跟主卡形成层次差 */
+.mk-card--nested {
+  background: var(--ink-50);
+  border: none;
+  box-shadow: none;
+  border-radius: var(--r-lg);
+}
+/* 平面卡 — 在某些紧凑场景 (chip 内嵌 / dropdown 内) 不需要阴影 */
+.mk-card--flat {
+  background: var(--surface-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: none;
+}
+
+/* === Chip === */
+.mk-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  background: var(--ink-50);
+  color: var(--ink-600);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.mk-chip--outline { background: transparent; border-color: var(--ink-100); }
+.mk-chip--brand { background: var(--brand-50); color: var(--brand-700); border-color: var(--brand-100); }
+.mk-chip--ok { background: var(--ok-bg); color: var(--ok); }
+.mk-chip--warn { background: var(--warn-bg); color: #8c6500; }
+.mk-chip--err { background: var(--err-bg); color: var(--err); }
+.mk-chip--info { background: var(--info-bg); color: var(--info); }
+.mk-chip--ghost { background: transparent; color: var(--ink-500); }
+
+/* === Status Pill === */
+.mk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 9px 0 8px;
+  border-radius: var(--r-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  background: var(--ink-50);
+  color: var(--ink-600);
+  border: 1px solid rgba(28, 25, 23, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+}
+.mk-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.7;
+}
+.mk-pill--draft { background: var(--ink-50); color: var(--ink-500); }
+.mk-pill--generating { background: var(--brand-50); color: var(--brand-700); }
+.mk-pill--generating::before { animation: mk-pulse 1.2s ease-in-out infinite; }
+.mk-pill--ready { background: #eaf3fb; color: #2563a8; }
+.mk-pill--picked { background: var(--ok-bg); color: var(--ok); }
+.mk-pill--approved { background: #e8f2ec; color: #1d6e3f; }
+.mk-pill--failed { background: var(--err-bg); color: var(--err); }
+
+@keyframes mk-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* === Button === */
+.mk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-700);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+  user-select: none;
+}
+.mk-btn:hover:not(:disabled) { background: var(--ink-50); transform: translateY(-1px); }
+.mk-btn:active:not(:disabled) { transform: translateY(0); }
+.mk-btn:disabled { cursor: not-allowed; opacity: 0.62; }
+.mk-btn--primary {
+  background: linear-gradient(180deg, var(--brand-500), var(--brand-600));
+  color: #fff;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.24) inset, 0 7px 16px rgba(160,70,40,0.22), 0 1px 2px rgba(160,70,40,0.18);
+}
+.mk-btn--primary:hover:not(:disabled) {
+  background: linear-gradient(180deg, var(--brand-500), var(--brand-700));
+  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 10px 22px rgba(160,70,40,0.28), 0 2px 4px rgba(160,70,40,0.18);
+}
+.mk-btn--secondary {
+  background: var(--surface-card);
+  border-color: rgba(28, 25, 23, 0.1);
+  color: var(--ink-800);
+  box-shadow: 0 1px 2px rgba(28,25,23,0.04), inset 0 1px 0 rgba(255,255,255,0.76);
+}
+.mk-btn--secondary:hover:not(:disabled) {
+  background: var(--ink-50);
+  border-color: rgba(28, 25, 23, 0.16);
+  box-shadow: 0 4px 10px rgba(28,25,23,0.06), inset 0 1px 0 rgba(255,255,255,0.76);
+}
+/* 2026-05-21 — ghost 按钮加描边 + 浅底色, 之前 transparent 看不到按钮形状.
+   用户原话: "复制完整提示词、复制完整json这些按钮... 现在没有勾边看不出来是个按钮,所有类似的地方都要修复". */
+.mk-btn--ghost {
+  color: var(--ink-700);
+  background: var(--surface-card);
+  border-color: rgba(28, 25, 23, 0.12);
+  box-shadow: 0 1px 2px rgba(28,25,23,0.03);
+}
+.mk-btn--ghost:hover:not(:disabled) {
+  color: var(--ink-900);
+  background: var(--ink-50);
+  border-color: rgba(28, 25, 23, 0.20);
+  box-shadow: 0 2px 6px rgba(28,25,23,0.06);
+}
+.mk-btn--danger {
+  color: var(--err);
+  background: var(--surface-card);
+  border-color: rgba(220, 38, 38, 0.20);
+  box-shadow: 0 1px 2px rgba(28,25,23,0.03);
+}
+.mk-btn--danger:hover:not(:disabled) {
+  background: var(--err-bg);
+  border-color: rgba(220, 38, 38, 0.35);
+  box-shadow: 0 2px 6px rgba(220,38,38,0.10);
+}
+.mk-btn--sm { height: 28px; padding: 0 10px; font-size: var(--fs-xs); border-radius: var(--r-sm); }
+.mk-btn--xs { height: 24px; padding: 0 8px; font-size: 11px; border-radius: var(--r-sm); gap: 4px; }
+.mk-btn--icon { width: 32px; padding: 0; }
+.mk-btn--icon.mk-btn--sm { width: 28px; }
+.mk-btn--icon.mk-btn--xs { width: 24px; }
+
+/* === Input / Select === */
+.mk-input, .mk-select {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--r-md);
+  background: var(--surface-card);
+  border: 1px solid transparent;
+  box-shadow: inset 0 0 0 1px var(--ink-150, var(--ink-200)), 0 1px 1px rgba(28,25,23,0.02);
+  color: var(--ink-900);
+  font-size: var(--fs-sm);
+  outline: none;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.mk-input:focus, .mk-select:focus {
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1px var(--brand-400), 0 0 0 3px rgba(217, 119, 87, 0.12);
+}
+.mk-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--surface-card);
+  border: 1px solid transparent;
+  box-shadow: inset 0 0 0 1px var(--ink-150, var(--ink-200)), 0 1px 1px rgba(28,25,23,0.02);
+  color: var(--ink-900);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+}
+.mk-textarea:focus {
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1px var(--brand-400), 0 0 0 3px rgba(217, 119, 87, 0.12);
+}
+
+/* === App Store style chip tabs === */
+.mk-tab-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border-radius: var(--r-full);
+  background: var(--ink-50);
+  box-shadow: inset 0 0 0 1px rgba(28,25,23,0.04);
+}
+.mk-tab {
+  height: 26px;
+  padding: 0 12px;
+  border: none;
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--ink-600);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+.mk-tab:hover { color: var(--ink-900); }
+.mk-tab--active {
+  background: var(--ink-900);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(28,25,23,0.16), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* === Label === */
+.mk-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-400);
+}
+
+/* === Divider === */
+.mk-divider { height: 1px; background: var(--ink-100); }
+
+/* === Thumbnail === */
+.mk-aspect-16-9 { aspect-ratio: 16 / 9; }
+.mk-thumb {
+  position: relative;
+  border-radius: var(--r-md);
+  background: var(--ink-100);
+  overflow: hidden;
+}
+.mk-thumb--empty {
+  background:
+    linear-gradient(135deg, transparent 47%, var(--ink-200) 47%, var(--ink-200) 53%, transparent 53%),
+    linear-gradient(45deg,  transparent 47%, var(--ink-200) 47%, var(--ink-200) 53%, transparent 53%),
+    var(--ink-100);
+}
+/* 源码 mock.css 的无后缀变体 — design-skill batch2.jsx 多处用到 thumb: "mk-thumb--photo"
+   不要重命名 photo-1 → photo（apps/web 生产代码 6 处依赖 photo-1） */
+.mk-thumb--photo {
+  background-image: linear-gradient(135deg, #e0c2ad 0%, #b48b73 60%, #8a5b44 100%);
+}
+.mk-thumb--photo-1 {
+  background-image: linear-gradient(135deg, #c08d6c 0%, #a36649 40%, #6f4030 100%);
+}
+.mk-thumb--photo-2 {
+  background-image: linear-gradient(135deg, #b9b0a4 0%, #847b71 60%, #4a4239 100%);
+}
+.mk-thumb--photo-3 {
+  background-image: linear-gradient(160deg, #e6c2a4 0%, #b87a5a 50%, #6e3722 100%);
+}
+.mk-thumb--photo-4 {
+  background-image: linear-gradient(140deg, #4a6480 0%, #2e3f54 60%, #14202d 100%);
+}
+.mk-thumb--photo-5 {
+  background-image: linear-gradient(140deg, #d6c3a8 0%, #9c8a72 50%, #574a3a 100%);
+}
+.mk-thumb--photo-6 {
+  background-image: linear-gradient(135deg, #e6cdb6 0%, #9c7355 100%);
+}
+.mk-thumb--photo-7 {
+  background-image: linear-gradient(140deg, #8b7869 0%, #2e231b 100%);
+}
+.mk-thumb__overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.92);
+  background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+}
+.mk-thumb__tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: var(--r-full);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+.mk-thumb__corner {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: var(--r-full);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+/* === Candidate counter badge === */
+.mk-count {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+  padding: 0 6px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: var(--r-full);
+  backdrop-filter: blur(4px);
+}
+
+/* === Scrollbar === */
+.mk-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.mk-scroll::-webkit-scrollbar-thumb {
+  background: var(--ink-200);
+  border-radius: 999px;
+}
+.mk-scroll::-webkit-scrollbar-track { background: transparent; }
+
+/* === Keyboard hint === */
+.mk-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 6px;
+  background: var(--ink-50);
+  border: 1px solid var(--ink-100);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-600);
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+}
+.mk-kbd--dark {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.78);
+}
+
+/* === Dot === */
+.mk-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* === Series cover gradients === */
+.mk-cover-1 { background: linear-gradient(135deg, #e9b898 0%, #a14826 100%); }
+.mk-cover-2 { background: linear-gradient(140deg, #8b7869 0%, #2e231b 100%); }
+.mk-cover-3 { background: linear-gradient(135deg, #c2a07c 0%, #6a4733 60%, #2a1a12 100%); }
+.mk-cover-4 { background: linear-gradient(135deg, #d6c3a8 0%, #8a6f53 100%); }
+.mk-cover-5 { background: linear-gradient(135deg, #abd0ce 0%, #4f7775 60%, #1c2e34 100%); }
+.mk-cover-6 { background: linear-gradient(135deg, #e6cdb6 0%, #9c7355 100%); }
+
+/* === Display text === */
+.mk-display {
+  font-family: "Noto Serif SC", "Plus Jakarta Sans", "PingFang SC", serif;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* === Split button === */
+.mk-split { display: inline-flex; align-items: stretch; border-radius: var(--r-md); overflow: hidden; }
+.mk-split .mk-btn { border-radius: 0; }
+.mk-split .mk-btn:first-child { border-top-left-radius: var(--r-md); border-bottom-left-radius: var(--r-md); }
+.mk-split .mk-btn:last-child {
+  border-top-right-radius: var(--r-md);
+  border-bottom-right-radius: var(--r-md);
+  border-left: 1px solid rgba(255,255,255,0.18);
+}
+.mk-split .mk-btn--primary + .mk-btn--primary { border-left-color: rgba(255,255,255,0.22); }
+
+/* ==========================================================
+   v24-batch-all 追加（来源 batch2b.jsx b2bStyles）
+   - StageStepper / ShotMetaBar / AnchorBar / PoolTile / ModelSplitButton
+   ========================================================== */
+
+/* === Stage Stepper === */
+.v24-stage-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px 24px;
+  background: var(--surface-card);
+  border-bottom: 1px solid var(--ink-100);
+}
+.v24-stage-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  transition: background 160ms ease;
+}
+.v24-stage-step:hover { background: var(--ink-50); }
+.v24-stage-step--on { background: var(--brand-50); }
+.v24-stage-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  font-feature-settings: "tnum";
+  background: var(--ink-100);
+  color: var(--ink-500);
+  flex-shrink: 0;
+}
+.v24-stage-step--on .v24-stage-step-num { background: var(--brand-500); color: #fff; }
+.v24-stage-step--done .v24-stage-step-num { background: var(--ok-bg); color: var(--ok); }
+.v24-stage-step-label { font-size: 13px; font-weight: 600; color: var(--ink-800); }
+.v24-stage-step-sub { font-size: 11px; color: var(--ink-500); margin-top: 2px; }
+.v24-stage-step-line { width: 28px; height: 1px; background: var(--ink-200); margin: 0 -2px; flex-shrink: 0; }
+
+/* === Shot Meta Bar === */
+.v24-shot-meta-bar {
+  padding: 14px 24px;
+  background: var(--surface-card);
+  border-bottom: 1px solid var(--ink-100);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.v24-shot-no-box {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--brand-700);
+  background: var(--brand-50);
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.v24-shot-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink-900);
+  letter-spacing: -0.01em;
+}
+.v24-shot-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--ink-500);
+}
+
+/* === Character Anchor Bar === */
+.v24-anchor-bar {
+  padding: 8px 24px;
+  background: linear-gradient(180deg, rgba(217,119,87,0.04) 0%, rgba(217,119,87,0) 100%);
+  border-bottom: 1px solid var(--ink-100);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.v24-anchor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  background: var(--surface-card);
+  border-radius: 999px;
+  border: 1px solid var(--ink-200);
+  font-size: 11.5px;
+  cursor: pointer;
+}
+.v24-anchor-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  background: var(--ink-100);
+}
+
+/* === Pool Tile === */
+.v24-pool-tile {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  background: var(--ink-100);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.v24-pool-tile:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.v24-pool-tile--on {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(217,119,87,0.15);
+}
+.v24-pool-tile--dim { opacity: 0.55; filter: grayscale(0.3); }
+.v24-pool-tile--ghost { opacity: 0.32; filter: grayscale(0.8); }
+.v24-pool-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  backdrop-filter: blur(4px);
+}
+
+/* === Model Split Button === */
+.v24-msb-wrap { position: relative; display: inline-flex; }
+.v24-msb-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 16px;
+  background: var(--brand-500);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 4px 12px rgba(217,119,87,0.32);
+  transition: background 160ms ease;
+}
+.v24-msb-main:hover:not(:disabled) { background: var(--brand-600); }
+.v24-msb-main:disabled { opacity: 0.6; cursor: not-allowed; }
+.v24-msb-caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 40px;
+  background: var(--brand-600);
+  color: #fff;
+  border: none;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  cursor: pointer;
+  border-left: 1px solid rgba(255,255,255,0.22);
+}
+.v24-msb-caret:hover { background: var(--brand-700); }
+.v24-msb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.18);
+  font-size: 11px;
+  font-weight: 600;
+}
+.v24-msb-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 340px;
+  background: var(--surface-card);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.16), 0 0 0 1px var(--ink-100);
+  padding: 6px;
+  z-index: 30;
+}
+.v24-msb-section {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-400);
+  text-transform: uppercase;
+  padding: 8px 10px 4px;
+}
+.v24-msb-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+.v24-msb-item:hover { background: var(--ink-50); }
+.v24-msb-item--on { background: var(--brand-50); }
+.v24-msb-item--hot { background: rgba(217,119,87,0.04); }
+.v24-msb-item-name { font-size: 13px; font-weight: 600; color: var(--ink-900); display: flex; align-items: center; gap: 6px; }
+.v24-msb-item-note { font-size: 11px; color: var(--ink-500); margin-top: 2px; }
+.v24-msb-item-price { font-size: 10.5px; color: var(--ink-400); font-family: ui-monospace, Consolas, monospace; margin-top: 2px; font-feature-settings: "tnum"; }
+.v24-msb-item-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--ok); flex-shrink: 0; }
+.v24-msb-item-dot--coming { background: var(--ink-300); }
+.v24-msb-foot {
+  padding: 10px 14px;
+  border-top: 1px solid var(--ink-100);
+  margin: 6px -6px -6px;
+  font-size: 11px;
+  color: var(--ink-500);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  background: var(--ink-50);
+}
+
+/* === Patch Card (AI suggest) === */
+.v24-patch {
+  background: var(--surface-card);
+  border: 1px solid var(--ink-100);
+  border-radius: 14px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.v24-patch-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: #fdfaf4;
+  border-bottom: 1px solid var(--ink-100);
+}
+.v24-patch-tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.v24-patch-tag--modify { background: var(--info-bg); color: var(--info); }
+.v24-patch-tag--insert { background: var(--ok-bg); color: var(--ok); }
+.v24-patch-tag--rewrite { background: var(--warn-bg); color: var(--warn); }
+.v24-patch-tag--delete { background: var(--err-bg); color: var(--err); }
+.v24-patch-title { font-size: 12.5px; font-weight: 600; color: var(--ink-900); }
+.v24-patch-path { font-family: ui-monospace, Consolas, monospace; font-size: 10px; color: var(--ink-500); }
+.v24-patch-body { padding: 8px 12px; display: flex; flex-direction: column; gap: 5px; }
+.v24-patch-diff-old {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--err-bg);
+  color: var(--ink-700);
+  font-size: 13px;
+  line-height: 1.55;
+  border-radius: 8px;
+  text-decoration: line-through;
+  text-decoration-color: rgba(200,60,60,0.5);
+}
+.v24-patch-diff-new {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--ok-bg);
+  color: var(--ink-900);
+  font-size: 13px;
+  line-height: 1.55;
+  border-radius: 8px;
+}
+.v24-patch-affect {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--warn-bg);
+  font-size: 11px;
+  color: var(--ink-700);
+  border-top: 1px solid var(--ink-100);
+}
+.v24-patch-acts {
+  display: flex;
+  gap: 6px;
+  padding: 9px 12px;
+  border-top: 1px solid var(--ink-50);
+}
+
+/* === Stage page common === */
+.v24-stage-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-canvas);
+}
+.v24-stage-body {
+  flex: 1;
+  min-height: 0;
+  padding: 18px;
+  overflow: auto;
+}
+.v24-stage-foot {
+  border-top: 1px solid var(--ink-100);
+  padding: 14px 24px;
+  background: var(--surface-card);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* === SceneCard / ScriptMeta (batch 2A) === */
+.v24-script-scene-card {
+  background: var(--surface-card);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.v24-script-scene-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: linear-gradient(180deg, #fdfaf4, #fbf6ee);
+  border-bottom: 1px solid var(--ink-100);
+  flex-wrap: wrap;
+}
+.v24-script-scene-no {
+  padding: 3px 10px;
+  background: var(--brand-500);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+}
+.v24-script-scene-body {
+  padding: 10px 18px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.v24-script-narration {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  margin: 0;
+  font-family: "Source Han Serif SC", "Noto Serif SC", serif;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-800);
+}
+.v24-script-dialogue {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+.v24-script-dialogue-char {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-900);
+  text-align: right;
+  padding-top: 2px;
+}
+.v24-script-dialogue-text {
+  font-size: 15px;
+  color: var(--ink-900);
+  line-height: 1.7;
+}
+
+/* === v24-batch-all · batch1 设计稿还原所需动画/hover === */
+.mk-card-hov { transition: transform 180ms ease, box-shadow 180ms ease; }
+.mk-card-hov:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.mk-enter { animation: mk-enter 380ms cubic-bezier(.2,.8,.25,1) both; }
+.mk-enter-soft { animation: mk-enter 520ms cubic-bezier(.2,.8,.25,1) both; }
+@keyframes mk-fade-up { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes mk-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.mk-stagger > * { animation: mk-enter 320ms cubic-bezier(.2,.8,.25,1) both; }
+.mk-stagger > *:nth-child(2) { animation-delay: 40ms; }
+.mk-stagger > *:nth-child(3) { animation-delay: 80ms; }
+.mk-stagger > *:nth-child(4) { animation-delay: 120ms; }
+.mk-stagger > *:nth-child(5) { animation-delay: 160ms; }
+.mk-stagger > *:nth-child(6) { animation-delay: 200ms; }
+.mk-stagger > *:nth-child(7) { animation-delay: 240ms; }
+.mk-breathe { animation: mk-breathe 2200ms ease-in-out infinite; }
+@keyframes mk-breathe { 0%,100% { box-shadow: 0 4px 12px rgba(217,119,87,0.32); } 50% { box-shadow: 0 8px 22px rgba(217,119,87,0.55); } }
+.mk-shimmer::after {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: -120%; width: 60%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: skewX(-18deg);
+  animation: mk-shimmer 3600ms ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes mk-shimmer { 0% { left: -120%; } 65%, 100% { left: 160%; } }
+/* 2026-05-21 — Button loading 自旋 (统一 Button 组件用) */
+@keyframes mk-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.mk-spin { animation: mk-spin 0.9s linear infinite; }
+.mk-thumb--empty {
+  background: linear-gradient(135deg, var(--ink-50), var(--ink-100));
+}
+
+/* === batch1 图标组件里用到的图标名映射到 Icon === */
+/* inbox, warning, search, filter, grid, list, arrowRight, plus — 已在 Icon.tsx 中 */
+
+/* ============================================
+   MentionTextarea (contenteditable + chip 节点架构, 2026-05-20 重写)
+   ============================================ */
+
+/* contenteditable 没原生 placeholder, 用 :empty + [data-empty] 双覆盖.
+   2026-05-20 Wave T hotfix — 仅 :empty 不够: 用户删空时 Chrome 留 <br> 让 :empty 失败,
+   placeholder 消失。MentionTextarea 自身监听 input 加 data-empty 属性更可靠。
+   两条规则都留 — :empty 处理初始状态(还没绑过 handler),data-empty 处理动态状态。 */
+.v24-mention-editor:empty::before,
+.v24-mention-editor[data-empty="true"]::before {
+  content: attr(data-placeholder);
+  color: var(--ink-400, #999);
+  pointer-events: none;
+}
+
+/* chip 节点 — 跟普通文字基线对齐, 不让 inline-flex 撑大行高 */
+.mention-chip {
+  vertical-align: baseline;
+  line-height: inherit;
+  /* 浏览器选区 chip 时高亮(部分浏览器默认行为温和, 加显式样式) */
+}
+.mention-chip::selection {
+  background: var(--brand-200, #93c5fd);
+  color: var(--brand-900, #1e3a8a);
+}
+/* chip 内 textNode 选区(Firefox 行为) */
+.mention-chip *::selection {
+  background: var(--brand-200, #93c5fd);
+}
+
+

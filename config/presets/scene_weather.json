@@ -1,0 +1,61 @@
+{
+  "id": "scene_weather",
+  "label": "场景天气",
+  "description": "场景的天气选项",
+  "options": [
+    {
+      "id": "sunny",
+      "label_zh": "晴",
+      "label_en": "Sunny",
+      "prompt_phrase": "clear sky, sunny",
+      "enabled": true,
+      "notes": "",
+      "default": true
+    },
+    {
+      "id": "cloudy",
+      "label_zh": "阴",
+      "label_en": "Cloudy",
+      "prompt_phrase": "overcast, cloudy sky",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "rainy",
+      "label_zh": "雨",
+      "label_en": "Rainy",
+      "prompt_phrase": "rainy, rain drops",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "snowy",
+      "label_zh": "雪",
+      "label_en": "Snowy",
+      "prompt_phrase": "snowy, snowfall",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "foggy",
+      "label_zh": "雾",
+      "label_en": "Foggy",
+      "prompt_phrase": "foggy, misty",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "windy",
+      "label_zh": "大风",
+      "label_en": "Windy",
+      "prompt_phrase": "windy, strong wind",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    }
+  ]
+}

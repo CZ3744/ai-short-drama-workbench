@@ -1,0 +1,50 @@
+{
+  "id": "episode_count",
+  "options": [
+    {
+      "id": "1",
+      "label_zh": "1集(单集)",
+      "label_en": "1 Episode (Single)",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "单集完整视频",
+      "default": true
+    },
+    {
+      "id": "3",
+      "label_zh": "3集",
+      "label_en": "3 Episodes",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "迷你连续剧",
+      "default": false
+    },
+    {
+      "id": "6",
+      "label_zh": "6集",
+      "label_en": "6 Episodes",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "标准连续剧",
+      "default": false
+    },
+    {
+      "id": "12",
+      "label_zh": "12集",
+      "label_en": "12 Episodes",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "长篇连续剧",
+      "default": false
+    },
+    {
+      "id": "custom",
+      "label_zh": "自定义",
+      "label_en": "Custom",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "用户自行输入集数",
+      "default": false
+    }
+  ]
+}

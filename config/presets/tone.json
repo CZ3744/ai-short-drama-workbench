@@ -1,0 +1,86 @@
+{
+  "id": "tone",
+  "options": [
+    {
+      "id": "warm_romance",
+      "label_zh": "甜宠",
+      "label_en": "Sweet Romance",
+      "prompt_phrase": "甜蜜温馨,粉嫩色调",
+      "enabled": true,
+      "notes": "恋爱向",
+      "default": true
+    },
+    {
+      "id": "suspenseful",
+      "label_zh": "悬疑",
+      "label_en": "Suspenseful",
+      "prompt_phrase": "紧张悬疑,步步惊心",
+      "enabled": true,
+      "notes": "推理/悬疑",
+      "default": false
+    },
+    {
+      "id": "hilarious",
+      "label_zh": "爆笑",
+      "label_en": "Hilarious",
+      "prompt_phrase": "爆笑搞笑,夸张表情,喜剧节奏",
+      "enabled": true,
+      "notes": "喜剧/搞笑",
+      "default": false
+    },
+    {
+      "id": "warm_tender",
+      "label_zh": "温情",
+      "label_en": "Warm & Tender",
+      "prompt_phrase": "温情脉脉,柔和光线,暖色调",
+      "enabled": true,
+      "notes": "亲情/友情",
+      "default": false
+    },
+    {
+      "id": "sharp",
+      "label_zh": "犀利",
+      "label_en": "Sharp",
+      "prompt_phrase": "犀利点评,一针见血",
+      "enabled": true,
+      "notes": "评论/吐槽",
+      "default": false
+    },
+    {
+      "id": "serious",
+      "label_zh": "严肃",
+      "label_en": "Serious",
+      "prompt_phrase": "严肃正式,纪录片质感",
+      "enabled": true,
+      "notes": "新闻/纪录片",
+      "default": false
+    },
+    {
+      "id": "healing",
+      "label_zh": "治愈",
+      "label_en": "Healing",
+      "prompt_phrase": "治愈系,温柔色调,舒缓节奏",
+      "enabled": true,
+      "notes": "治愈/减压",
+      "default": false
+    },
+    {
+      "id": "inspiring",
+      "label_zh": "燃",
+      "label_en": "Inspiring",
+      "prompt_phrase": "热血燃向,激昂配色,快节奏",
+      "enabled": true,
+      "notes": "励志/热血",
+      "default": false
+    },
+    {
+      "id": "emo",
+      "label_zh": "emo",
+      "label_en": "Emotional",
+      "prompt_phrase": "emo风格,暗色调,忧郁情绪",
+      "enabled": true,
+      "notes": "伤感/怀旧",
+      "default": false
+    }
+  ]
+}

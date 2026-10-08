@@ -1,0 +1,137 @@
+{
+  "id": "content_type",
+  "options": [
+    {
+      "id": "short_drama",
+      "label_zh": "短剧",
+      "label_en": "Short Drama",
+      "prompt_phrase": "短剧风格,节奏紧凑,人物冲突驱动",
+      "enabled": true,
+      "notes": "最通用的短视频叙事形态",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "anime_drama",
+      "label_zh": "漫剧",
+      "label_en": "Anime Drama",
+      "prompt_phrase": "日式动漫风格,赛璐璐着色,二次元角色设计",
+      "enabled": true,
+      "notes": "抽卡容错高,适合新手和批量产出",
+      "default": true,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "live_action_drama",
+      "label_zh": "真人短剧",
+      "label_en": "Live Action Drama",
+      "prompt_phrase": "真人出镜,实拍质感,自然光线",
+      "enabled": true,
+      "notes": "需要高质量真人素材或视频API",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "science_explainer",
+      "label_zh": "科普",
+      "label_en": "Science Explainer",
+      "prompt_phrase": "科普讲解风格,图表辅助,清晰逻辑",
+      "enabled": true,
+      "notes": "适合知识类内容",
+      "default": false,
+      "requires_characters": false,
+      "requires_scenes": true
+    },
+    {
+      "id": "talking_head",
+      "label_zh": "口播",
+      "label_en": "Talking Head",
+      "prompt_phrase": "口播风格,人物居中,字幕强调",
+      "enabled": true,
+      "notes": "单人对镜头讲话",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": false
+    },
+    {
+      "id": "vlog",
+      "label_zh": "Vlog",
+      "label_en": "Vlog",
+      "prompt_phrase": "Vlog风格,生活化镜头,轻松自然",
+      "enabled": true,
+      "notes": "生活记录类",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "narration",
+      "label_zh": "解说",
+      "label_en": "Narration",
+      "prompt_phrase": "解说风格,旁白驱动,画面配合文案",
+      "enabled": true,
+      "notes": "解说配音+画面配合",
+      "default": false,
+      "requires_characters": false,
+      "requires_scenes": true
+    },
+    {
+      "id": "classic_literature",
+      "label_zh": "名著",
+      "label_en": "Classic Literature",
+      "prompt_phrase": "名著改编,古典美学,文学质感",
+      "enabled": true,
+      "notes": "文学经典可视化",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "suspense",
+      "label_zh": "悬疑",
+      "label_en": "Suspense",
+      "prompt_phrase": "悬疑氛围,暗色调,悬念层层递进",
+      "enabled": true,
+      "notes": "悬疑推理类叙事",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "sweet_romance",
+      "label_zh": "甜宠",
+      "label_en": "Sweet Romance",
+      "prompt_phrase": "甜宠风格,粉嫩色调,甜蜜互动",
+      "enabled": true,
+      "notes": "甜宠恋爱短剧",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "time_travel",
+      "label_zh": "穿越",
+      "label_en": "Time Travel",
+      "prompt_phrase": "穿越题材,古今交错,身份反转",
+      "enabled": true,
+      "notes": "穿越题材,需要双场景设计",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    },
+    {
+      "id": "war_god",
+      "label_zh": "战神",
+      "label_en": "War God",
+      "prompt_phrase": "战神题材,热血战斗,霸气逆袭",
+      "enabled": true,
+      "notes": "男频战神爽文",
+      "default": false,
+      "requires_characters": true,
+      "requires_scenes": true
+    }
+  ]
+}

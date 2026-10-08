@@ -1,0 +1,440 @@
+{
+  "id": "video_provider",
+  "options": [
+    {
+      "id": "jimeng_video_3pro",
+      "label_zh": "即梦视频 3.0 Pro",
+      "label_en": "Jimeng Video 3.0 Pro",
+      "prompt_phrase": "高质量视频生成",
+      "enabled": true,
+      "notes": "火山视觉即梦图生视频 (model 在设置自己填)",
+      "default": false,
+      "mode": "i2v",
+      "requires_reference": true,
+      "max_clip_seconds": 5,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "JIMENG_VOLC_ACCESS_KEY",
+      "base_url": "https://visual.volcengineapi.com",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "jimeng_video_3_720p",
+      "label_zh": "即梦视频 3.0 720P",
+      "label_en": "Jimeng Video 3.0 720P",
+      "prompt_phrase": "720P视频生成",
+      "enabled": true,
+      "notes": "火山视觉即梦图生视频低分辨率版本,成本更低",
+      "default": false,
+      "mode": "i2v",
+      "requires_reference": true,
+      "max_clip_seconds": 5,
+      "fps_options": [
+        24
+      ],
+      "env_key_name": "JIMENG_VOLC_ACCESS_KEY",
+      "base_url": "https://visual.volcengineapi.com",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "kling_3",
+      "label_zh": "可灵 图生视频",
+      "label_en": "Kling I2V",
+      "prompt_phrase": "电影感运镜,光影饱满",
+      "enabled": true,
+      "notes": "短剧圈主流,i2v 效果稳定 (model 在设置自己填)",
+      "default": false,
+      "mode": "i2v",
+      "requires_reference": true,
+      "max_clip_seconds": 10,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "KLING_API_KEY",
+      "base_url": "https://api.klingai.com",
+      "cost_per_second_cny": 0.5,
+      "enabled_without_key": false
+    },
+    {
+      "id": "vidu_q3_ref",
+      "label_zh": "Vidu 参考图生视频",
+      "label_en": "Vidu Ref-to-Video",
+      "prompt_phrase": "参考图驱动视频生成",
+      "enabled": true,
+      "notes": "参考图生视频模式 (model 在设置自己填)",
+      "default": false,
+      "mode": "ref2v",
+      "requires_reference": true,
+      "max_clip_seconds": 8,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "VIDU_API_KEY",
+      "base_url": "https://api.vidu.cn/ent/v2",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "aliyun_wan_t2v",
+      "label_zh": "阿里通义万相 文生视频",
+      "label_en": "Alibaba Wan T2V",
+      "prompt_phrase": "文生视频",
+      "enabled": true,
+      "notes": "阿里云通义万相视频生成 (model 在设置自己填)",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 5,
+      "fps_options": [
+        24
+      ],
+      "env_key_name": "DASHSCOPE_API_KEY",
+      "base_url": "https://dashscope.aliyuncs.com",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "minimax_hailuo",
+      "label_zh": "MiniMax 海螺视频",
+      "label_en": "MiniMax Hailuo",
+      "prompt_phrase": "海螺视频生成",
+      "enabled": true,
+      "notes": "MiniMax 视频生成服务 (model 在设置自己填)",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 6,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "MINIMAX_API_KEY",
+      "base_url": "https://api.minimaxi.com",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "zhipu_cogvideox",
+      "label_zh": "智谱 CogVideoX",
+      "label_en": "Zhipu CogVideoX",
+      "prompt_phrase": "中文文生视频,动作清晰",
+      "enabled": true,
+      "notes": "智谱视频生成异步 API,使用 API Key + Model Name",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 10,
+      "fps_options": [
+        30,
+        60
+      ],
+      "env_key_name": "ZHIPU_API_KEY",
+      "base_url": "https://open.bigmodel.cn",
+      "model_id": "cogvideox-3",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "baidu_qianfan_video",
+      "label_zh": "百度千帆视频",
+      "label_en": "Baidu Qianfan Video",
+      "prompt_phrase": "千帆文生视频,国内可用",
+      "enabled": true,
+      "notes": "百度千帆多模态 Qianfan-Video,使用 API Key + Model Name",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 16,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "BAIDU_QIANFAN_API_KEY",
+      "base_url": "https://qianfan.baidubce.com",
+      "model_id": "VQ3-Pro",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "tencent_hunyuan_video",
+      "label_zh": "腾讯混元生视频",
+      "label_en": "Tencent Hunyuan Video",
+      "prompt_phrase": "混元文生视频,国内云 API",
+      "enabled": true,
+      "notes": "腾讯混元生视频 API,需 SecretId + SecretKey + 地域",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 5,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "TENCENT_SECRET_ID",
+      "base_url": "https://vclm.tencentcloudapi.com",
+      "model_id": "HY-Video-1.5",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "local_mock_video",
+      "label_zh": "本地 Mock 视频",
+      "label_en": "Local Mock Video",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "免费 mock,首跑不烧钱,用于开发测试",
+      "default": false,
+      "mode": "mock",
+      "requires_reference": false,
+      "max_clip_seconds": 60,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "",
+      "base_url": "",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": true
+    },
+    {
+      "id": "local_animatediff_lightning_openclaw",
+      "label_zh": "本地 AnimateDiff Lightning 4-step",
+      "label_en": "Local AnimateDiff Lightning 4-step",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 4,
+      "fps_options": [
+        8,
+        16
+      ],
+      "env_key_name": "",
+      "base_url": "http://127.0.0.1:18789",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false,
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "animatediff_lightning",
+        "timeout_ms": 600000
+      }
+    },
+    {
+      "id": "local_animatediff_lightning8_openclaw",
+      "label_zh": "[禁用 实测黑屏色块] 本地 AnimateDiff Lightning 8-step",
+      "label_en": "[Disabled - garbage output] Local AnimateDiff Lightning 8-step",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 4,
+      "fps_options": [
+        8,
+        16
+      ],
+      "env_key_name": "",
+      "base_url": "http://127.0.0.1:18789",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false,
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "animatediff_lightning_8step",
+        "timeout_ms": 600000
+      }
+    },
+    {
+      "id": "local_animatediff_v15_openclaw",
+      "label_zh": "[调试中] 本地 AnimateDiff v1-5-2 · 质量版",
+      "label_en": "[Debugging] Local AnimateDiff v1-5-2",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 15,
+      "fps_options": [
+        8,
+        16
+      ],
+      "env_key_name": "",
+      "base_url": "http://127.0.0.1:18789",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false,
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "animatediff_v15",
+        "timeout_ms": 900000
+      }
+    },
+    {
+      "id": "local_animatediff_openclaw",
+      "label_zh": "[Deprecated] 本地 AnimateDiff (OpenClaw)",
+      "label_en": "[Deprecated] Local AnimateDiff",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 4,
+      "fps_options": [
+        8,
+        16
+      ],
+      "env_key_name": "",
+      "base_url": "http://127.0.0.1:18789",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false,
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "animatediff_v15",
+        "timeout_ms": 900000
+      }
+    },
+    {
+      "id": "local_wan_openclaw",
+      "label_zh": "本地 Wan (OpenClaw)",
+      "label_en": "Local Wan (OpenClaw)",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 5,
+      "fps_options": [
+        24
+      ],
+      "env_key_name": "",
+      "base_url": "http://127.0.0.1:18789",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false,
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "wan2.1",
+        "timeout_ms": 1200000
+      }
+    },
+    {
+      "id": "local_video_mock_openclaw",
+      "label_zh": "本地 Mock 测试视频 (OpenClaw)",
+      "label_en": "Local Mock Test Video (OpenClaw)",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 8,
+      "fps_options": [
+        8
+      ],
+      "env_key_name": "",
+      "base_url": "http://127.0.0.1:18789",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false,
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "mock",
+        "timeout_ms": 60000
+      }
+    },
+    {
+      "id": "runway_gen4",
+      "label_zh": "Runway Gen-4",
+      "label_en": "Runway Gen-4",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "海外视频 API, 待接入",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 10,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "",
+      "base_url": "https://api.runwayml.com",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "pika_2",
+      "label_zh": "Pika 2.0",
+      "label_en": "Pika 2.0",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "海外视频 API, 待接入",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 10,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "",
+      "base_url": "https://api.pika.art",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "sora_api",
+      "label_zh": "OpenAI Sora API",
+      "label_en": "OpenAI Sora API",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "海外视频 API, 待接入",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 60,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "",
+      "base_url": "https://api.openai.com/v1",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    },
+    {
+      "id": "veo3",
+      "label_zh": "Google Veo 3",
+      "label_en": "Google Veo 3",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "海外视频 API, 待接入",
+      "default": false,
+      "mode": "t2v",
+      "requires_reference": false,
+      "max_clip_seconds": 60,
+      "fps_options": [
+        24,
+        30
+      ],
+      "env_key_name": "",
+      "base_url": "https://generativelanguage.googleapis.com",
+      "cost_per_second_cny": 0,
+      "enabled_without_key": false
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+.inbox-filter-toggle {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .v24-inbox-page {
+    height: auto !important;
+    min-height: 100%;
+    flex-direction: column;
+  }
+
+  .inbox-filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 18px;
+    border: 0;
+    border-bottom: 1px solid var(--ink-100);
+    background: var(--surface-card);
+    color: var(--ink-700);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .inbox-filter-toggle span {
+    margin-left: auto;
+    color: var(--brand-700);
+    font-size: 12px;
+  }
+
+  .v24-inbox-page .inbox-filters {
+    display: none;
+    width: 100% !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--ink-100);
+  }
+
+  .v24-inbox-page .inbox-filters[data-open="true"] {
+    display: block;
+  }
+
+  .v24-inbox-page .inbox-main {
+    padding: 20px 16px !important;
+    overflow: visible !important;
+  }
+
+  .inbox-toolbar > span:empty {
+    display: none;
+  }
+
+  .inbox-search {
+    flex: 1 1 100%;
+  }
+
+  .inbox-search input {
+    width: 100% !important;
+  }
+}

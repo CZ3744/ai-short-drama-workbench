@@ -1,0 +1,68 @@
+{
+  "id": "shot_type",
+  "options": [
+    {
+      "id": "extreme_close",
+      "label_zh": "特写",
+      "label_en": "Extreme Close-up",
+      "prompt_phrase": "特写镜头,聚焦细节",
+      "enabled": true,
+      "notes": "表情/细节强调",
+      "default": false
+    },
+    {
+      "id": "close_up",
+      "label_zh": "近景",
+      "label_en": "Close-up",
+      "prompt_phrase": "近景,胸部以上,表情清晰",
+      "enabled": true,
+      "notes": "对话/情感场景",
+      "default": false
+    },
+    {
+      "id": "medium",
+      "label_zh": "中景",
+      "label_en": "Medium Shot",
+      "prompt_phrase": "中景,腰部以上,人物与环境兼顾",
+      "enabled": true,
+      "notes": "最通用的景别",
+      "default": true
+    },
+    {
+      "id": "full_shot",
+      "label_zh": "全景",
+      "label_en": "Full Shot",
+      "prompt_phrase": "全景,展示完整人物和环境",
+      "enabled": true,
+      "notes": "环境交代/动作展示",
+      "default": false
+    },
+    {
+      "id": "extreme_long",
+      "label_zh": "大远景",
+      "label_en": "Extreme Long Shot",
+      "prompt_phrase": "大远景,广阔场景,人物渺小",
+      "enabled": true,
+      "notes": "场景氛围/开场",
+      "default": false
+    },
+    {
+      "id": "top_down",
+      "label_zh": "俯视",
+      "label_en": "Top-down / Bird's Eye",
+      "prompt_phrase": "俯视角度,上帝视角",
+      "enabled": true,
+      "notes": "地图/布局/特殊视角",
+      "default": false
+    },
+    {
+      "id": "low_angle",
+      "label_zh": "仰视",
+      "label_en": "Low Angle",
+      "prompt_phrase": "仰视角度,人物高大",
+      "enabled": true,
+      "notes": "英雄/威严感",
+      "default": false
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "count_per_retake",
+  "options": [
+    {
+      "id": "1",
+      "label_zh": "1 张",
+      "label_en": "1 image",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": false,
+      "value": 1
+    },
+    {
+      "id": "3",
+      "label_zh": "3 张",
+      "label_en": "3 images",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": true,
+      "value": 3
+    },
+    {
+      "id": "6",
+      "label_zh": "6 张",
+      "label_en": "6 images",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": false,
+      "value": 6
+    },
+    {
+      "id": "10",
+      "label_zh": "10 张",
+      "label_en": "10 images",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "",
+      "default": false,
+      "value": 10
+    }
+  ]
+}

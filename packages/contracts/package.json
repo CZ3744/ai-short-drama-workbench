@@ -1,0 +1,7 @@
+{
+  "name": "@video-generate/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared contracts for video-generate apps and packages"
+}

@@ -1,0 +1,67 @@
+{
+  "id": "knowledge_60s",
+  "label": "60s 知识科普",
+  "preview_image": "/images/templates/knowledge.png",
+  "description": "单集 60 秒趣味知识科普，适合抖音/快手/B站短视频。节奏紧凑，可视化强，适合知识类账号。",
+  "defaults": {
+    "content_type": "knowledge",
+    "platform": "douyin",
+    "aspect_ratio": "9:16",
+    "visual_style": "扁平化科普动画风",
+    "audience": "全年龄段",
+    "tone": "轻松、有趣、有料",
+    "pacing": "快速切入主题",
+    "camera_style": "动态图文转场",
+    "ending_type": "point",
+    "max_retake_per_shot": 3,
+    "max_video_seconds_per_job": 60,
+    "max_parallel_tasks": 3
+  },
+  "character_placeholders": [
+    {
+      "slot_id": "host",
+      "role": "主讲人",
+      "hint": "知识博主形象，可以是真人/虚拟形象"
+    }
+  ],
+  "scene_placeholders": [
+    {
+      "slot_id": "studio",
+      "hint": "录制场景，如简约书桌前/绿幕/虚拟演播厅"
+    },
+    {
+      "slot_id": "visual_bg",
+      "hint": "动态背景，如数据图表/示意图/动画背景"
+    }
+  ],
+  "storyboard_skeleton": {
+    "episodes": [
+      {
+        "index": 1,
+        "title_template": "单集科普",
+        "shots_skeleton": [
+          {
+            "action_template": "开场 hook：抛出问题/冷知识，配合动态文字特效",
+            "duration": 5
+          },
+          {
+            "action_template": "主讲人在{studio}讲解核心概念",
+            "duration": 15
+          },
+          {
+            "action_template": "图文/动画 Demo 演示原理",
+            "duration": 15
+          },
+          {
+            "action_template": "案例/类比让观众秒懂",
+            "duration": 15
+          },
+          {
+            "action_template": "总结金句 + 关注引导",
+            "duration": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "pacing",
+  "options": [
+    {
+      "id": "fast_cut",
+      "label_zh": "快速剪辑",
+      "label_en": "Fast Cut",
+      "prompt_phrase": "快速剪辑节奏,镜头切换频繁,信息密度高",
+      "enabled": true,
+      "notes": "适合解说/搞笑/高能混剪",
+      "default": false,
+      "shot_duration_min_sec": 1,
+      "shot_duration_max_sec": 3
+    },
+    {
+      "id": "medium",
+      "label_zh": "常规",
+      "label_en": "Medium",
+      "prompt_phrase": "常规叙事节奏,张弛有度",
+      "enabled": true,
+      "notes": "最通用的节奏",
+      "default": true,
+      "shot_duration_min_sec": 3,
+      "shot_duration_max_sec": 6
+    },
+    {
+      "id": "slow_narrative",
+      "label_zh": "慢镜叙事",
+      "label_en": "Slow Narrative",
+      "prompt_phrase": "慢镜叙事,长镜头,沉浸式体验",
+      "enabled": true,
+      "notes": "文艺/纪录片/情感渲染",
+      "default": false,
+      "shot_duration_min_sec": 6,
+      "shot_duration_max_sec": 15
+    },
+    {
+      "id": "mv_style",
+      "label_zh": "MV风",
+      "label_en": "MV Style",
+      "prompt_phrase": "MV风格,卡点剪辑,音乐节奏驱动",
+      "enabled": true,
+      "notes": "音乐视频/卡点视频",
+      "default": false,
+      "shot_duration_min_sec": 1,
+      "shot_duration_max_sec": 4
+    }
+  ]
+}

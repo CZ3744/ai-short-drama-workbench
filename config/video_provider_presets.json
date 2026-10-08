@@ -1,0 +1,566 @@
+{
+  "version": "0.2.1",
+  "updated_at": "2026-05-08",
+  "providers": {
+    "local_mock_video": {
+      "id": "local_mock_video",
+      "label": "Local Mock Video (本地测试)",
+      "description": "使用 FFmpeg 将场景卡片 PNG 循环缩放为 mp4，仅用于验证视频片段工作流。",
+      "enabled": true,
+      "needs_api_key": false,
+      "is_real_video": false,
+      "supports": {
+        "text_to_video": true,
+        "image_to_video": true
+      },
+      "models": {
+        "local_mock": {
+          "id": "local_mock",
+          "label": "Local Mock",
+          "prompt_max_chars": 2000,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "any",
+          "duration_min": 1,
+          "duration_max": 60,
+          "duration_default": 8,
+          "resolution_tiers": [
+            "480P",
+            "720P",
+            "1080P"
+          ],
+          "default_resolution_tier": "1080P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": false,
+          "supports_seed": false,
+          "supports_audio": false,
+          "cost_level": "free",
+          "notes": "不消耗额度，只验证流程"
+        }
+      }
+    },
+    "minimax_hailuo": {
+      "id": "minimax_hailuo",
+      "label": "MiniMax / 海螺文生视频",
+      "description": "MiniMax 真实文生视频 API，仅支持单个分镜文生视频。需配置 MINIMAX_API_KEY。无 Key 时返回 key_missing。",
+      "enabled": true,
+      "needs_api_key": true,
+      "is_real_video": true,
+      "supports": {
+        "text_to_video": true,
+        "image_to_video": false
+      },
+      "models": {
+        "MiniMax-Hailuo-2.3": {
+          "id": "MiniMax-Hailuo-2.3",
+          "label": "MiniMax-Hailuo-2.3",
+          "prompt_max_chars": 1800,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            6,
+            10
+          ],
+          "duration_default": 6,
+          "resolution_tiers": [
+            "768P",
+            "1080P",
+            "720P"
+          ],
+          "default_resolution_tier": "768P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": true,
+          "supports_seed": false,
+          "supports_audio": true,
+          "cost_level": "medium",
+          "notes": "当前默认模型"
+        },
+        "MiniMax-Hailuo-02": {
+          "id": "MiniMax-Hailuo-02",
+          "label": "MiniMax-Hailuo-02",
+          "prompt_max_chars": 1800,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            6,
+            10
+          ],
+          "duration_default": 6,
+          "resolution_tiers": [
+            "768P",
+            "1080P",
+            "720P"
+          ],
+          "default_resolution_tier": "768P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": true,
+          "supports_seed": false,
+          "supports_audio": true,
+          "cost_level": "medium"
+        },
+        "T2V-01-Director": {
+          "id": "T2V-01-Director",
+          "label": "T2V-01-Director",
+          "prompt_max_chars": 1800,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            6,
+            10
+          ],
+          "duration_default": 6,
+          "resolution_tiers": [
+            "768P",
+            "1080P",
+            "720P"
+          ],
+          "default_resolution_tier": "768P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": true,
+          "supports_seed": false,
+          "supports_audio": true,
+          "cost_level": "medium"
+        },
+        "T2V-01": {
+          "id": "T2V-01",
+          "label": "T2V-01",
+          "prompt_max_chars": 1800,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            6,
+            10
+          ],
+          "duration_default": 6,
+          "resolution_tiers": [
+            "768P",
+            "1080P",
+            "720P"
+          ],
+          "default_resolution_tier": "768P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": true,
+          "supports_seed": false,
+          "supports_audio": true,
+          "cost_level": "medium"
+        }
+      }
+    },
+    "aliyun_wan_t2v": {
+      "id": "aliyun_wan_t2v",
+      "label": "阿里云百炼 / 通义万相 Wan 文生视频",
+      "description": "阿里云百炼 DashScope 通义万相 Wan 系列文生视频 API，仅支持单个分镜文生视频。需配置 ALIYUN_DASHSCOPE_API_KEY。",
+      "enabled": true,
+      "needs_api_key": true,
+      "is_real_video": true,
+      "region": "cn-beijing",
+      "base_url": "https://dashscope.aliyuncs.com",
+      "submit_endpoint": "/api/v1/services/aigc/video-generation/video-synthesis",
+      "query_endpoint_prefix": "/api/v1/tasks/",
+      "supports": {
+        "text_to_video": true,
+        "image_to_video": false
+      },
+      "models": {
+        "wan2.6-t2v": {
+          "id": "wan2.6-t2v",
+          "label": "Wan 2.6 文生视频（高质量/有声/多镜头）",
+          "prompt_max_chars": 1500,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "range",
+          "duration_min": 2,
+          "duration_max": 15,
+          "duration_default": 5,
+          "resolution_tiers": [
+            "720P",
+            "1080P"
+          ],
+          "default_resolution_tier": "1080P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": true,
+          "supports_watermark": true,
+          "supports_seed": true,
+          "supports_audio": true,
+          "supports_shot_type": true,
+          "shot_type_options": [
+            "single",
+            "multi"
+          ],
+          "cost_level": "high",
+          "notes": "高质量模型，支持 2-15 秒，有声，多镜头"
+        },
+        "wan2.6-t2v-us": {
+          "id": "wan2.6-t2v-us",
+          "label": "Wan 2.6 文生视频（海外）",
+          "prompt_max_chars": 1500,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            5,
+            10
+          ],
+          "duration_default": 5,
+          "resolution_tiers": [
+            "720P",
+            "1080P"
+          ],
+          "default_resolution_tier": "1080P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": true,
+          "supports_watermark": true,
+          "supports_seed": true,
+          "supports_audio": true,
+          "cost_level": "high",
+          "notes": "海外地域版本"
+        },
+        "wan2.5-t2v-preview": {
+          "id": "wan2.5-t2v-preview",
+          "label": "Wan 2.5 文生视频预览版",
+          "prompt_max_chars": 1500,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            5,
+            10
+          ],
+          "duration_default": 5,
+          "resolution_tiers": [
+            "480P",
+            "720P",
+            "1080P"
+          ],
+          "default_resolution_tier": "1080P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": true,
+          "supports_watermark": true,
+          "supports_seed": true,
+          "supports_audio": true,
+          "cost_level": "medium",
+          "notes": "预览版，支持全部分辨率档位"
+        },
+        "wan2.2-t2v-plus": {
+          "id": "wan2.2-t2v-plus",
+          "label": "Wan 2.2 文生视频 Plus（低成本调试推荐）",
+          "prompt_max_chars": 800,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed",
+          "duration_fixed": 5,
+          "duration_default": 5,
+          "resolution_tiers": [
+            "480P",
+            "1080P"
+          ],
+          "default_resolution_tier": "480P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": true,
+          "supports_watermark": true,
+          "supports_seed": true,
+          "supports_audio": false,
+          "cost_level": "low",
+          "notes": "低成本调试推荐，duration 固定 5 秒，无声视频"
+        },
+        "wan2.1-t2v-turbo": {
+          "id": "wan2.1-t2v-turbo",
+          "label": "Wan 2.1 文生视频 Turbo（快速/低成本）",
+          "prompt_max_chars": 800,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed",
+          "duration_fixed": 5,
+          "duration_default": 5,
+          "resolution_tiers": [
+            "480P",
+            "720P"
+          ],
+          "default_resolution_tier": "720P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": true,
+          "supports_watermark": true,
+          "supports_seed": true,
+          "supports_audio": false,
+          "cost_level": "low",
+          "notes": "快速模型，duration 固定 5 秒，无声视频"
+        },
+        "wan2.1-t2v-plus": {
+          "id": "wan2.1-t2v-plus",
+          "label": "Wan 2.1 文生视频 Plus",
+          "prompt_max_chars": 800,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed",
+          "duration_fixed": 5,
+          "duration_default": 5,
+          "resolution_tiers": [
+            "720P"
+          ],
+          "default_resolution_tier": "720P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": true,
+          "supports_watermark": true,
+          "supports_seed": true,
+          "supports_audio": false,
+          "cost_level": "low",
+          "notes": "仅支持 720P，duration 固定 5 秒"
+        }
+      }
+    },
+    "kling_3": {
+      "id": "kling_3",
+      "label": "可灵 Kling 3.0 图生视频",
+      "description": "快手可灵 AI 图生视频 API，i2v 稳定、中文 prompt 理解好。需配置 KLING_ACCESS_KEY + KLING_SECRET_KEY（JWT 鉴权）。仅支持 image-to-video。",
+      "enabled": true,
+      "needs_api_key": true,
+      "is_real_video": true,
+      "base_url": "https://api.klingai.com",
+      "submit_endpoint": "/v1/videos/image2video",
+      "query_endpoint_prefix": "/v1/videos/image2video/",
+      "supports": {
+        "text_to_video": false,
+        "image_to_video": true
+      },
+      "models": {
+        "kling-v3-i2v": {
+          "id": "kling-v3-i2v",
+          "label": "Kling 3.0 图生视频",
+          "prompt_max_chars": 2500,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            5,
+            10
+          ],
+          "duration_default": 5,
+          "resolution_tiers": [
+            "720P",
+            "1080P"
+          ],
+          "default_resolution_tier": "1080P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": false,
+          "supports_seed": false,
+          "supports_audio": false,
+          "cost_level": "medium",
+          "notes": "图生视频专用，不支持纯文本生成。需要清晰首帧图片。"
+        },
+        "kling-v3-i2v-pro": {
+          "id": "kling-v3-i2v-pro",
+          "label": "Kling 3.0 图生视频 Pro",
+          "prompt_max_chars": 2500,
+          "negative_prompt_max_chars": 500,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            5,
+            10
+          ],
+          "duration_default": 5,
+          "resolution_tiers": [
+            "1080P"
+          ],
+          "default_resolution_tier": "1080P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": false,
+          "supports_seed": false,
+          "supports_audio": false,
+          "cost_level": "high",
+          "notes": "Pro 模式，画质更高，价格更贵。"
+        }
+      }
+    },
+    "vidu_q3_ref": {
+      "id": "vidu_q3_ref",
+      "label": "Vidu Q3 参考图生视频 (Reference-to-Video)",
+      "description": "Vidu Q3 多图参考锁人/锁场景视频生成 API，支持 3-7 张参考图，适合短剧跨镜头一致性。需配置 VIDU_API_KEY。",
+      "enabled": true,
+      "needs_api_key": true,
+      "is_real_video": true,
+      "base_url": "https://api.vidu.cn/ent/v2",
+      "submit_endpoint": "/reference2video",
+      "query_endpoint_prefix": "/tasks/",
+      "supports": {
+        "text_to_video": false,
+        "image_to_video": false,
+        "reference_to_video": true
+      },
+      "models": {
+        "viduq3": {
+          "id": "viduq3",
+          "label": "Vidu Q3 (多镜头一致性最优)",
+          "prompt_max_chars": 2000,
+          "negative_prompt_max_chars": 0,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            4,
+            8
+          ],
+          "duration_default": 4,
+          "resolution_tiers": [
+            "720P"
+          ],
+          "default_resolution_tier": "720P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": false,
+          "supports_seed": true,
+          "supports_audio": true,
+          "cost_level": "medium",
+          "default_style": "general",
+          "requires_reference": true,
+          "min_reference_images": 3,
+          "max_reference_images": 7,
+          "notes": "ref2v 专用，不支持 t2v/i2v。3-7 张参考图，第一张锁主体。"
+        },
+        "viduq3-turbo": {
+          "id": "viduq3-turbo",
+          "label": "Vidu Q3 Turbo (快速/性价比)",
+          "prompt_max_chars": 2000,
+          "negative_prompt_max_chars": 0,
+          "duration_mode": "fixed_options",
+          "duration_options": [
+            4,
+            8
+          ],
+          "duration_default": 4,
+          "resolution_tiers": [
+            "720P"
+          ],
+          "default_resolution_tier": "720P",
+          "aspect_ratios": [
+            "16:9",
+            "9:16",
+            "1:1"
+          ],
+          "default_aspect_ratio": "16:9",
+          "supports_prompt_extend": false,
+          "supports_watermark": false,
+          "supports_seed": true,
+          "supports_audio": true,
+          "cost_level": "low",
+          "default_style": "general",
+          "requires_reference": true,
+          "min_reference_images": 3,
+          "max_reference_images": 7,
+          "notes": "Turbo 模式，速度更快，价格更低。"
+        }
+      }
+    }
+  },
+  "resolution_sizes": {
+    "480P": {
+      "16:9": "832*480",
+      "9:16": "480*832",
+      "1:1": "624*624",
+      "4:3": "624*480",
+      "3:4": "480*624"
+    },
+    "720P": {
+      "16:9": "1280*720",
+      "9:16": "720*1280",
+      "1:1": "960*960",
+      "4:3": "1088*832",
+      "3:4": "832*1088"
+    },
+    "1080P": {
+      "16:9": "1920*1080",
+      "9:16": "1080*1920",
+      "1:1": "1440*1440",
+      "4:3": "1632*1248",
+      "3:4": "1248*1632"
+    }
+  },
+  "default_provider": "local_mock_video",
+  "default_model_overrides": {
+    "aliyun_wan_t2v": "wan2.2-t2v-plus",
+    "minimax_hailuo": "MiniMax-Hailuo-2.3",
+    "local_mock_video": "local_mock",
+    "kling_3": "kling-v3-i2v",
+    "vidu_q3_ref": "viduq3"
+  }
+}

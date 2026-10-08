@@ -1,0 +1,77 @@
+{
+  "id": "platform",
+  "options": [
+    {
+      "id": "douyin",
+      "label_zh": "抖音",
+      "label_en": "Douyin",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "国内最大短视频平台",
+      "default": true,
+      "aspect_default": "9:16",
+      "duration_max_sec": 600,
+      "cover_ratio": "9:16"
+    },
+    {
+      "id": "bilibili",
+      "label_zh": "B站",
+      "label_en": "Bilibili",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "中长视频为主,年轻用户",
+      "default": false,
+      "aspect_default": "16:9",
+      "duration_max_sec": 1800,
+      "cover_ratio": "16:9"
+    },
+    {
+      "id": "xiaohongshu",
+      "label_zh": "小红书",
+      "label_en": "Xiaohongshu",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "种草平台,女性用户居多",
+      "default": false,
+      "aspect_default": "3:4",
+      "duration_max_sec": 300,
+      "cover_ratio": "3:4"
+    },
+    {
+      "id": "youtube_shorts",
+      "label_zh": "YouTube Shorts",
+      "label_en": "YouTube Shorts",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "海外短视频",
+      "default": false,
+      "aspect_default": "9:16",
+      "duration_max_sec": 180,
+      "cover_ratio": "9:16"
+    },
+    {
+      "id": "video_channel",
+      "label_zh": "视频号",
+      "label_en": "WeChat Video Channel",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "微信生态内视频",
+      "default": false,
+      "aspect_default": "9:16",
+      "duration_max_sec": 1800,
+      "cover_ratio": "9:16"
+    },
+    {
+      "id": "kuaishou",
+      "label_zh": "快手",
+      "label_en": "Kuaishou",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "下沉市场为主",
+      "default": false,
+      "aspect_default": "9:16",
+      "duration_max_sec": 600,
+      "cover_ratio": "9:16"
+    }
+  ]
+}

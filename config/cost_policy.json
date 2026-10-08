@@ -1,0 +1,11 @@
+{
+  "max_video_jobs_per_project": 30,
+  "max_retries_per_scene": 2,
+  "max_candidate_clips_per_scene": 3,
+  "video_provider_concurrency": 1,
+  "tts_provider_concurrency": 1,
+  "fallback_on_video_failure": "local_card",
+  "fallback_on_tts_failure": "edge_tts",
+  "stop_on_quota_error": true,
+  "mode": "balanced"
+}

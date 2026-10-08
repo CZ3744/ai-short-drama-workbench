@@ -1,0 +1,185 @@
+{
+  "id": "visual_style",
+  "options": [
+    {
+      "id": "anime_cel",
+      "label_zh": "动漫赛璐璐",
+      "label_en": "Anime Cel",
+      "prompt_phrase": "日式动漫风格,赛璐璐着色,清晰线条",
+      "enabled": true,
+      "notes": "最稳定的AI生成风格之一",
+      "default": true
+    },
+    {
+      "id": "realistic",
+      "label_zh": "写实",
+      "label_en": "Realistic",
+      "prompt_phrase": "写实风格,真实光影,高清细节",
+      "enabled": true,
+      "notes": "接近真人照片质感",
+      "default": false
+    },
+    {
+      "id": "ink_wash",
+      "label_zh": "水墨",
+      "label_en": "Ink Wash",
+      "prompt_phrase": "中国水墨画风格,留白意境,墨色渲染",
+      "enabled": true,
+      "notes": "国风古韵",
+      "default": false
+    },
+    {
+      "id": "cyberpunk",
+      "label_zh": "赛博朋克",
+      "label_en": "Cyberpunk",
+      "prompt_phrase": "赛博朋克风格,霓虹灯光,暗色调科技感",
+      "enabled": true,
+      "notes": "科幻/未来题材",
+      "default": false
+    },
+    {
+      "id": "minimalist",
+      "label_zh": "极简",
+      "label_en": "Minimalist",
+      "prompt_phrase": "极简风格,大量留白,扁平设计",
+      "enabled": true,
+      "notes": "信息图/知识类适用",
+      "default": false
+    },
+    {
+      "id": "thick_paint",
+      "label_zh": "厚涂",
+      "label_en": "Thick Paint",
+      "prompt_phrase": "厚涂油画风格,笔触粗犷,色彩浓郁",
+      "enabled": true,
+      "notes": "欧美奇幻风格",
+      "default": false
+    },
+    {
+      "id": "three_d_render",
+      "label_zh": "3D渲染",
+      "label_en": "3D Render",
+      "prompt_phrase": "3D渲染风格,立体建模,全局光照",
+      "enabled": true,
+      "notes": "适合科技/产品展示",
+      "default": false
+    },
+    {
+      "id": "pixel_art",
+      "label_zh": "像素",
+      "label_en": "Pixel Art",
+      "prompt_phrase": "像素艺术风格,复古游戏感,低分辨率美学",
+      "enabled": true,
+      "notes": "游戏/怀旧题材",
+      "default": false
+    },
+    {
+      "id": "vintage_film",
+      "label_zh": "老电影",
+      "label_en": "Vintage Film",
+      "prompt_phrase": "老电影质感,胶片颗粒,偏暖色调",
+      "enabled": true,
+      "notes": "怀旧/文艺题材",
+      "default": false
+    },
+    {
+      "id": "ins_style",
+      "label_zh": "Ins风",
+      "label_en": "Instagram Style",
+      "prompt_phrase": "Instagram风格,高饱和度,滤镜感强",
+      "enabled": true,
+      "notes": "时尚/生活方式类",
+      "default": false
+    },
+    {
+      "id": "watercolor",
+      "label_zh": "水彩",
+      "label_en": "Watercolor",
+      "prompt_phrase": "水彩画风格,透明水色,柔和边缘",
+      "enabled": true,
+      "notes": "温馨/治愈题材",
+      "default": false
+    },
+    {
+      "id": "comic_book",
+      "label_zh": "美漫",
+      "label_en": "Comic Book",
+      "prompt_phrase": "美漫风格,粗黑描边,网点纸质感",
+      "enabled": true,
+      "notes": "欧美漫画风",
+      "default": false
+    },
+    {
+      "id": "flat_illustration",
+      "label_zh": "扁平插画",
+      "label_en": "Flat Illustration",
+      "prompt_phrase": "扁平插画风格,纯色色块,简洁造型",
+      "enabled": true,
+      "notes": "MG动画/科普适用",
+      "default": false
+    },
+    {
+      "id": "ghibli",
+      "label_zh": "吉卜力风",
+      "label_en": "Ghibli Style",
+      "prompt_phrase": "吉卜力动画风格,柔和色彩,细腻背景",
+      "enabled": true,
+      "notes": "宫崎骏风格,治愈系",
+      "default": false
+    },
+    {
+      "id": "dark_fantasy",
+      "label_zh": "暗黑奇幻",
+      "label_en": "Dark Fantasy",
+      "prompt_phrase": "暗黑奇幻风格,哥特建筑,神秘光影",
+      "enabled": true,
+      "notes": "黑暗/奇幻题材",
+      "default": false
+    },
+    {
+      "id": "pop_art",
+      "label_zh": "波普艺术",
+      "label_en": "Pop Art",
+      "prompt_phrase": "波普艺术风格,鲜艳撞色,重复图案",
+      "enabled": true,
+      "notes": "潮流/时尚题材",
+      "default": false
+    },
+    {
+      "id": "chibi",
+      "label_zh": "Q版",
+      "label_en": "Chibi",
+      "prompt_phrase": "Q版风格,大头小身,萌系造型",
+      "enabled": true,
+      "notes": "可爱/搞笑题材",
+      "default": false
+    },
+    {
+      "id": "noir",
+      "label_zh": "黑色电影",
+      "label_en": "Film Noir",
+      "prompt_phrase": "黑色电影风格,高对比度,明暗对比强烈",
+      "enabled": true,
+      "notes": "悬疑/犯罪题材",
+      "default": false
+    },
+    {
+      "id": "surreal",
+      "label_zh": "超现实",
+      "label_en": "Surreal",
+      "prompt_phrase": "超现实风格,梦境般的场景,违反物理规律",
+      "enabled": true,
+      "notes": "艺术实验/概念片",
+      "default": false
+    },
+    {
+      "id": "chinese_ancient",
+      "label_zh": "国风古韵",
+      "label_en": "Chinese Ancient",
+      "prompt_phrase": "国风古韵风格,古典建筑,汉服元素",
+      "enabled": true,
+      "notes": "古装/仙侠题材",
+      "default": false
+    }
+  ]
+}

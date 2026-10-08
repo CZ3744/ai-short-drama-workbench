@@ -1,0 +1,152 @@
+{
+  "id": "sweet_drama_3min",
+  "label": "3 分钟甜宠短剧",
+  "preview_image": "/images/templates/sweet_drama.png",
+  "description": "经典都市甜宠:偶遇→冲突→反转→和好。适合竖屏短剧平台，节奏明快，情感浓度高。",
+  "defaults": {
+    "content_type": "short_drama",
+    "platform": "bilibili",
+    "aspect_ratio": "9:16",
+    "visual_style": "都市甜宠",
+    "audience": "18-30岁女性",
+    "tone": "甜、暖、微虐再反转",
+    "pacing": "快节奏",
+    "camera_style": "韩剧柔光调",
+    "ending_type": "HE",
+    "max_retake_per_shot": 3,
+    "max_video_seconds_per_job": 180,
+    "max_parallel_tasks": 3
+  },
+  "character_placeholders": [
+    {
+      "slot_id": "female_lead",
+      "role": "女主",
+      "hint": "25岁都市女性，职业自选，性格温柔坚韧"
+    },
+    {
+      "slot_id": "male_lead",
+      "role": "男主",
+      "hint": "同龄，职业自选，外冷内热/霸道总裁型"
+    },
+    {
+      "slot_id": "female_friend",
+      "role": "闺蜜",
+      "hint": "女主好友，性格活泼，可选"
+    },
+    {
+      "slot_id": "villain",
+      "role": "反派(前任)",
+      "hint": "制造矛盾的角色，可选"
+    }
+  ],
+  "scene_placeholders": [
+    {
+      "slot_id": "meet_place",
+      "hint": "相遇场所，如咖啡馆/书店/地铁"
+    },
+    {
+      "slot_id": "office",
+      "hint": "工作场所，如写字楼/公司"
+    },
+    {
+      "slot_id": "home",
+      "hint": "私人空间，如公寓/卧室"
+    },
+    {
+      "slot_id": "date_spot",
+      "hint": "约会场景，如餐厅/天台/公园"
+    }
+  ],
+  "storyboard_skeleton": {
+    "episodes": [
+      {
+        "index": 1,
+        "title_template": "相遇",
+        "shots_skeleton": [
+          {
+            "action_template": "女主在{meet_place}低头工作",
+            "duration": 5
+          },
+          {
+            "action_template": "男主推门进入，两人意外对视",
+            "duration": 5
+          },
+          {
+            "action_template": "女主慌乱收回目光",
+            "duration": 3
+          },
+          {
+            "action_template": "男主嘴角微扬",
+            "duration": 3
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "title_template": "重逢",
+        "shots_skeleton": [
+          {
+            "action_template": "女主在{office}开会，没想到合作方竟是男主",
+            "duration": 5
+          },
+          {
+            "action_template": "男主公事公办，女主强装镇定",
+            "duration": 4
+          },
+          {
+            "action_template": "会后男主在走廊拦住女主",
+            "duration": 4
+          },
+          {
+            "action_template": "男主：「好久不见」女主愣住",
+            "duration": 4
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "title_template": "冲突",
+        "shots_skeleton": [
+          {
+            "action_template": "反派角色突然出现，挑拨离间",
+            "duration": 5
+          },
+          {
+            "action_template": "女主误会男主，质问他",
+            "duration": 4
+          },
+          {
+            "action_template": "男主沉默，女主转身离开",
+            "duration": 3
+          },
+          {
+            "action_template": "男主握紧拳头，眼神复杂",
+            "duration": 3
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "title_template": "和好",
+        "shots_skeleton": [
+          {
+            "action_template": "女主在{home}独自难过",
+            "duration": 4
+          },
+          {
+            "action_template": "闺蜜递上一封信，是男主写的",
+            "duration": 4
+          },
+          {
+            "action_template": "女主跑向{date_spot}，男主已在等候",
+            "duration": 5
+          },
+          {
+            "action_template": "两人相拥，镜头拉远",
+            "duration": 5
+          }
+        ]
+      }
+    ]
+  }
+}

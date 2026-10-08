@@ -1,0 +1,60 @@
+{
+  "id": "aspect_ratio",
+  "options": [
+    {
+      "id": "9x16",
+      "label_zh": "9:16 竖屏",
+      "label_en": "9:16 Vertical",
+      "prompt_phrase": "竖屏构图,主体居中",
+      "enabled": true,
+      "notes": "短视频主流比例",
+      "default": true,
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "16x9",
+      "label_zh": "16:9 横屏",
+      "label_en": "16:9 Landscape",
+      "prompt_phrase": "横屏构图,宽画幅",
+      "enabled": true,
+      "notes": "传统视频和B站主流",
+      "default": false,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "1x1",
+      "label_zh": "1:1 方形",
+      "label_en": "1:1 Square",
+      "prompt_phrase": "方形构图,居中对称",
+      "enabled": true,
+      "notes": "Instagram/小红书常用",
+      "default": false,
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "id": "4x3",
+      "label_zh": "4:3",
+      "label_en": "4:3",
+      "prompt_phrase": "4:3画幅,复古感",
+      "enabled": true,
+      "notes": "复古/怀旧风格",
+      "default": false,
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "3x4",
+      "label_zh": "3:4 竖屏",
+      "label_en": "3:4 Portrait",
+      "prompt_phrase": "3:4竖屏,小红书常用",
+      "enabled": true,
+      "notes": "小红书/Instagram竖图",
+      "default": false,
+      "width": 1080,
+      "height": 1440
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "id": "length",
+  "options": [
+    {
+      "id": "30s",
+      "label_zh": "30秒",
+      "label_en": "30 seconds",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "超短视频/预告片",
+      "default": false,
+      "target_duration_sec": 30,
+      "shot_count_hint": 5
+    },
+    {
+      "id": "60s",
+      "label_zh": "60秒",
+      "label_en": "60 seconds",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "短视频主流长度",
+      "default": true,
+      "target_duration_sec": 60,
+      "shot_count_hint": 10
+    },
+    {
+      "id": "90s",
+      "label_zh": "90秒",
+      "label_en": "90 seconds",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "中等短视频",
+      "default": false,
+      "target_duration_sec": 90,
+      "shot_count_hint": 15
+    },
+    {
+      "id": "3min",
+      "label_zh": "3分钟",
+      "label_en": "3 minutes",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "中长视频",
+      "default": false,
+      "target_duration_sec": 180,
+      "shot_count_hint": 30
+    },
+    {
+      "id": "5min",
+      "label_zh": "5分钟",
+      "label_en": "5 minutes",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "长视频/B站标准",
+      "default": false,
+      "target_duration_sec": 300,
+      "shot_count_hint": 50
+    },
+    {
+      "id": "custom",
+      "label_zh": "自定义",
+      "label_en": "Custom",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "用户自行输入目标时长",
+      "default": false,
+      "target_duration_sec": 0,
+      "shot_count_hint": 0
+    }
+  ]
+}

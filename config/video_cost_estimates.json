@@ -1,0 +1,221 @@
+{
+  "version": "0.2.3",
+  "updated": "2026-05-18",
+  "currency": "CNY",
+  "estimates": [
+    {
+      "provider": "local_mock_video",
+      "model": "local_mock",
+      "estimated_cny": 0,
+      "notes": "本地模拟，完全免费。"
+    },
+    {
+      "provider": "aliyun_wan_t2v",
+      "model": "wan2.2-t2v-plus",
+      "resolution_tier": "480P",
+      "duration": 5,
+      "estimated_cny": 0.7,
+      "notes": "估算值，实际以阿里云百炼账单为准。推荐首次 smoke 使用。"
+    },
+    {
+      "provider": "aliyun_wan_t2v",
+      "model": "wan2.2-t2v-plus",
+      "resolution_tier": "1080P",
+      "duration": 5,
+      "estimated_cny": 1.4,
+      "notes": "估算值，实际以阿里云百炼账单为准。"
+    },
+    {
+      "provider": "aliyun_wan_t2v",
+      "model": "wan2.1-t2v-turbo",
+      "resolution_tier": "480P",
+      "duration": 5,
+      "estimated_cny": 0.5,
+      "notes": "估算值，实际以阿里云百炼账单为准。"
+    },
+    {
+      "provider": "aliyun_wan_t2v",
+      "model": "wan2.5-t2v-preview",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 1,
+      "notes": "估算值，实际以阿里云百炼账单为准。"
+    },
+    {
+      "provider": "aliyun_wan_t2v",
+      "model": "wan2.6-t2v",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 1.5,
+      "notes": "估算值，实际以阿里云百炼账单为准。"
+    },
+    {
+      "provider": "minimax_hailuo",
+      "model": "MiniMax-Hailuo-2.3",
+      "resolution_tier": "768P",
+      "duration": 6,
+      "estimated_cny": 2,
+      "notes": "估算值，实际以 MiniMax 平台账单为准。"
+    },
+    {
+      "provider": "minimax_hailuo",
+      "model": "MiniMax-Hailuo-2.3",
+      "resolution_tier": "1080P",
+      "duration": 6,
+      "estimated_cny": 3,
+      "notes": "估算值，实际以 MiniMax 平台账单为准。"
+    },
+    {
+      "provider": "minimax_hailuo",
+      "model": "MiniMax-Hailuo-2.3",
+      "resolution_tier": "768P",
+      "duration": 10,
+      "estimated_cny": 3.5,
+      "notes": "估算值，实际以 MiniMax 平台账单为准。"
+    },
+    {
+      "provider": "kling_3",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 2.5,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.5 元/秒，具体以平台账单为准。"
+    },
+    {
+      "provider": "kling_3",
+      "model": "default",
+      "resolution_tier": "1080P",
+      "duration": 5,
+      "estimated_cny": 3.5,
+      "notes": "public_pricing_2026-05-18 保守上限，1080P 高画质档约 0.7 元/秒，具体以平台账单为准。"
+    },
+    {
+      "provider": "kling_3",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 10,
+      "estimated_cny": 5,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.5 元/秒，具体以平台账单为准。"
+    },
+    {
+      "provider": "vidu_q3_ref",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 2,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.4 元/秒，具体以平台账单为准。"
+    },
+    {
+      "provider": "vidu_q3_ref",
+      "model": "default",
+      "resolution_tier": "1080P",
+      "duration": 5,
+      "estimated_cny": 2.5,
+      "notes": "public_pricing_2026-05-18 保守上限，1080P 档约 0.5 元/秒，具体以平台账单为准。"
+    },
+    {
+      "provider": "vidu_q3_ref",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 10,
+      "estimated_cny": 4,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.4 元/秒，具体以平台账单为准。"
+    },
+    {
+      "provider": "jimeng_video_3pro",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 3.5,
+      "notes": "public_pricing_2026-05-18 保守上限，即梦 3.0 Pro 约 0.7 元/秒，具体以字节平台账单为准。"
+    },
+    {
+      "provider": "jimeng_video_3pro",
+      "model": "default",
+      "resolution_tier": "1080P",
+      "duration": 5,
+      "estimated_cny": 4.5,
+      "notes": "public_pricing_2026-05-18 保守上限，即梦 3.0 Pro 1080P 约 0.9 元/秒，具体以字节平台账单为准。"
+    },
+    {
+      "provider": "jimeng_video_3pro",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 10,
+      "estimated_cny": 7,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.7 元/秒，具体以字节平台账单为准。"
+    },
+    {
+      "provider": "jimeng_video_3_720p",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 2,
+      "notes": "public_pricing_2026-05-18 保守上限，即梦 3.0 720p 约 0.4 元/秒，具体以字节平台账单为准。"
+    },
+    {
+      "provider": "jimeng_video_3_720p",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 10,
+      "estimated_cny": 4,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.4 元/秒，具体以字节平台账单为准。"
+    },
+    {
+      "provider": "zhipu_cogvideox",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 1.5,
+      "notes": "public_pricing_2026-05-18 保守上限，智谱 CogVideoX 约 0.3 元/秒，具体以智谱开放平台账单为准。"
+    },
+    {
+      "provider": "zhipu_cogvideox",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 10,
+      "estimated_cny": 3,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.3 元/秒，具体以智谱开放平台账单为准。"
+    },
+    {
+      "provider": "baidu_qianfan_video",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 1.5,
+      "notes": "public_pricing_2026-05-18 保守上限，百度千帆视频约 0.3 元/秒，具体以百度智能云账单为准。"
+    },
+    {
+      "provider": "baidu_qianfan_video",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 10,
+      "estimated_cny": 3,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.3 元/秒，具体以百度智能云账单为准。"
+    },
+    {
+      "provider": "tencent_hunyuan_video",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 5,
+      "estimated_cny": 2,
+      "notes": "public_pricing_2026-05-18 保守上限，腾讯混元视频约 0.4 元/秒，具体以腾讯云账单为准。"
+    },
+    {
+      "provider": "tencent_hunyuan_video",
+      "model": "default",
+      "resolution_tier": "1080P",
+      "duration": 5,
+      "estimated_cny": 2.5,
+      "notes": "public_pricing_2026-05-18 保守上限，1080P 档约 0.5 元/秒，具体以腾讯云账单为准。"
+    },
+    {
+      "provider": "tencent_hunyuan_video",
+      "model": "default",
+      "resolution_tier": "720P",
+      "duration": 10,
+      "estimated_cny": 4,
+      "notes": "public_pricing_2026-05-18 保守上限，约 0.4 元/秒，具体以腾讯云账单为准。"
+    }
+  ]
+}

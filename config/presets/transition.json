@@ -1,0 +1,60 @@
+{
+  "id": "transition",
+  "options": [
+    {
+      "id": "fade",
+      "label_zh": "淡入淡出",
+      "label_en": "Fade In/Out",
+      "prompt_phrase": "淡入淡出过渡",
+      "enabled": true,
+      "notes": "渐变为黑然后再渐显,适合场景切换",
+      "default": true,
+      "type": "dissolve",
+      "duration_ms": 500
+    },
+    {
+      "id": "hard_cut",
+      "label_zh": "硬切",
+      "label_en": "Hard Cut",
+      "prompt_phrase": "硬切过渡",
+      "enabled": true,
+      "notes": "直接切换到下一个画面,适合快节奏剪辑",
+      "default": false,
+      "type": "cut",
+      "duration_ms": 0
+    },
+    {
+      "id": "cross_dissolve",
+      "label_zh": "交叉溶解",
+      "label_en": "Cross Dissolve",
+      "prompt_phrase": "交叉溶解过渡",
+      "enabled": true,
+      "notes": "两画面短暂重叠过渡,适合时间流逝感",
+      "default": false,
+      "type": "dissolve",
+      "duration_ms": 1000
+    },
+    {
+      "id": "push",
+      "label_zh": "推拉",
+      "label_en": "Push",
+      "prompt_phrase": "推拉过渡",
+      "enabled": true,
+      "notes": "新画面推入旧画面推出,适合动态切换",
+      "default": false,
+      "type": "wipe",
+      "duration_ms": 600
+    },
+    {
+      "id": "none",
+      "label_zh": "无",
+      "label_en": "None",
+      "prompt_phrase": "无过渡效果",
+      "enabled": true,
+      "notes": "不使用任何转场效果",
+      "default": false,
+      "type": "none",
+      "duration_ms": 0
+    }
+  ]
+}

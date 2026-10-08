@@ -1,0 +1,53 @@
+{
+  "document_parser": {
+    "type": "parser",
+    "status": "available",
+    "description": "解析 txt/md/docx/pdf 文本文档"
+  },
+  "edge_tts": {
+    "type": "tts",
+    "status": "available",
+    "cost_level": "free",
+    "supports_batch": true,
+    "fallback": "silence"
+  },
+  "mimo_tts": {
+    "type": "tts",
+    "status": "available",
+    "cost_level": "credits",
+    "supports_batch": "unstable",
+    "fallback": "edge_tts"
+  },
+  "local_card_image": {
+    "type": "image",
+    "status": "available",
+    "cost_level": "free",
+    "fallback": null
+  },
+  "local_mock_video": {
+    "type": "video",
+    "status": "available",
+    "cost_level": "free",
+    "supports_text_to_video": false,
+    "supports_image_to_video": false,
+    "fallback": "local_card"
+  },
+  "ffmpeg": {
+    "type": "render",
+    "status": "available",
+    "cost_level": "free",
+    "description": "本地视频渲染、拼接、字幕烧录"
+  },
+  "ikuncode_gpt55": {
+    "type": "llm",
+    "status": "available",
+    "cost_level": "credits",
+    "description": "IKunCode gpt-5.5 文本 LLM"
+  },
+  "mimo_v25_pro": {
+    "type": "llm",
+    "status": "available",
+    "cost_level": "credits",
+    "description": "MiMo v2.5 Pro 文本/多模态 LLM"
+  }
+}

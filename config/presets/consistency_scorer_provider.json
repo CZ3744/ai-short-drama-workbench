@@ -1,0 +1,47 @@
+{
+  "id": "consistency_scorer_provider",
+  "options": [
+    {
+      "id": "gemini_flash",
+      "label_zh": "Gemini 2.5 Flash (OpenRouter 视觉)",
+      "label_en": "Gemini 2.5 Flash Vision (OpenRouter)",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "调用 Gemini Flash 多模态 API 比对两张图的角色/场景一致性。需要 OPENROUTER_API_KEY。",
+      "default": true,
+      "base_url": "https://openrouter.ai/api/v1",
+      "model_id": "google/gemini-2.5-flash-preview",
+      "env_key_name": "OPENROUTER_API_KEY",
+      "api_type": "openai_compat_vision",
+      "cost_per_call_cny": 0.002,
+      "timeout_ms": 30000,
+      "enabled_without_key": false
+    },
+    {
+      "id": "local_clip",
+      "label_zh": "本地 CLIP (Transformers.js)",
+      "label_en": "Local CLIP (Transformers.js)",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "使用 @xenova/transformers 加载 CLIP 模型本地计算 embedding + cosine 相似度。需 npm install @xenova/transformers。免费无限制。三级 cascade 中等精度。",
+      "default": false,
+      "model_id": "Xenova/clip-vit-base-patch32",
+      "cost_per_call_cny": 0,
+      "timeout_ms": 60000,
+      "enabled_without_key": true
+    },
+    {
+      "id": "phash",
+      "label_zh": "pHash 兜底 (完全离线 / 仅辅助参考)",
+      "label_en": "pHash Stub (Fully Offline / Coarse)",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "2026-05-20 Wave T S26 — 三级 cascade 最末端兜底:字节级 SHA256 同图 + 同 element 路径同源判定。无任何 LLM / 模型依赖,瞬时算出。精度低,只能识别完全相同的图或同源目录的图,差异比对不准。Gemini/CLIP 都不可用时强制走这一级。",
+      "default": false,
+      "model_id": "phash_stub_byte_identity",
+      "cost_per_call_cny": 0,
+      "timeout_ms": 5000,
+      "enabled_without_key": true
+    }
+  ]
+}

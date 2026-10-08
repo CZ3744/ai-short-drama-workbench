@@ -1,0 +1,67 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+.env.*
+!.env.example
+config/local-settings.json
+config/*.local.json
+outputs/
+
+# 2026-09-20 — 单项目根目录:
+# 运行数据统一收回本仓库 data/，但继续整目录 gitignore，避免用户素材污染源码历史。
+# 老 data/ 历史目录 (legacy / bak / archive) 也一并排除。
+data/
+data.legacy-*/
+data.bak-*/
+logs/
+*.log
+.DS_Store
+.claude/
+_archive/
+build-prompts/
+*.backup
+samples-backup/
+.vite/
+.vite-temp/
+web/dist/
+
+# 2026-05-13 技术债清理: 旧版/废弃/playground 设计稿统一搬这里
+.trash/
+
+# 残骸文件 (历史 agent 留下的 .tmp / .head 编辑中间产物)
+*.tmp
+*.head
+*.moved
+*.bak
+*.clean
+*.git_orig
+# tsc 诊断残留 (agent 收尾时跑的 npx tsc 临时输出)
+.tsc_*
+
+# 本地运行状态 / 数据库 / smoke 输出
+config/*.db
+config/*.db-shm
+config/*.db-wal
+# db 备份 (db-merge / 一次性维护操作留下, README 见 config/BACKUP_README.md)
+config/*.backup-*
+data/budget_charges.jsonl
+data/oauth_codex_smoke/
+projects/
+dev-launch.marker
+SNAPSHOT_*.patch
+apps/test_2.txt
+design-skill/**/.design-canvas.state.json
+data/failed_debug/
+
+# 自动化验收的临时副本、日志、截图；不提交用户数据或机器相关测试产物。
+/tmp/quality-tests/
+/.quality-tmp/
+/.quality-reports/
+
+# Local agent handoff state and credentials are never distribution material.
+/.ai-bridge/
+*.pem
+*.key
+coverage/

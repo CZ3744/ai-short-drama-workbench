@@ -1,0 +1,145 @@
+{
+  "id": "tts_provider",
+  "options": [
+    {
+      "id": "edge_tts",
+      "label_zh": "Edge TTS",
+      "label_en": "Edge TTS",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "微软 Edge 浏览器 TTS,免费,无需 Key",
+      "default": true,
+      "requires_key": false,
+      "languages": [
+        "zh-CN",
+        "en-US",
+        "ja-JP",
+        "ko-KR"
+      ],
+      "env_key_name": ""
+    },
+    {
+      "id": "mimo_tts",
+      "label_zh": "小米 MiMo TTS (限时免费)",
+      "label_en": "Xiaomi MiMo TTS (Free Trial)",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "小米开放平台 MiMo v2.5 TTS, 全 tier 限时免费 (0 Credit)。到 platform.xiaomimimo.com 注册→Token Plan→生成 API Key, 填到下方 API Key 字段。支持 <style> 标签控情绪/语速/方言。3 内置音色: mimo_default / default_zh / default_en。⚠️ MiMo TTS 仅 CN 节点 (token-plan-cn.xiaomimimo.com) 提供, SGP 新加坡 plan 仅含 LLM 不含 TTS, 你的 MIMO_API_KEY (CN) 即可启用。",
+      "default": false,
+      "requires_key": true,
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "env_key_name": "MIMO_API_KEY",
+      "base_url": "https://token-plan-cn.xiaomimimo.com/v1",
+      "model_id": "mimo-v2.5-tts"
+    },
+    {
+      "id": "huoshan_tts",
+      "label_zh": "火山 TTS",
+      "label_en": "Huoshan TTS",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "[未接入] 字节跳动火山引擎 TTS — 2026-05-18 关闭: registry 走 silent fallback 到 edge_tts 踩红线 #1, 实现真 provider 后再 enabled=true",
+      "default": false,
+      "requires_key": true,
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "env_key_name": "VOLC_API_KEY"
+    },
+    {
+      "id": "minimax_tts",
+      "label_zh": "MiniMax TTS",
+      "label_en": "MiniMax TTS",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "[未接入] MiniMax 语音合成 — 2026-05-18 关闭: registry 走 silent fallback 到 edge_tts 踩红线 #1, 实现真 provider 后再 enabled=true",
+      "default": false,
+      "requires_key": true,
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "env_key_name": "MINIMAX_API_KEY"
+    },
+    {
+      "id": "windows_sapi",
+      "label_zh": "Windows SAPI",
+      "label_en": "Windows SAPI",
+      "prompt_phrase": "",
+      "enabled": true,
+      "notes": "Windows 系统自带 TTS,无需 Key,中文音色有限",
+      "default": false,
+      "requires_key": false,
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "env_key_name": ""
+    },
+    {
+      "id": "openclaw_local_tts",
+      "label_zh": "OpenClaw 本地 TTS",
+      "label_en": "OpenClaw Local TTS",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "[未实现] OpenClaw 本地 TTS 旧 id 占位 — 2026-05-18 EVE-5 关闭: registry 走 FallbackTtsWrapper 调用即 throw,enabled=true 时用户选了会直接崩。新本地 TTS 走 local_gpt_sovits_openclaw / local_tts_mock_openclaw / local_cosyvoice2_openclaw",
+      "default": false,
+      "requires_key": false,
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "env_key_name": ""
+    },
+    {
+      "id": "local_gpt_sovits_openclaw",
+      "label_zh": "本地 GPT-SoVITS (OpenClaw)",
+      "label_en": "Local GPT-SoVITS (OpenClaw)",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "requires_key": false,
+      "languages": [
+        "zh-CN",
+        "zh-HK",
+        "en-US",
+        "ja-JP"
+      ],
+      "env_key_name": "",
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "gpt_sovits",
+        "timeout_ms": 300000
+      },
+      "enabled_without_key": false
+    },
+    {
+      "id": "local_tts_mock_openclaw",
+      "label_zh": "本地 Mock 测试 TTS (OpenClaw)",
+      "label_en": "Local Mock Test TTS (OpenClaw)",
+      "prompt_phrase": "",
+      "enabled": false,
+      "notes": "可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。",
+      "default": false,
+      "requires_key": false,
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "env_key_name": "",
+      "executor": {
+        "python_path": "",
+        "script_path": "",
+        "engine": "mock",
+        "timeout_ms": 30000
+      },
+      "enabled_without_key": false
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "ending_type",
+  "options": [
+    {
+      "id": "open",
+      "label_zh": "开放结局",
+      "label_en": "Open Ending",
+      "prompt_phrase": "开放结局,留下想象空间",
+      "enabled": true,
+      "notes": "引发观众讨论",
+      "default": false
+    },
+    {
+      "id": "happy",
+      "label_zh": "大团圆",
+      "label_en": "Happy Ending",
+      "prompt_phrase": "大团圆结局,圆满收场",
+      "enabled": true,
+      "notes": "甜宠/家庭剧标配",
+      "default": false
+    },
+    {
+      "id": "twist",
+      "label_zh": "反转",
+      "label_en": "Plot Twist",
+      "prompt_phrase": "反转结局,出人意料的转折",
+      "enabled": true,
+      "notes": "悬疑/烧脑向",
+      "default": false
+    },
+    {
+      "id": "hook",
+      "label_zh": "留悬念",
+      "label_en": "Cliffhanger",
+      "prompt_phrase": "悬念结尾,引导下一集",
+      "enabled": true,
+      "notes": "连续剧首选,促进追更",
+      "default": true
+    },
+    {
+      "id": "be",
+      "label_zh": "BE(Bad Ending)",
+      "label_en": "Bad Ending",
+      "prompt_phrase": "悲剧结局,遗憾收场",
+      "enabled": true,
+      "notes": "虐心向,情绪冲击",
+      "default": false
+    },
+    {
+      "id": "tragedy",
+      "label_zh": "悲剧",
+      "label_en": "Tragedy",
+      "prompt_phrase": "悲剧结局,沉重收束",
+      "enabled": true,
+      "notes": "深刻题材",
+      "default": false
+    },
+    {
+      "id": "power_fantasy",
+      "label_zh": "爽文结局",
+      "label_en": "Power Fantasy",
+      "prompt_phrase": "爽文结局,逆袭成功,大快人心",
+      "enabled": true,
+      "notes": "战神/逆袭标配",
+      "default": false
+    }
+  ]
+}

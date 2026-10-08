@@ -1,0 +1,61 @@
+{
+  "id": "scene_time_of_day",
+  "label": "场景时间",
+  "description": "场景的时间段选项",
+  "options": [
+    {
+      "id": "dawn",
+      "label_zh": "凌晨",
+      "label_en": "Dawn",
+      "prompt_phrase": "dawn, early morning",
+      "enabled": true,
+      "notes": "00:00-05:00",
+      "default": false
+    },
+    {
+      "id": "early_morning",
+      "label_zh": "清晨",
+      "label_en": "Early Morning",
+      "prompt_phrase": "early morning, sunrise",
+      "enabled": true,
+      "notes": "05:00-08:00",
+      "default": false
+    },
+    {
+      "id": "daytime",
+      "label_zh": "白天",
+      "label_en": "Daytime",
+      "prompt_phrase": "daytime, bright daylight",
+      "enabled": true,
+      "notes": "08:00-16:00",
+      "default": true
+    },
+    {
+      "id": "afternoon",
+      "label_zh": "午后",
+      "label_en": "Afternoon",
+      "prompt_phrase": "afternoon, golden hour approaching",
+      "enabled": true,
+      "notes": "13:00-17:00",
+      "default": false
+    },
+    {
+      "id": "dusk",
+      "label_zh": "黄昏",
+      "label_en": "Dusk",
+      "prompt_phrase": "dusk, golden hour, sunset",
+      "enabled": true,
+      "notes": "17:00-19:00",
+      "default": false
+    },
+    {
+      "id": "night",
+      "label_zh": "夜晚",
+      "label_en": "Night",
+      "prompt_phrase": "night, nighttime",
+      "enabled": true,
+      "notes": "19:00-24:00",
+      "default": false
+    }
+  ]
+}

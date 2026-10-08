@@ -1,0 +1,61 @@
+{
+  "id": "scene_lighting",
+  "label": "场景布光",
+  "description": "场景的布光/光照风格选项",
+  "options": [
+    {
+      "id": "natural",
+      "label_zh": "自然光",
+      "label_en": "Natural Light",
+      "prompt_phrase": "natural lighting",
+      "enabled": true,
+      "notes": "",
+      "default": true
+    },
+    {
+      "id": "backlit",
+      "label_zh": "逆光",
+      "label_en": "Backlit",
+      "prompt_phrase": "backlit, rim light",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "cinematic",
+      "label_zh": "电影感布光",
+      "label_en": "Cinematic Lighting",
+      "prompt_phrase": "cinematic lighting, dramatic shadows",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "neon",
+      "label_zh": "霓虹",
+      "label_en": "Neon",
+      "prompt_phrase": "neon lights, neon glow",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "flashlight",
+      "label_zh": "手电光源",
+      "label_en": "Flashlight",
+      "prompt_phrase": "flashlight, torch light",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    },
+    {
+      "id": "warm_dim",
+      "label_zh": "昏黄",
+      "label_en": "Warm Dim",
+      "prompt_phrase": "warm dim lighting, amber",
+      "enabled": true,
+      "notes": "",
+      "default": false
+    }
+  ]
+}
