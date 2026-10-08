@@ -309,7 +309,7 @@ export default function SeriesDetail() {
   // ── render P09 ──────────────────────────────────────────
 
   return (
-    <div className="v24-shell flex flex-col h-full">
+    <div className="v24-shell v24-series-overview flex flex-col h-full">
       <SeriesHeader
         slug={slug}
         series={series}

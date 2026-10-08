@@ -1,6 +1,6 @@
 # 实跑截图
 
-120 张真实 Chromium 截图，来自隔离人工样本。打开下载后的 [可筛选图集](index.html)，或点击下列图片链接查看。
+122 张真实 Chromium 截图，来自隔离人工样本。打开下载后的 [可筛选图集](index.html)，或点击下列图片链接查看。
 
 - [01-studio-desktop](01-studio-desktop.png)
 - [02-create-series-dialog](02-create-series-dialog.png)
@@ -53,6 +53,8 @@
 - [46-script-recovered-draft-choice](46-script-recovered-draft-choice.png)
 - [48-script-version-switch-with-backup](48-script-version-switch-with-backup.png)
 - [50-studio-with-project-narrow](50-studio-with-project-narrow.png)
+- [51-series-overview-narrow-bottom](51-series-overview-narrow-bottom.png)
+- [51-series-overview-narrow-episode](51-series-overview-narrow-episode.png)
 - [51-series-overview-narrow](51-series-overview-narrow.png)
 - [52-inbox-narrow](52-inbox-narrow.png)
 - [53-script-narrow-bottom](53-script-narrow-bottom.png)

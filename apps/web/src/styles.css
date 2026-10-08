@@ -5900,6 +5900,12 @@ body { background: var(--studio-paper); }
 @media (max-width: 650px) {
   .v24-series-body { grid-template-columns: minmax(0, 1fr) !important; }
   .v24-series-episode-col { min-width: 0; }
+  .v24-series-overview { height: auto !important; min-height: 100%; overflow: visible; }
+  .v24-series-overview > .v24-series-body { flex: none; min-height: auto; grid-template-rows: auto auto; }
+  .v24-series-episode-col { min-height: auto; }
+  .v24-series-episode-list { flex: none; overflow: visible; }
+  .v24-series-episode-row { flex-shrink: 0; }
+  .v24-series-body > .overflow-auto { overflow: visible; }
   .v24-series-episode-header { flex-direction: column; align-items: stretch; gap: 12px; padding: 18px 16px; }
   .v24-series-episode-header > div:last-child { flex-wrap: wrap; }
   .v24-series-episode-row { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 12px; min-width: 0; }
