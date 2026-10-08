@@ -21,8 +21,59 @@ describe('public release preset configuration', () => {
           if (key in option.executor) assert.equal(option.executor[key], '');
         }
       }
+      for (const option of output.options.filter(option => /^local_.+_openclaw$/.test(option.id))) {
+        assert.equal(option.enabled, false, `${name}: uninstalled local script provider must stay disabled`);
+        assert.equal(option.default, false);
+      }
+      if (output.id === 'image_provider') assert.equal(defaults[0].id, 'local_card_image');
       assert.equal(JSON.stringify(original), before, 'export must not rewrite local source settings');
     }
+  });
+
+  it('disables an exec image preset whose executor was omitted and replaces its first-run promise', () => {
+    const original = { id: 'image_provider', options: [
+      { id: 'local_sdxl_openclaw', enabled: true, default: true, notes: '首跑即可用', notes_detail: '已安装于原机器' },
+      { id: 'local_card_image', enabled: false, default: false },
+    ] };
+    const before = structuredClone(original);
+    const output = prepareReleasePresetConfig(original);
+    const extension = output.options[0];
+    assert.equal(extension.enabled, false);
+    assert.equal(extension.enabled_without_key, false);
+    assert.equal(extension.default, false);
+    assert.deepEqual(extension.executor, { python_path: '', script_path: '' });
+    assert.match(extension.notes, /先配置/);
+    assert.doesNotMatch(extension.notes + extension.notes_detail, /首跑即可用|原机器/);
+    const demo = output.options[1];
+    assert.equal(demo.enabled, true);
+    assert.equal(demo.default, true);
+    assert.equal(demo.enabled_without_key, true);
+    assert.match(demo.label_zh, /演示.*非 AI/);
+    assert.match(demo.notes, /失败不会自动切换/);
+    assert.deepEqual(original, before);
+    assert.deepEqual(prepareReleasePresetConfig(output), output, 'safe to reapply to an existing public preset');
+  });
+
+  it('disables unconfigured script-based video and speech providers without touching ordinary APIs', () => {
+    const output = prepareReleasePresetConfig({ options: [
+      { id: 'local_wan_openclaw', enabled: true, default: true },
+      { id: 'local_gpt_sovits_openclaw', enabled: true, default: true, executor: null },
+      { id: 'custom_local_script', enabled: true, default: true, executor: { python_path: 'python' } },
+      { id: 'custom_cloud', enabled: true, default: true, base_url: 'https://api.example.test/v1' },
+    ] });
+    for (const option of output.options.slice(0, 3)) {
+      assert.equal(option.enabled, false);
+      assert.equal(option.default, false);
+      assert.equal(option.executor.python_path, '');
+      assert.equal(option.executor.script_path, '');
+    }
+    assert.deepEqual(output.options[3], { id: 'custom_cloud', enabled: true, default: true, base_url: 'https://api.example.test/v1' });
+  });
+
+  it('fails image export instead of choosing an unavailable extension when the demo is missing', () => {
+    assert.throws(() => prepareReleasePresetConfig({ id: 'image_provider', options: [
+      { id: 'local_sdxl_openclaw', enabled: true, default: true },
+    ] }), /Public image presets require a local demo option/);
   });
 
   it('replaces an unavailable local video default with an explicitly labeled demo', () => {

@@ -8,8 +8,8 @@
     },
     {
       "path": ".github/workflows/quality.yml",
-      "bytes": 1553,
-      "sha256": "1d2481f101cb900871e6cd6f2c3ce64e597f36f6a7db8cface9e7fc1413dba03"
+      "bytes": 1663,
+      "sha256": "5d507d968711ebfacae8055d5b56b062322677d79fcc5ccd3608f9102bb12fa0"
     },
     {
       "path": ".gitignore",
@@ -98,8 +98,8 @@
     },
     {
       "path": "apps/server/src/__tests__/launcher-contract.test.ts",
-      "bytes": 10087,
-      "sha256": "c69e38b24eedea2535fd610aa41de95cb599b60128957ff23de95ee38762eee2"
+      "bytes": 12553,
+      "sha256": "521579bf5a7dcb92f418e7705d9146c5bd8fe3721c80c4cc46273d74392b30af"
     },
     {
       "path": "apps/server/src/__tests__/logging-chain.test.ts",
@@ -2918,8 +2918,8 @@
     },
     {
       "path": "config/presets/image_provider.json",
-      "bytes": 5584,
-      "sha256": "529e19f7c8ff39aad50b0abb447069475579870201b3d7c91eb8c3dd44464007"
+      "bytes": 5890,
+      "sha256": "bbd1772cafed836b866f4295ccca8383c171fc6f185c5146df01fc4377113f9a"
     },
     {
       "path": "config/presets/length.json",
@@ -3049,7 +3049,7 @@
     {
       "path": "docs/RELEASE_NOTES.md",
       "bytes": 2163,
-      "sha256": "c0c568552c634b07d80a7c37b8497618af6b643e67900d84130543bdd19e7c64"
+      "sha256": "b626bbd5f0bc28898a9fe9e31f81ad321162c1ffe8708dac4f68fefb6da10bee"
     },
     {
       "path": "docs/UPGRADE_BRIEF_2026-10-08.md",
@@ -3059,7 +3059,7 @@
     {
       "path": "docs/VISUAL_REVIEW.md",
       "bytes": 4260,
-      "sha256": "da97d9915113d480a86fd7f06d57674bc2056e2df6bd59dfce173859cdef8c6d"
+      "sha256": "7d370c47ab1cb72c2dc04a1ae1fb5137bfc6d5ff01b876d44acac16aa78241f8"
     },
     {
       "path": "docs/screenshots/01-studio-desktop.png",
@@ -3908,8 +3908,8 @@
     },
     {
       "path": "packages/core/src/test/releasePresetConfig.test.mjs",
-      "bytes": 2907,
-      "sha256": "82fb33eae8409ed6f333090c314447417df2745179f22a899d1e770f75785976"
+      "bytes": 5840,
+      "sha256": "c211eb4593b187214087d3bc2a55054a5316d56f4cba80b346b06e1209cf7131"
     },
     {
       "path": "packages/core/src/test/scrub.test.ts",
@@ -5038,8 +5038,8 @@
     },
     {
       "path": "scripts/release-preset-config.mjs",
-      "bytes": 1684,
-      "sha256": "688bea4159f8629e4dcd135d0ba3a9ba502e17f98028a9b57fdbbedc7084ea6e"
+      "bytes": 3286,
+      "sha256": "a34596025a521213e50c9b582ed520811b70a44cb6879961f99f171e6404569d"
     },
     {
       "path": "scripts/run-safe-tests.mjs",

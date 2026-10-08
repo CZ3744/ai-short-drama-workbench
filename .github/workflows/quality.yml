@@ -25,6 +25,8 @@ jobs:
       - name: Verify Python
         run: python --version
       - run: npm ci
+      - name: Verify isolated Windows launcher
+        run: node scripts/run-safe-tests.mjs launcher-contract
       # windows-latest includes Edge; verify a real headless launch instead of downloading a second browser.
       - name: Verify installed Chromium browser
         run: |

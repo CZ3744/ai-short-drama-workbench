@@ -2,25 +2,64 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { mkdtempSync, rmSync } from "node:fs";
 import { createServer } from "node:http";
 import { handleStudioWebIdentity } from "../../../../scripts/studio-web-identity";
 
 const psLiteral = (value: string) => `'${value.replaceAll("'", "''")}'`;
 function runPowerShell(body: string) {
-  const source = `$ErrorActionPreference = 'Stop'\n. ${psLiteral(path.join(process.cwd(), "studio-common.ps1"))}\n${body}`;
+  const windowsRoot = process.env.SystemRoot;
+  assert.ok(windowsRoot, "Windows PowerShell checks require SystemRoot");
+  const powershell = path.join(windowsRoot, "System32/WindowsPowerShell/v1.0/powershell.exe");
+  const emptyModules = mkdtempSync(path.join(process.cwd(), ".tmp", "powershell-modules-"));
+  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !["PSMODULEPATH", "WINPSMODULEPATH"].includes(key.toUpperCase())));
+  // WinPS inserts AllUsers when the initial path contains PSHOME. An empty test
+  // directory avoids cold discovery of every module installed on a hosted runner.
+  env.PSModulePath = emptyModules;
+  const source = `[Console]::Error.WriteLine('[launcher-check] script-entry')
+$ErrorActionPreference = 'Stop'
+$PSModuleAutoLoadingPreference = 'None'
+$env:PSModulePath = $PSHOME + '\\Modules'
+Import-Module ($PSHOME + '\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+Import-Module ($PSHOME + '\\Modules\\Microsoft.PowerShell.Management\\Microsoft.PowerShell.Management.psd1') -ErrorAction Stop
+[Console]::Error.WriteLine('[launcher-check] modules-ready')
+. ${psLiteral(path.join(process.cwd(), "studio-common.ps1"))}
+[Console]::Error.WriteLine('[launcher-check] common-ready')
+${body}
+[Console]::Error.WriteLine('[launcher-check] assertions-ready')`;
   const started = Date.now();
   try {
-    return execFileSync("powershell", ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", Buffer.from(source, "utf16le").toString("base64")], {
-      windowsHide: true, encoding: "utf8", timeout: 15000,
+    return execFileSync(powershell, ["-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", Buffer.from(source, "utf16le").toString("base64")], {
+      windowsHide: true, encoding: "utf8", timeout: 15000, env,
     }).trim();
   } catch (error) {
     const failure = error as Error & { code?: string; status?: number; signal?: string; stdout?: string | Buffer; stderr?: string | Buffer };
     // Keep CI evidence useful: the full encoded command can otherwise bury the actual failure.
     throw new Error(`Windows PowerShell launcher check failed after ${Date.now() - started}ms: code=${failure.code ?? "none"}, status=${failure.status ?? "none"}, signal=${failure.signal ?? "none"}\nstdout: ${String(failure.stdout ?? "").slice(-3000)}\nstderr: ${String(failure.stderr ?? "").slice(-5000)}`);
+  } finally {
+    rmSync(emptyModules, { recursive: true, force: true });
   }
 }
 
 describe("silent launcher contracts", () => {
+  it("loads only explicit system modules without inheriting unrelated module search paths", { skip: process.platform !== "win32" }, () => {
+    const originalPath = process.env.PSModulePath;
+    process.env.PSModulePath = path.join(process.cwd(), ".tmp", "unrelated-modules");
+    try {
+      const output = runPowerShell(String.raw`
+        @{ modulePath = $env:PSModulePath; expectedPath = ($PSHOME + '\Modules'); autoload = [string]$PSModuleAutoLoadingPreference; utility = (Get-Module Microsoft.PowerShell.Utility).Path; management = (Get-Module Microsoft.PowerShell.Management).Path } | ConvertTo-Json -Compress
+      `);
+      const result = JSON.parse(output);
+      assert.equal(result.modulePath, result.expectedPath);
+      assert.equal(result.autoload, "None");
+      for (const modulePath of [result.utility, result.management]) {
+        assert.ok(modulePath.toLowerCase().startsWith(result.expectedPath.toLowerCase() + path.sep));
+      }
+    } finally {
+      if (originalPath === undefined) delete process.env.PSModulePath;
+      else process.env.PSModulePath = originalPath;
+    }
+  });
   it("serves a local identity with only the app, service and process ID", async () => {
     const server = createServer((req, res) => handleStudioWebIdentity(req, res, () => { res.statusCode = 404; res.end(); }));
     await new Promise<void>(resolve => server.listen(0, "127.0.0.1", resolve));
