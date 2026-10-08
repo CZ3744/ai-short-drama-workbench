@@ -5088,8 +5088,8 @@
     },
     {
       "path": "start-dev.bat",
-      "bytes": 2140,
-      "sha256": "b54944d78abc8c66167badd0644b584cf3b0a2e8d39d57ca62bf868dff0e1cd7"
+      "bytes": 257,
+      "sha256": "262fe4e3cb4145ccabfa19bfe4c808c812de395f0767a4709288e83ddf1dfe3d"
     },
     {
       "path": "start-studio-hidden.vbs",
