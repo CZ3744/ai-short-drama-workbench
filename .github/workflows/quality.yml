@@ -45,4 +45,5 @@ jobs:
         with:
           name: studio-quality-evidence
           path: .quality-reports/
+          include-hidden-files: true
           retention-days: 14

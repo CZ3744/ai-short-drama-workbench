@@ -114,6 +114,23 @@ try {
     await fs.writeFile(path.join(reports, 'tests-latest.json'), JSON.stringify(summary, null, 2) + '\n');
   }
   console.log(JSON.stringify(summary, null, 2));
+  if (exitCode !== 0) {
+    // CI logs must explain failures even when artifact upload is unavailable.
+    // This output comes from the isolated fixture, without inherited user credentials.
+    const lines = output.split(/\r?\n/);
+    const selected = new Set();
+    for (let i = 0; i < lines.length; i++) {
+      if (!/^\s*not ok\b/.test(lines[i])) continue;
+      for (let j = Math.max(0, i - 2); j < Math.min(lines.length, i + 100); j++) {
+        if (j > i + 1 && /^\s*# Subtest:/.test(lines[j])) break;
+        selected.add(j);
+      }
+    }
+    const diagnostics = selected.size
+      ? [...selected].sort((a, b) => a - b).map(i => lines[i]).join('\n')
+      : lines.slice(-120).join('\n');
+    console.error(`\nFailure diagnostics (full log: ${summary.log}):\n${diagnostics.slice(0, 40000)}`);
+  }
 } finally {
   // 只清理本次 mkdtemp 返回的测试副本，绝不清空用户 data/outputs。
   await fs.rm(fixture, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }).catch(error => {

@@ -4,11 +4,7 @@
 # 启动器和停止器必须用同一套标准 —— 启动器靠它认出端口被外人占了要报警,
 # 停止器靠它决定哪些进程碰都不能碰。两边各写一份, 迟早各说各话。
 
-# 后端端口 2026-07-22 从 8787 改成 8788, 别改回去:
-# 用户机器上的 codexpro (codexpro start --root C:/Projects/video-studio) 常驻 8787。两边撞港时
-# Windows 不会报 EADDRINUSE, 而是让后来的照样"绑定成功", 请求却被先到的那个接走 ——
-# 于是页面能开、后端日志也说 listening, 但每个接口都被 codexpro 回 401。
-# 换个端口是让两个程序能同时开着的最省事办法。
+# 独立端口避免与其他本地服务冲突。启动器仍校验服务身份，不能仅凭端口开放判定成功。
 $StudioApiPort = 8788
 $StudioWebPort = 5173
 
@@ -41,10 +37,7 @@ function Get-StudioPortOwner {
 }
 
 # 后端到底是不是"我们的"后端。
-# 光看端口通不通是不够的 —— 2026-07-22 的真实故障就是端口通, 但接电话的是别的程序,
-# 所有接口一律返回 401, 页面能开却全线报错。所以必须验明正身: /healthz 得答出我们自己的 ok:true。
-# 返回 ours / foreign / down 三态。
-# (这里的 -TimeoutSec 是等本机子进程启动就绪的探针, 不是业务网络请求, 与"严禁本地主动 timeout"铁律无关。)
+# 端口开放不代表服务正确；必须同时验证进程归属与健康响应。
 function Test-StudioBackend {
     param([int]$Port = $StudioApiPort)
     try {

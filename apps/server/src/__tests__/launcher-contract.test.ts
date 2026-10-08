@@ -8,9 +8,16 @@ import { handleStudioWebIdentity } from "../../../../scripts/studio-web-identity
 const psLiteral = (value: string) => `'${value.replaceAll("'", "''")}'`;
 function runPowerShell(body: string) {
   const source = `$ErrorActionPreference = 'Stop'\n. ${psLiteral(path.join(process.cwd(), "studio-common.ps1"))}\n${body}`;
-  return execFileSync("powershell", ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", Buffer.from(source, "utf16le").toString("base64")], {
-    windowsHide: true, encoding: "utf8", timeout: 15000,
-  }).trim();
+  const started = Date.now();
+  try {
+    return execFileSync("powershell", ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", Buffer.from(source, "utf16le").toString("base64")], {
+      windowsHide: true, encoding: "utf8", timeout: 15000,
+    }).trim();
+  } catch (error) {
+    const failure = error as Error & { code?: string; status?: number; signal?: string; stdout?: string | Buffer; stderr?: string | Buffer };
+    // Keep CI evidence useful: the full encoded command can otherwise bury the actual failure.
+    throw new Error(`Windows PowerShell launcher check failed after ${Date.now() - started}ms: code=${failure.code ?? "none"}, status=${failure.status ?? "none"}, signal=${failure.signal ?? "none"}\nstdout: ${String(failure.stdout ?? "").slice(-3000)}\nstderr: ${String(failure.stderr ?? "").slice(-5000)}`);
+  }
 }
 
 describe("silent launcher contracts", () => {

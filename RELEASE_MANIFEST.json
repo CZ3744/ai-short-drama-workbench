@@ -8,8 +8,8 @@
     },
     {
       "path": ".github/workflows/quality.yml",
-      "bytes": 1516,
-      "sha256": "c46f2a29239566ae0e34e8796b623a4e3312b87d82ef798df71daa8d4ffeb90a"
+      "bytes": 1553,
+      "sha256": "1d2481f101cb900871e6cd6f2c3ce64e597f36f6a7db8cface9e7fc1413dba03"
     },
     {
       "path": ".gitignore",
@@ -98,8 +98,8 @@
     },
     {
       "path": "apps/server/src/__tests__/launcher-contract.test.ts",
-      "bytes": 9472,
-      "sha256": "3de4f4b9a8d39a4307f2fa60fd2ba011c29d0c40877cd539197720b4c6fad957"
+      "bytes": 10087,
+      "sha256": "c69e38b24eedea2535fd610aa41de95cb599b60128957ff23de95ee38762eee2"
     },
     {
       "path": "apps/server/src/__tests__/logging-chain.test.ts",
@@ -5043,8 +5043,8 @@
     },
     {
       "path": "scripts/run-safe-tests.mjs",
-      "bytes": 7997,
-      "sha256": "70e30f87eba3f4094846842631070548933b1e3db22cee0fdbeecc3ae2cc2f9c"
+      "bytes": 8803,
+      "sha256": "09edf32dc492e4b9752b9b546431f132f64231f6d61eb579a5625b899c66e76f"
     },
     {
       "path": "scripts/run-sample.ts",
@@ -5113,8 +5113,8 @@
     },
     {
       "path": "studio-common.ps1",
-      "bytes": 7069,
-      "sha256": "15c4a55a1e668d206788d2bc624d9b3ecc48080fd09f274279d46d1c7e4745d3"
+      "bytes": 6398,
+      "sha256": "d5c813eadb9eebf6aa9b6ff6d054201fd2db375e34757d8fffe1da48cd7bd89f"
     },
     {
       "path": "tsconfig.json",
