@@ -19,6 +19,11 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verify Python
+        run: python --version
       - run: npm ci
       - run: npx playwright install chromium
       - name: Install media test tools

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useGlobalTool } from "../shell/GlobalTools";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
@@ -977,7 +978,7 @@ export function GlobalQueuePanel({ className: _className }: GlobalQueuePanelProp
   return (
     <>
       {/* 弹出层（含透明遮罩） */}
-      {open && (
+      {open && createPortal(
         <div
           ref={overlayRef}
           onClick={handleOverlayClick}
@@ -1010,7 +1011,8 @@ export function GlobalQueuePanel({ className: _className }: GlobalQueuePanelProp
             elementNameMap={elementNameMap}
             episodeTitleMap={episodeTitleMap}
           />
-        </div>
+        </div>,
+        document.body,
       )}
 
       {/* 右下角圆形悬浮按钮（弹窗打开时隐藏，避免重叠） */}

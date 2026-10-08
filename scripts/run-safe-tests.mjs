@@ -82,6 +82,8 @@ try {
     TMP: path.join(fixture, '.tmp'), TEMP: path.join(fixture, '.tmp'), TMPDIR: path.join(fixture, '.tmp'),
     VIDEO_GENERATE_TEST_FIXTURE: fixture,
   });
+  // An explicit test interpreter is safe to pass through; real provider configuration stays excluded.
+  if (process.env.VIDEO_GENERATE_TEST_PYTHON) env.VIDEO_GENERATE_TEST_PYTHON = process.env.VIDEO_GENERATE_TEST_PYTHON;
   if (browserMode && process.platform === 'win32' && process.env.LOCALAPPDATA) {
     // 仅复用已安装的浏览器二进制；新 profile 和用户目录仍在测试副本内。
     env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright');

@@ -111,10 +111,24 @@ try {
     await page!.screenshot({ path: path.join(out, filename), fullPage: true });
     report.checks.push({ name, route, ...state, screenshot: filename, horizontalOverflow: state.documentWidth > width + 1 });
     const main = page!.locator("main");
-    if (await main.count() && await main.evaluate(el => el.scrollHeight > el.clientHeight * 1.3)) {
+    if (await main.count() && (name === "status-failures-narrow" || await main.evaluate(el => el.scrollHeight > el.clientHeight * 1.3))) {
       await main.evaluate(el => el.scrollTop = el.scrollHeight);
       await page!.screenshot({ path: path.join(out, filename.replace(".png", "-bottom.png")), fullPage: true });
       await main.evaluate(el => el.scrollTop = 0);
+    }
+    if (name === "status-failures-narrow") {
+      const failureCard: Locator = page!.locator(".failure-record").first();
+      await failureCard.waitFor({ state: "visible" });
+      await failureCard.scrollIntoViewIfNeeded();
+      await page!.screenshot({ path: path.join(out, filename.replace(".png", "-record.png")), fullPage: true });
+    }
+    if (name === "series-overview-narrow") {
+      const episodeRow: Locator = page!.locator(".v24-series-episode-row").first();
+      await episodeRow.scrollIntoViewIfNeeded();
+      await page!.screenshot({ path: path.join(out, filename.replace(".png", "-episode.png")), fullPage: true });
+      const action = episodeRow.getByRole("button").last();
+      await action.scrollIntoViewIfNeeded();
+      await action.click({ trial: true });
     }
   }
 
@@ -234,9 +248,23 @@ try {
       for (const tool of ["shortcuts", "assistant", "queue"]) {
         const trigger = page.locator(`[data-tool-trigger="${tool}"]`);
         await trigger.click();
-        const panel = page.locator(`[data-tool-panel="${tool}"]`);
+        const panel: Locator = page.locator(`[data-tool-panel="${tool}"]`);
         await panel.waitFor({ state: "visible" });
         await page.waitForFunction(name => document.querySelector(`[data-tool-panel="${name}"]`)?.contains(document.activeElement), tool);
+        // A focusable panel can still sit outside the viewport or behind page cards.
+        // Shortcuts uses BaseDialog's full-screen wrapper; inspect its actual card.
+        const surface: Locator = tool === "shortcuts" ? panel.locator(":scope > div").last() : panel;
+        const panelGeometry: { x: number; y: number; width: number; height: number; right: number; bottom: number; unobscured: boolean } = await surface.evaluate(el => {
+          const rect = el.getBoundingClientRect();
+          const points = [[rect.left + 12, rect.top + 12], [rect.left + rect.width / 2, rect.top + Math.min(30, rect.height / 2)], [rect.right - 12, rect.bottom - 12]];
+          return { x: rect.left, y: rect.top, width: rect.width, height: rect.height,
+            right: rect.right, bottom: rect.bottom,
+            unobscured: points.every(([x, y]) => el.contains(document.elementFromPoint(x, y))) };
+        });
+        assert.ok(panelGeometry.width > 150 && panelGeometry.height > 80, `${kind}/${tool}/${width}: panel collapsed`);
+        assert.ok(panelGeometry.x >= -1 && panelGeometry.y >= -1 && panelGeometry.right <= width + 1 && panelGeometry.bottom <= height + 1,
+          `${kind}/${tool}/${width}: panel outside viewport ${JSON.stringify(panelGeometry)}`);
+        assert.equal(panelGeometry.unobscured, true, `${kind}/${tool}/${width}: panel covered by page content`);
         if (width === 1440 || width === 390) await page.screenshot({ path: path.join(out, `tool-${kind}-${tool}-${width}.png`), fullPage: true });
         await page.keyboard.press("Tab");
         assert.equal(await panel.evaluate(el => el.contains(document.activeElement)), true);

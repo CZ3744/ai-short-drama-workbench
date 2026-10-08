@@ -17,6 +17,7 @@
 
 import { useGlobalTool } from "../shell/GlobalTools";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { Icon } from "../shared/Icon";
@@ -395,14 +396,14 @@ export function AIAssistantPanel() {
   }
 
   // ── 抽屉 (右侧滑出) ─────────────────────────────────
-  return (
+  return createPortal(
     <div role="dialog" aria-label="AI 润色助手" data-tool-panel="assistant" tabIndex={-1}
       style={{
         position: "fixed",
         right: 12,
         bottom: 12,
         width: "min(440px, calc(100vw - 24px))",
-        height: "min(720px, calc(100vh - 48px))",
+        height: "min(720px, calc(100dvh - 48px))",
         display: "flex",
         flexDirection: "column",
         background: "var(--surface-card)",
@@ -410,7 +411,7 @@ export function AIAssistantPanel() {
         borderRadius: 14,
         boxShadow: "0 12px 36px rgba(40,32,24,0.22)",
         overflow: "hidden",
-        zIndex: 60,
+        zIndex: 200,
       }}
     >
       {/* 头部 */}
@@ -568,7 +569,8 @@ export function AIAssistantPanel() {
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

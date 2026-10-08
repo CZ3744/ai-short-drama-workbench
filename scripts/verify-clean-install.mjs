@@ -15,6 +15,7 @@ for (const [key, value] of Object.entries(process.env)) {
 }
 Object.assign(env, { VIDEO_GENERATE_CLEAN_FIXTURE: fixture, HOME: path.join(fixture, '.home'), USERPROFILE: path.join(fixture, '.home'), APPDATA: path.join(fixture, '.home/AppData'), LOCALAPPDATA: path.join(fixture, '.home/AppData'), TEMP: path.join(fixture, '.tmp'), TMP: path.join(fixture, '.tmp'), NO_COLOR: '1' });
 env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || path.join(process.env.LOCALAPPDATA || '', 'ms-playwright');
+if (process.env.VIDEO_GENERATE_TEST_PYTHON) env.VIDEO_GENERATE_TEST_PYTHON = process.env.VIDEO_GENERATE_TEST_PYTHON;
 const summary = { at: new Date().toISOString(), node: process.version, npm: '', fixture, commands: [] };
 async function run(args, name) {
   const child = spawn(process.execPath, [npmCli, ...args], { cwd: fixture, env, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });

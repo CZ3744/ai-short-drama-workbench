@@ -5,6 +5,7 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { prepareReleasePresetConfig } from './release-preset-config.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.resolve(process.argv[2] || path.join(root, '.quality-reports', `release-${Date.now()}`));
@@ -18,7 +19,9 @@ const rootFiles = new Set(['package.json', 'package-lock.json', 'tsconfig.json',
 const approvedScripts = new Set(['run-safe-tests.mjs', 'test-network-guard.mjs', 'browser-smoke.ts', 'verify-clean-install.mjs', 'codebase-health.ts', 'health-extension-completeness.ts', 'consolidate-project-roots.ts', 'audit-historical-assets.mjs', 'inspect-memory-recovery.mjs', 'run-sample.ts', 'validate-output.ts', 'check-llm.ts', 'smoke-phase-stable.ts', 'test-e2e-auto.ts', 'migrate-shot-picked-video.ts', 'export-release.mjs', 'whisper_transcribe.py', 'check-release-privacy.mjs']);
 const files = [...new Set([...git('ls-files', '-z').split('\0'), ...git('ls-files', '--others', '--exclude-standard', '-z').split('\0')])].filter(Boolean);
 approvedScripts.add('dev.mjs');
+approvedScripts.add('studio-web-identity.ts');
 approvedScripts.add('browser-workflow-checks.ts');
+approvedScripts.add('release-preset-config.mjs');
 const remote = git('remote', 'get-url', 'origin').trim();
 const owner = remote.match(/github\.com[/:]([^/]+)/)?.[1];
 const privateWords = [os.userInfo().username, owner].filter(word => word && word.length >= 4 && !['root', 'runner', 'user', 'example'].includes(word));
@@ -50,19 +53,7 @@ for (const relative of files.sort()) {
   if (/\.(?:[cm]?[jt]sx?|json|md|txt|css|html|svg|ya?ml|toml|ps1|vbs|bat|py)$|(?:^|\/)(?:\.gitignore|\.env\.example|\.node-version|\.nvmrc|LICENSE)$/i.test(relative)) {
     let text = sanitize(bytes.toString('utf8'));
     if (relative.startsWith('config/') && relative.endsWith('.json')) {
-      const cfg = JSON.parse(text);
-      function clean(value) {
-        if (!value || typeof value !== 'object') return;
-        if (value.executor) {
-          for (const key of ['python_path', 'script_path', 'voices_dir']) if (key in value.executor) value.executor[key] = '';
-          value.enabled = false;
-          value.enabled_without_key = false;
-          value.default = false;
-          value.notes = '可选本地扩展。请先配置本机 Python、执行脚本和模型，再启用。';
-        }
-        for (const child of Object.values(value)) clean(child);
-      }
-      clean(cfg);
+      const cfg = prepareReleasePresetConfig(JSON.parse(text));
       text = JSON.stringify(cfg, null, 2) + '\n';
     }
     bytes = Buffer.from(text);

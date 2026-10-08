@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { createServer } from "node:http";
+import { handleStudioWebIdentity } from "../../../../scripts/studio-web-identity";
 
 const psLiteral = (value: string) => `'${value.replaceAll("'", "''")}'`;
 function runPowerShell(body: string) {
@@ -12,6 +14,25 @@ function runPowerShell(body: string) {
 }
 
 describe("silent launcher contracts", () => {
+  it("serves a local identity with only the app, service and process ID", async () => {
+    const server = createServer((req, res) => handleStudioWebIdentity(req, res, () => { res.statusCode = 404; res.end(); }));
+    await new Promise<void>(resolve => server.listen(0, "127.0.0.1", resolve));
+    const address = server.address();
+    assert.ok(address && typeof address !== "string");
+    const url = `http://127.0.0.1:${address.port}/__studio_identity`;
+    try {
+      const response = await fetch(url);
+      assert.equal(response.status, 200);
+      assert.equal(response.headers.get("cache-control"), "no-store");
+      assert.deepEqual(await response.json(), { app: "video-generate", service: "web", pid: process.pid });
+      assert.equal((await fetch(url, { method: "POST" })).status, 405);
+      assert.equal((await fetch(`${url}-other`)).status, 404);
+    } finally {
+      server.closeAllConnections();
+      await new Promise<void>((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+    }
+  });
+
   it("launches absolute project children with a strict Vite port and hidden windows", () => {
     const output = execFileSync(process.execPath, ["--input-type=module", "-e", `
       import cp from 'node:child_process';
@@ -83,5 +104,52 @@ describe("silent launcher contracts", () => {
     assert.equal(launch.cwd, root);
     assert.equal(launch.window, "Hidden");
     assert.notEqual(launch.stdout, launch.stderr);
+  });
+
+  it("uses a verified local identity only when the listener inventory is unavailable", { skip: process.platform !== "win32" }, () => {
+    const output = runPowerShell(String.raw`
+      $script:owner = $null
+      $script:process = [pscustomobject]@{ ProcessId = 54321; CommandLine = ${psLiteral(`node "${path.join(process.cwd(), "node_modules/vite/bin/vite.js")}"`)} }
+      $script:identity = '{"app":"video-generate","service":"web","pid":54321}'
+      $script:html = '<meta name="application-name" content="video-generate">'
+      $script:filters = @()
+      $script:requests = 0
+      function Get-StudioPortOwner { param($Port); return $script:owner }
+      function Get-CimInstance { param($ClassName, $Filter, $ErrorAction); $script:filters += $Filter; return $script:process }
+      function Invoke-WebRequest {
+        param($Uri, [switch]$UseBasicParsing, $TimeoutSec, $ErrorAction)
+        $script:requests++
+        $content = if ($Uri.EndsWith('/__studio_identity')) { $script:identity } else { $script:html }
+        return [pscustomobject]@{ StatusCode = 200; Content = $content }
+      }
+      $ready = Test-StudioWeb
+      $script:html = '<html>Wrong app</html>'
+      $wrongDocument = Test-StudioWeb
+      $script:html = '<meta name="application-name" content="video-generate">'
+      $script:process = [pscustomobject]@{ CommandLine = 'node C:\Other\node_modules\vite\bin\vite.js' }
+      $foreignProcess = Test-StudioWeb
+      $script:process = $null
+      $missingProcess = Test-StudioWeb
+      $script:identity = '{"app":"other-app","service":"web","pid":54321}'
+      $wrongApp = Test-StudioWeb
+      $script:identity = '{"app":"video-generate","service":"api","pid":54321}'
+      $wrongService = Test-StudioWeb
+      $script:identity = '{"app":"video-generate","service":"web","pid":"54321 OR 1=1"}'
+      $badPid = Test-StudioWeb
+      $script:identity = '{"app":"video-generate","service":"web","pid":0}'
+      $zeroPid = Test-StudioWeb
+      $script:identity = 'not-json'
+      $badJson = Test-StudioWeb
+      $script:owner = [pscustomobject]@{ CommandLine = 'node C:\Other\node_modules\vite\bin\vite.js' }
+      $beforeForeign = $script:requests
+      $foreignListener = Test-StudioWeb
+      @{ ready = $ready; wrongDocument = $wrongDocument; foreignProcess = $foreignProcess; missingProcess = $missingProcess; wrongApp = $wrongApp; wrongService = $wrongService; badPid = $badPid; zeroPid = $zeroPid; badJson = $badJson; foreignListener = $foreignListener; foreignRequests = ($script:requests - $beforeForeign); filters = $script:filters } | ConvertTo-Json -Compress
+    `);
+    assert.deepEqual(JSON.parse(output), {
+      ready: true, wrongDocument: false, foreignProcess: false, missingProcess: false,
+      wrongApp: false, wrongService: false, badPid: false, zeroPid: false, badJson: false,
+      foreignListener: false, foreignRequests: 0,
+      filters: Array(4).fill("ProcessId=54321"),
+    });
   });
 });

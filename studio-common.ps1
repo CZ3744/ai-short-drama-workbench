@@ -79,6 +79,20 @@ function Test-StudioDevEntryProcess {
 function Test-StudioWeb {
     param([int]$Port = $StudioWebPort)
     $owner = Get-StudioPortOwner -Port $Port
+    if (-not $owner) {
+        # Some Windows environments omit live listeners from the TCP inventory.
+        # An HTTP 200 alone is still not ownership: resolve the local identity PID
+        # back to the exact checkout's Vite command line before trusting its HTML.
+        try {
+            $probe = Invoke-WebRequest -Uri "http://127.0.0.1:$Port/__studio_identity" -UseBasicParsing -TimeoutSec 3 -ErrorAction Stop
+            if ($probe.StatusCode -ne 200) { return $false }
+            $identity = $probe.Content | ConvertFrom-Json -ErrorAction Stop
+            if ($identity.app -ne 'video-generate' -or $identity.service -ne 'web') { return $false }
+            [long]$identityProcessId = 0
+            if (-not [long]::TryParse([string]$identity.pid, [ref]$identityProcessId) -or $identityProcessId -le 0 -or $identityProcessId -gt [int]::MaxValue) { return $false }
+            $owner = Get-CimInstance Win32_Process -Filter "ProcessId=$identityProcessId" -ErrorAction Stop
+        } catch { return $false }
+    }
     if (-not (Test-StudioWebProcess $owner)) { return $false }
     try {
         $resp = Invoke-WebRequest -Uri "http://127.0.0.1:$Port/" -UseBasicParsing -TimeoutSec 3 -ErrorAction Stop

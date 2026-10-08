@@ -82,6 +82,9 @@ const NUMBERED_MIGRATIONS: NumberedMigration[] = [
     id: "0003_task_queue_status_priority_idx",
     description: "B-N5 task_queue.status + priority composite index",
     up: (db) => {
+      // New installs initialize task_queue later. Its initializer creates these same
+      // indexes; this migration only upgrades queues that already exist.
+      if (!db.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'task_queue'").get()) return;
       db.exec("CREATE INDEX IF NOT EXISTS idx_task_queue_status_priority ON task_queue(status, priority ASC, created_at ASC)");
       db.exec("CREATE INDEX IF NOT EXISTS idx_task_queue_project ON task_queue(project_id)");
     },

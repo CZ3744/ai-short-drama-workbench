@@ -1,10 +1,22 @@
-// P25: Tests for runPythonScript — mock child_process
+// Real local Python subprocess contracts; no provider calls or machine-specific paths.
 
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 
-// Use real python if available; tests that need a real spawn use this.
-const PYTHON_EXE = "C:\\Users\\example\\AppData\\Local\\Programs\\Python\\Python312\\python.exe";
+function findPython(): string | undefined {
+  const candidates = [process.env.VIDEO_GENERATE_TEST_PYTHON, process.env.PYTHON, process.env.PYTHON_PATH, "python", "python3"];
+  for (const candidate of [...new Set(candidates.filter((value): value is string => Boolean(value)))]) {
+    const result = spawnSync(candidate, ["-I", "-S", "-c", "import sys; print('video-generate-python-ok')"], {
+      encoding: "utf8", windowsHide: true, timeout: 5000,
+    });
+    if (result.status === 0 && result.stdout.trim() === "video-generate-python-ok") return candidate;
+  }
+  return undefined;
+}
+const availablePython = findPython();
+const PYTHON_EXE = availablePython ?? "python";
+const pythonRequired = { skip: availablePython ? false : "No runnable Python on PATH; set VIDEO_GENERATE_TEST_PYTHON to an interpreter" };
 
 describe("runPythonScript", () => {
   it("rejects python_path with disallowed basename", async () => {
@@ -59,24 +71,22 @@ describe("runPythonScript", () => {
     assert.ok(result.duration_ms < 100);
   });
 
-  it("allows shell metacharacters in args (shell:false makes them safe)", async () => {
+  it("allows shell metacharacters in args (shell:false makes them safe)", pythonRequired, async () => {
     const { runPythonScript } = await import("../localExec");
 
-    // Real python will fail on the nonexistent script, but the metachar args
-    // should pass validation. shell:false prevents any injection.
+    const args = ["hello & del /f", "foo | bar", 'foo > output.txt', 'prompt with "quotes"'];
     const result = await runPythonScript({
       python_path: PYTHON_EXE,
-      script_path: "nonexistent_script.py",
-      args: ["hello & del /f", "foo | bar", 'foo > output.txt', 'prompt with "quotes"'],
+      script_path: "-c",
+      args: ["import sys, json; print(json.dumps(sys.argv[1:]))", ...args],
       timeout_ms: 10000,
     });
 
-    // python will fail (script not found), but NOT a validation error
-    assert.notEqual(result.exit_code, 0);
-    assert.ok(!result.stderr.includes("null byte"), "Should not get validation error for metachars");
+    assert.equal(result.exit_code, 0);
+    assert.deepEqual(JSON.parse(result.stdout), args, "shell metacharacters must reach Python as literal arguments");
   });
 
-  it("captures stdout, stderr, exit_code, and duration_ms", async () => {
+  it("captures stdout, stderr, exit_code, and duration_ms", pythonRequired, async () => {
     const { runPythonScript } = await import("../localExec");
 
     const result = await runPythonScript({
@@ -94,7 +104,7 @@ describe("runPythonScript", () => {
     assert.ok(result.duration_ms < 10000);
   });
 
-  it("captures non-zero exit code", async () => {
+  it("captures non-zero exit code", pythonRequired, async () => {
     const { runPythonScript } = await import("../localExec");
 
     const result = await runPythonScript({
@@ -107,7 +117,7 @@ describe("runPythonScript", () => {
     assert.equal(result.exit_code, 42);
   });
 
-  it("captures stderr output", async () => {
+  it("captures stderr output", pythonRequired, async () => {
     const { runPythonScript } = await import("../localExec");
 
     const result = await runPythonScript({
@@ -121,7 +131,7 @@ describe("runPythonScript", () => {
     assert.ok(result.stderr.includes("error output"));
   });
 
-  it("on_stdout callback receives lines", async () => {
+  it("on_stdout callback receives lines", pythonRequired, async () => {
     const { runPythonScript } = await import("../localExec");
     const lines: string[] = [];
 
@@ -138,7 +148,7 @@ describe("runPythonScript", () => {
     assert.ok(lines.includes("line2"), `Expected "line2" in ${JSON.stringify(lines)}`);
   });
 
-  it("timeout kills long-running process", async () => {
+  it("timeout kills long-running process", pythonRequired, async () => {
     const { runPythonScript } = await import("../localExec");
 
     const result = await runPythonScript({

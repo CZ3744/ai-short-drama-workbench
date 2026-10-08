@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "node:path";
 import { readFileSync } from "node:fs";
+import { studioWebIdentityPlugin } from "../../scripts/studio-web-identity";
 
 const pkgVersion: string = (() => {
   try {
@@ -23,7 +24,7 @@ export default defineConfig({
     // 注入 package.json 的语义版本，前端用 __PACKAGE_VERSION__ 读取
     __PACKAGE_VERSION__: JSON.stringify(pkgVersion),
   },
-  plugins: [react(), tailwindcss()],
+  plugins: [studioWebIdentityPlugin(), react(), tailwindcss()],
   resolve: {
     alias: {
       shared: resolve(__dirname, "./src/components/shared"),

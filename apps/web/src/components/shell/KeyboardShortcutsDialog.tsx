@@ -9,6 +9,7 @@
  */
 import { useGlobalTool } from "./GlobalTools";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { BaseDialog } from "../ui/BaseDialog";
 import { Icon } from "../shared/Icon";
 
@@ -52,7 +53,7 @@ export function KeyboardShortcutsDialog({
     return acc;
   }, {} as Record<string, ShortcutEntry[]>);
 
-  return (
+  return createPortal(
     <BaseDialog
       open={open}
       onClose={onClose}
@@ -60,6 +61,7 @@ export function KeyboardShortcutsDialog({
       title="键盘快捷键速查"
       maxWidth={560}
       iconName="help"
+      zIndex={200}
     >
       <div style={{ fontSize: 12, color: "var(--ink-500)", marginBottom: 12 }}>
         在 input / textarea / 弹窗内时, 大部分快捷键暂停 (避免吞用户输入).
@@ -120,7 +122,8 @@ export function KeyboardShortcutsDialog({
           </div>
         ))}
       </div>
-    </BaseDialog>
+    </BaseDialog>,
+    document.body,
   );
 }
 

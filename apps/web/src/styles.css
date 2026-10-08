@@ -5897,6 +5897,24 @@ body { background: var(--studio-paper); }
   .cast-detail-header > div:last-child { flex-basis: 100%; justify-content: flex-end; }
   .cast-detail-columns > div:first-child > div:first-child > div { flex-wrap: wrap; }
 }
+@media (max-width: 650px) {
+  .v24-series-body { grid-template-columns: minmax(0, 1fr) !important; }
+  .v24-series-episode-col { min-width: 0; }
+  .v24-series-episode-header { flex-direction: column; align-items: stretch; gap: 12px; padding: 18px 16px; }
+  .v24-series-episode-header > div:last-child { flex-wrap: wrap; }
+  .v24-series-episode-row { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 12px; min-width: 0; }
+  .v24-series-episode-row > div:first-child { grid-column: 1; grid-row: 1; }
+  .v24-series-episode-info { grid-column: 1 / -1; grid-row: 2; }
+  .v24-series-episode-row > div:last-child { grid-column: 2; grid-row: 1; justify-content: flex-start; align-items: flex-end; }
+  .v24-series-episode-info > div:first-child { flex-wrap: wrap; }
+  .v24-series-episode-info > div:first-child > h4 { white-space: normal; overflow-wrap: anywhere; }
+  .v24-series-episode-info > div:first-child > .mk-pill { flex-shrink: 0; white-space: nowrap; }
+  .v24-series-episode-info > .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .v24-series-episode-info > .grid > div { padding: 8px !important; gap: 5px; min-width: 0; }
+  .v24-series-episode-info > .grid svg { flex-shrink: 0; }
+  .v24-series-episode-info > .grid > div > div > div:first-child { white-space: nowrap; }
+  .v24-series-episode-info > div:last-child { flex-wrap: wrap; gap: 8px; }
+}
 
 /* System status: keep time controls and failure reasons readable on narrow screens. */
 .failure-toolbar { flex-wrap: wrap; }
