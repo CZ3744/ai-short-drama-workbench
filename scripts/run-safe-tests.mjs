@@ -14,8 +14,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // 非隐藏目录：Express 的媒体文件下载会拒绝路径中包含 dotfile 的测试副本。
 const scratch = path.join(root, 'tmp', 'quality-tests');
 const reports = path.join(root, '.quality-reports');
-const browserMode = process.argv.includes('--browser');
-const filters = process.argv.slice(2).filter(arg => arg !== '--browser');
+const showcaseMode = process.argv.includes('--showcase');
+const browserMode = showcaseMode || process.argv.includes('--browser');
+const filters = process.argv.slice(2).filter(arg => arg !== '--browser' && arg !== '--showcase');
 await fs.mkdir(scratch, { recursive: true });
 await fs.mkdir(reports, { recursive: true });
 const fixture = await fs.mkdtemp(path.join(scratch, browserMode ? 'browser-' : 'tests-'));
@@ -92,7 +93,7 @@ try {
     env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright');
   }
   const args = ['--import', 'tsx', '--import', pathToFileURL(path.join(fixture, 'scripts/test-network-guard.mjs')).href,
-    ...(browserMode ? ['scripts/browser-smoke.ts'] : ['--test', '--test-concurrency=1', '--test-timeout=45000', '--test-reporter=tap', ...tests])];
+    ...(browserMode ? [showcaseMode ? 'scripts/browser-showcase.ts' : 'scripts/browser-smoke.ts'] : ['--test', '--test-concurrency=1', '--test-timeout=45000', '--test-reporter=tap', ...tests])];
   console.log(`隔离${browserMode ? '浏览器验收' : '测试'}：${tests.length} 个测试文件；${copied} 个源码/公共 fixture 文件。无用户数据、无真实 Key。`);
   const child = spawn(process.execPath, args, { cwd: fixture, env, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
   const chunks = [];
@@ -110,8 +111,11 @@ try {
     if (await fs.stat(resultDir).catch(() => null)) {
       await fs.cp(resultDir, path.join(reports, stamp), { recursive: true });
       summary.browser = JSON.parse(await fs.readFile(path.join(resultDir, 'summary.json'), 'utf8'));
+      if (showcaseMode && exitCode === 0) {
+        await fs.cp(resultDir, path.join(root, 'docs/media/source'), { recursive: true });
+      }
     }
-    await fs.writeFile(path.join(reports, 'browser-latest.json'), JSON.stringify(summary, null, 2) + '\n');
+    await fs.writeFile(path.join(reports, showcaseMode ? 'showcase-latest.json' : 'browser-latest.json'), JSON.stringify(summary, null, 2) + '\n');
   } else {
     await fs.writeFile(path.join(reports, 'tests-latest.tap'), output);
     await fs.writeFile(path.join(reports, 'tests-latest.json'), JSON.stringify(summary, null, 2) + '\n');

@@ -61,8 +61,9 @@ export interface ComposeVersion {
 }
 
 /**
- * List all compose output mp4 files for an episode.
- * Determines mode from filename: "rough_*.mp4" = rough, "final.mp4"/"final_v<N>.mp4" = full.
+ * List completed compose outputs and numbered snapshots for an episode.
+ * Intermediate source/shot segments remain on disk but are not user-facing versions.
+ * Determines mode from filename: "rough_<timestamp>.mp4" = rough, "final.mp4"/"final_v<N>.mp4" = full.
  * W11 D4 (2026-05-27): 同时列出 final_v<N>.mp4 历史快照 — 用户原话"数据保留 > 直接删除" (铁律 #6).
  * Sorted newest first.
  */
@@ -72,7 +73,7 @@ export async function listComposeVersions(slug: string, epId: string): Promise<C
   const entries = await fs.readdir(composeDir);
   const results: ComposeVersion[] = [];
   for (const entry of entries) {
-    if (!entry.endsWith(".mp4")) continue;
+    if (!/^(?:final(?:_v\d+)?|rough_\d+)\.mp4$/.test(entry)) continue;
     // W11 D4: 跳过 _trash 软删目录 (用户可以恢复, 但默认不出现在版本列表)
     // _trash 是子目录, readdir 不会进, 这里只是显式说明
     const fp = path.join(composeDir, entry);

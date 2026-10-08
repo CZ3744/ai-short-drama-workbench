@@ -36,7 +36,7 @@ export interface RoughShotInput {
  *  - `-loop 1 -t <duration> -i <image>` 单图循环为 N 秒视频
  *  - `-pix_fmt yuv420p` 保证浏览器播放
  *  - `scale + pad + setsar=1` 统一尺寸,否则 concat 会因 SAR 不一致报错
- *  - `-shortest` 保证音视频时长对齐
+ *  - 音频补静音并按镜头时长裁切，短台词不会截断画面
  *
  * 失败时抛 Error,信息已 toC 翻译;调用方应在 catch 中决定是否降级 mock。
  */
@@ -80,7 +80,7 @@ export async function generateRoughShotSegment(input: RoughShotInput): Promise<v
   );
 
   if (audioPath) {
-    args.push("-c:a", "aac", "-b:a", "96k", "-shortest");
+    args.push("-c:a", "aac", "-b:a", "96k", "-af", "apad", "-t", duration.toFixed(3));
   } else {
     args.push("-an");
   }

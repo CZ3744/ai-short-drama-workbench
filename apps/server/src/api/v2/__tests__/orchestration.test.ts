@@ -101,21 +101,30 @@ describe("Phase 5A Orchestration API — isolated contracts", () => {
     assert.equal(result.status, 502, JSON.stringify(result.body));
     assert.equal((await readSeries(slug))?.script_version, beforeVersion);
   });
-  it("extracts entities from the accepted episode using an explicit fixture", async () => {
+  it("extracts entities from the latest saved edits instead of the old disk snapshot", async () => {
+    const edited = "# 最新保存的剧本\n\n蓝色纸船穿过雨后的石桥，这是用户刚改写的内容。";
+    const saved = await fetch(`${base}/series/${slug}/episodes/${episodeId}`, {
+      method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ script_md: edited }),
+    });
+    assert.equal(saved.status, 200);
     model.reply({ characters: [], scenes: [], relationships: [] });
     const result = await post(`/series/${slug}/episodes/${episodeId}/extract-entities`, {});
     model.reply(scriptFixture);
     assert.equal(result.status, 200, JSON.stringify(result.body));
+    assert.ok(model.requests.at(-1)?.prompt.includes("蓝色纸船穿过雨后的石桥"));
+    assert.ok(!model.requests.at(-1)?.prompt.includes(scriptFixture.full_script));
   });
   it("entity extraction rejects an unknown episode", async () => {
     assert.equal((await post(`/series/${slug}/episodes/no-such-episode/extract-entities`, {})).status, 404);
   });
   it("plans a real stored shot using the fixture model", async () => {
+    const requestsBefore = model.requests.length;
     model.reply([{ shot_id: "shot_fixture", shot_type: "wide", scene_id: "scene_fixture", characters: [],
       action: "机器人安全行驶", camera_movement: "static", duration_sec: 3, prompt_img: "A robot on a track" }]);
     const result = await post(`/series/${slug}/episodes/${episodeId}/plan-storyboard`, {});
     model.reply(scriptFixture);
     assert.equal(result.status, 200, JSON.stringify(result.body));
+    assert.ok(model.requests.slice(requestsBefore).some(request => request.prompt.includes("蓝色纸船穿过雨后的石桥")), "storyboard planning must receive the latest editor save");
     const shots = await (await fetch(`${base}/series/${slug}/episodes/${episodeId}/shots`)).json();
     assert.equal(shots.shots.length, 1);
   });

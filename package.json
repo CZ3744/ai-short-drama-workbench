@@ -1,6 +1,6 @@
 {
   "name": "script-driven-ai-video-generate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "packageManager": "npm@11.13.0",
   "type": "module",
@@ -31,7 +31,8 @@
     "workspace:merge": "tsx scripts/consolidate-project-roots.ts --apply",
     "verify:clean-install": "node scripts/verify-clean-install.mjs",
     "check:privacy": "node scripts/check-release-privacy.mjs",
-    "release:export": "node scripts/export-release.mjs"
+    "release:export": "node scripts/export-release.mjs",
+    "doctor": "node scripts/doctor.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

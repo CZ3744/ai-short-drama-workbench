@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "sample": "雨停之前 · 虚构咖啡馆故事",
+  "provenance": "Original SVG storyboard drawings; imported still-image clips; no AI generation",
+  "screenshots": [
+    "01-studio.png",
+    "03-storyboard.png",
+    "04-prompt-review.png",
+    "05-compose.png",
+    "02-script.png"
+  ],
+  "checks": [
+    "Create project through the actual dialog and API",
+    "Choose the character reference image through the real representative-image control",
+    "Import original images and local MP4s through real API; select each first frame through UI and verify automatically selected imported videos",
+    "Open full prompt review, cancel and restore its actual representative image without duplication, edit text and close with Escape without generating",
+    "Select every aspect preset through UI; reload and verify saved selection; compose with the accepted 16:9 value, play and pause the actual result",
+    "Export ZIP through UI, verify a real nonempty local ZIP and the output-folder action without opening a desktop window",
+    "Edit actual script, save, verify latest text by API readback"
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "failure": ""
+}

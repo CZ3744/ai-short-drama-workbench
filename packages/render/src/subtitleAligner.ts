@@ -15,6 +15,7 @@
 import fs from "node:fs/promises";
 import { spawn } from "node:child_process";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { pathExists, getConfigValue } from "../../core/src/index";
 import { runProcess } from "./process";
 
@@ -276,9 +277,8 @@ async function tryPythonFasterWhisper(
   if (process.platform === "win32" && pythonExe === "py") {
     pythonArgs.push("-3.12");
   }
-  // 脚本路径: 从当前文件 (__dirname = packages/render/src 或 dist/render/src) 上溯到 repo root.
-  // 用 __dirname 而非 process.cwd()，确保无论从哪个目录启动 node/tsx 都能正确解析.
-  const scriptPath = path.resolve(__dirname, "..", "..", "..", "scripts", "whisper_transcribe.py");
+  // ESM has no __dirname; resolve from the module so arbitrary launch directories work.
+  const scriptPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "scripts", "whisper_transcribe.py");
   if (!(await pathExists(scriptPath))) {
     warnings.push(`Python whisper 桥接脚本不存在: ${scriptPath}`);
     return null;

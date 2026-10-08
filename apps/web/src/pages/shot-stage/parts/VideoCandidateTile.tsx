@@ -130,7 +130,7 @@ export function VideoCandidateTile({
             size="xs"
             iconLeft="check"
             onClick={(e) => { e.stopPropagation(); onSelect(); }}
-            title={isPicked ? "已选为本镜最终视频 — 再点取消" : "选定此视频作为最终视频"}
+            title={isPicked ? "已选为本镜最终视频" : "选定此视频作为最终视频"}
             style={isPicked ? { color: "var(--brand-700)", borderColor: "var(--brand-300)" } : undefined}
           >
             {isPicked ? "已选定" : "选定"}

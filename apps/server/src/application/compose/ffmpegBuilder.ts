@@ -192,7 +192,7 @@ export async function runConcatPhase(
       }
 
       // 烧字幕(草稿默认烧,便于看清节奏)
-      if (ctx.srtLines.length > 0 && await pathExists(roughSourcePath)) {
+      if (ctx.burnSubtitles && ctx.srtLines.length > 0 && await pathExists(roughSourcePath)) {
         try {
           sseBroker.emit({
             type: "compose.stage",
@@ -206,6 +206,7 @@ export async function runConcatPhase(
             output_mp4: finalMp4Path,
             style: ctx.subtitleStyle,
             animation: ctx.subtitleAnimation,
+            custom_style: ctx.customStyle,
             aspect_ratio: ctx.aspectRatio,
             width: ctx.subtitleCanvas.width,
             height: ctx.subtitleCanvas.height,

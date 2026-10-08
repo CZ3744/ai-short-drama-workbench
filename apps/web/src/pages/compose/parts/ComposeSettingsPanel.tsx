@@ -41,7 +41,7 @@ import {
 } from "../../../lib/subtitlePresets";
 import { VoiceSelector } from "../../../components/element/VoiceSelector";
 import { Button } from "../../../components/ui/button";
-import { seriesAspectToCss } from "../../../lib/aspectRatio";
+import { aspectRatioToPresetId, normalizeAspectRatio, seriesAspectToCss } from "../../../lib/aspectRatio";
 
 // ─── 持久化 ──────────────────────────────────────────────────────────
 
@@ -126,6 +126,7 @@ export function ComposeSettingsPanel({ seriesSlug, epId, defaultAspectRatio = "9
   const setProvider = useSessionStore((s) => s.setProvider);
 
   const persisted = useMemo(() => loadPersisted(seriesSlug, epId), [seriesSlug, epId]);
+  const defaultAspect = normalizeAspectRatio(defaultAspectRatio) ?? "9:16";
 
   const [activeTab, setActiveTab] = useState<TabKey>("tts");
 
@@ -141,7 +142,7 @@ export function ComposeSettingsPanel({ seriesSlug, epId, defaultAspectRatio = "9
   const [customSubtitleStyle, setCustomSubtitleStyle] = useState<CustomSubtitleStyle>(persisted.customSubtitleStyle ?? { ...CUSTOM_SUBTITLE_DEFAULTS });
   const [bgmMood, setBgmMood] = useState<string>(persisted.bgmMood ?? "");
   const [bgmVolume, setBgmVolume] = useState<number[]>(persisted.bgmVolume ?? [50]);
-  const [aspectRatio, setAspectRatio] = useState<string>(persisted.aspectRatio ?? defaultAspectRatio);
+  const [aspectRatio, setAspectRatio] = useState<string>(normalizeAspectRatio(persisted.aspectRatio) ?? defaultAspect);
   const [transition, setTransition] = useState<string>(persisted.transition ?? "");
   const [voicePerCharacter, setVoicePerCharacter] = useState<Record<string, string>>(persisted.voicePerCharacter ?? {});
   const [watermark, setWatermark] = useState<string>(persisted.watermark ?? "");
@@ -166,7 +167,7 @@ export function ComposeSettingsPanel({ seriesSlug, epId, defaultAspectRatio = "9
     setCustomSubtitleStyle(s.customSubtitleStyle ?? { ...CUSTOM_SUBTITLE_DEFAULTS });
     setBgmMood(s.bgmMood ?? "");
     setBgmVolume(s.bgmVolume ?? [50]);
-    setAspectRatio(s.aspectRatio ?? defaultAspectRatio);
+    setAspectRatio(normalizeAspectRatio(s.aspectRatio) ?? defaultAspect);
     setTransition(s.transition ?? "");
     setVoicePerCharacter(s.voicePerCharacter ?? {});
     setWatermark(s.watermark ?? "");
@@ -174,12 +175,15 @@ export function ComposeSettingsPanel({ seriesSlug, epId, defaultAspectRatio = "9
     setUseEpisodeVoiceOverride(s.useEpisodeVoiceOverride ?? false);
     setEpisodeVoiceOverride(s.episodeVoiceOverride ?? "");
     setEpisodeVoiceProvider(s.episodeVoiceProvider ?? providers.tts);
-  }, [seriesSlug, epId, providers.tts, defaultAspectRatio]);
+  }, [seriesSlug, epId, providers.tts, defaultAspect]);
 
+  const previousDefaultAspect = useRef(defaultAspect);
   useEffect(() => {
-    if (persisted.aspectRatio) return;
-    setAspectRatio((current) => (current === "9:16" ? defaultAspectRatio : current));
-  }, [defaultAspectRatio, persisted.aspectRatio]);
+    const previous = previousDefaultAspect.current;
+    previousDefaultAspect.current = defaultAspect;
+    if (normalizeAspectRatio(persisted.aspectRatio)) return;
+    setAspectRatio((current) => (current === previous ? defaultAspect : current));
+  }, [defaultAspect, persisted.aspectRatio]);
 
   // 500ms 防抖写盘
   useEffect(() => {
@@ -272,7 +276,7 @@ export function ComposeSettingsPanel({ seriesSlug, epId, defaultAspectRatio = "9
       bgm_mood: bgmMood || undefined,
       bgm_volume: bgmVolume[0] / 100, // 0-1 归一化给后端
       transition: transition || undefined,
-      aspect_ratio: aspectRatio || undefined,
+      aspect_ratio: normalizeAspectRatio(aspectRatio),
       ...(voice_style_map ? { voice_style_map } : {}),
       ...(subtitle_tracks ? { subtitle_tracks } : {}),
       ...(useEpiOverride
@@ -852,7 +856,15 @@ export function ComposeSettingsPanel({ seriesSlug, epId, defaultAspectRatio = "9
       </div>
       <div>
         <SectionLabel>画面比例</SectionLabel>
-        <PresetSelect dictId="aspect_ratio" value={aspectRatio} onValueChange={setAspectRatio} />
+        <PresetSelect
+          dictId="aspect_ratio"
+          value={aspectRatioToPresetId(aspectRatio)}
+          currentValueLabel={`${aspectRatio}（当前画幅）`}
+          onValueChange={(value) => {
+            const normalized = normalizeAspectRatio(value);
+            if (normalized) setAspectRatio(normalized);
+          }}
+        />
         <p style={{ fontSize: 10.5, color: "var(--ink-400)", marginTop: 6 }}>
           决定最终成片画幅, 跟导出规格独立。
         </p>

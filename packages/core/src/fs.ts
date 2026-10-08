@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { randomUUID } from "node:crypto";
 import { migrateToLatest } from "./migrations";
 
 export async function ensureDir(dir: string) {
@@ -11,10 +12,26 @@ export async function ensureDir(dir: string) {
  * approximate atomic on Windows). Prevents readers from seeing partial data.
  */
 export async function atomicWrite(filePath: string, data: string): Promise<void> {
-  const tmpPath = filePath + ".tmp";
+  const tmpPath = `${filePath}.${process.pid}.${randomUUID()}.tmp`;
   await ensureDir(path.dirname(filePath));
-  await fs.writeFile(tmpPath, data, "utf8");
-  await fs.rename(tmpPath, filePath);
+  try {
+    await fs.writeFile(tmpPath, data, "utf8");
+    for (let attempt = 0; ; attempt++) {
+      try {
+        await fs.rename(tmpPath, filePath);
+        break;
+      } catch (error) {
+        const code = (error as NodeJS.ErrnoException).code;
+        // Windows scanners/readers can briefly hold the destination. Keep the
+        // old complete file intact and stop retrying after 775 ms total wait.
+        if ((code !== "EPERM" && code !== "EBUSY") || attempt >= 5) throw error;
+        await new Promise(resolve => setTimeout(resolve, 25 * 2 ** attempt));
+      }
+    }
+  } finally {
+    // Each writer owns its temp file; a concurrent writer must never lose theirs.
+    await fs.rm(tmpPath, { force: true }).catch(() => {});
+  }
 }
 
 export async function writeJson(filePath: string, value: unknown) {

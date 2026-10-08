@@ -2,9 +2,11 @@
 
 ## 安装并启动
 
-1. 安装 Node.js 24，在项目目录运行 `npm ci`。
+1. 安装 Node.js 24，在项目目录运行 `npm ci`，再用 `npm run doctor` 检查依赖。
 2. Windows 双击 `start-studio-hidden.vbs`。后台服务静默启动，准备好后打开浏览器。
 3. 浏览器地址为 `http://127.0.0.1:5173`。其他平台可使用 `npm run dev`；当前重点验收环境为 Windows。
+
+想让 AI 编程助手代劳，可以复制 [本地安装指令](AI_SETUP.md)。第一次不必配置模型：新建系列、写一段剧本、等待保存，再刷新确认文字还在，就能先熟悉工作台。
 
 ## 连接你自己的模型
 
@@ -26,6 +28,8 @@
 本地卡片图是样稿工具。它便于学习流程，不替代云端模型或正式作品素材。
 
 ## 合成前准备
+
+运行 `npm run doctor -- --require-media`，可检查合成依赖是否可用。
 
 FFmpeg 和 FFprobe 用于视频检测、字幕和合成。请将两者加入 PATH 并确认 `ffmpeg -version` 与 `ffprobe -version` 可运行。个别模块支持路径配置，但完整合成目前仍依赖 PATH。Edge TTS 需要可访问网络及对应 Python 包；没有语音服务时可使用已有音频或按页面提供的无配音流程处理。
 

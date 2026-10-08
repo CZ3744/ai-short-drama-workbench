@@ -1,74 +1,93 @@
+<div align="center">
+
 # AI 短剧工作台
 
-**把灵感写成剧本，把分镜做成作品。** 一款本地运行、可逐步修改的 AI 视频创作工具，延续 Claude 的暖白与陶土色，结合 iOS 风格的柔和控件与清晰层次。
+### 把故事拍出来，先从改好一个镜头开始。
 
-![工作台](docs/screenshots/studio.png)
+一个本地 AI 视频创作与分镜工具。写剧本、管素材、做短片，接自己的模型。
 
-## 从想法到成片
+[开始使用](#开始使用) · [让 AI 帮你安装](docs/AI_SETUP.md) · [看真实界面](docs/SHOWCASE.md) · [English](README.en.md)
 
-灵感收集 → 剧本编辑 → 分镜规划 → 人物与场景 → 首帧与镜头视频 → 配音、字幕与合成。
+![AI 短剧工作台：从剧本到镜头](docs/media/product-overview.png)
 
-每一步都能回看、修改与重新生成。你可以连接自己的文字、图像、视频和语音 API，也可以直接导入已有素材。作品、模型设置和密钥保存在自己的电脑上。
+</div>
 
-- **清晰的工作台**：搜索、排序、继续创作、批量管理，以及真实的加载和失败状态。
-- **可靠的编辑**：剧本连续保存、失败重试、版本切换保护、镜头之间的状态隔离。
-- **可控制的生成**：就近选择模型，生成前查看和编辑完整提示词及参考图片。
-- **完整的素材流程**：人物、场景、物品、服装、参考照片、素材组、归档柜和回收站。
-- **自己的模型与预算**：支持多种服务商和兼容接口；每位使用者提供自己的 API Key。
-- **独立运行**：不依赖作者的账号、机器目录、数据库或作品。
+做 AI 短片时，常常不是缺一个生成按钮，而是改完剧本后，要重新找人物图、翻提示词、对镜头、挑素材。
+
+这个工作台把这些事放在一起。一个镜头不满意，就回到那个镜头继续改。已经写好的剧本、挑好的参考图、做好的视频，也可以接着用。
+
+## 它适合怎么用？
+
+**先把故事讲明白。** 写下或粘贴剧本，按集管理。编辑时自动保存，修改前后可以留版本，不必把“最终版2”散落在文件夹里。
+
+**再把镜头做具体。** 排分镜、关联人物和场景。制作首帧时，可以检查提示词和参考图，再决定要不要生成；候选素材留在对应镜头下。
+
+**最后把素材接起来。** 接自己的图像、视频或语音服务，也能导入已有素材。准备齐镜头后，再配置字幕与合成，导出视频。
+
+| 写故事，留得住修改 | 做镜头，看得见依据 |
+|---|---|
+| ![真实剧本编辑界面](docs/media/source/script.png) | ![真实镜头提示词审核界面](docs/media/source/prompt-review.png) |
+
+上方宣传图由真实截图排版制作；[原始截图、样例说明和操作步骤](docs/SHOWCASE.md) 可直接查看。演示故事与素材为专门制作的虚构样例，不代表云端模型的生成效果。
 
 ## 开始使用
 
-推荐 Node.js 24。安装依赖后，在 Windows 双击 `start-studio-hidden.vbs` 静默启动：
+**推荐 Windows + Node.js 24。** 安装 [Node.js](https://nodejs.org/) 后，下载仓库，或运行：
 
 ```sh
+git clone https://github.com/CZ3744/video-generate-studio.git
+cd video-generate-studio
 npm ci
+npm run doctor
 ```
 
-打开 [本地工作台](http://127.0.0.1:5173)。在「设置」里添加自己的模型名称、服务地址、模型 ID 和 API Key。先写剧本或导入素材也可以，不必一次配齐所有服务。
+Windows 双击 **`start-studio-hidden.vbs`**，准备好后会打开浏览器。地址是 [127.0.0.1:5173](http://127.0.0.1:5173)。结束时双击 `stop-studio.vbs`。
 
-开发模式使用 `npm run dev`。停止 Windows 后台工作台可双击 `stop-studio.vbs`。合成与导出需要 FFmpeg / FFprobe；请将两者加入 PATH；个别模块支持路径设置，但完整合成仍依赖 PATH。
+也可以运行 `npm run dev` 启动。macOS / Linux 尚未做与 Windows 同等程度的实机验收。
 
-详见 [新用户指南](docs/GETTING_STARTED.md) 和 [分发与隐私说明](docs/DISTRIBUTION.md)。
+**不熟悉命令行？** 把 [这段安装指令](docs/AI_SETUP.md) 复制给你的 AI 编程助手，让它安装、检查环境，并实际验证剧本保存。
 
-## 界面
+### 第一次打开，先做一件小事
 
-| 剧本编辑 | 模型设置 |
-|---|---|
-| ![剧本](docs/screenshots/script.png) | ![设置](docs/screenshots/settings.png) |
+新建一个系列 → 写一段剧本 → 等待保存 → 刷新确认内容还在。这个过程不需要 API Key。
 
-[查看逐页截图与视觉验收](docs/VISUAL_REVIEW.md) · [本次升级说明](docs/RELEASE_NOTES.md)
+想生成内容时，再去「设置」添加自己的模型。先配文字或图像服务就可以，不用一次配齐。合成视频需要 **FFmpeg / FFprobe**；安装后运行 `npm run doctor -- --require-media` 检查。
 
-## 配置与费用
+[完整新用户指南](docs/GETTING_STARTED.md) · [常见问题](docs/FAQ.md) · [遇到问题](docs/GETTING_STARTED.md#遇到问题)
 
-模型凭据由使用者自行填写。`.env` 和 `config/local-settings.json` 不进入 Git；无需复制示例文件也能通过设置页配置。兼容接口的服务地址和模型 ID 以自己的服务商为准，内置列表是可选入口。
+## 使用前说清楚
 
-本地卡片图只用于样稿，不代表真实 AI 生图质量。真实云端生成由服务商计费；设置中的预算与单次请求预览帮助控制使用量。可选 GPU/Python 扩展需要单独安装，发布版默认停用未配置的本地扩展。
+- **工具免费，模型按服务商计费。** 本项目采用 MIT 许可，不提供共享 Key 或免费云端额度。支持范围以设置页现有适配器为准，并非任意视频 API 填进去都能用。
+- **作品在本机，云端请求会出网。** 调用模型时，必要的提示词、素材和认证信息会发送到你选的服务商。仓库不包含作者的私人作品、数据库或凭据。详见 [隐私说明](docs/DISTRIBUTION.md)。
+- **没有 Key 也能先整理创作。** 剧本编辑、分镜管理、素材导入可先用；本地演示卡片只用来试流程，不是 AI 生图效果。
+- **目前是持续打磨的 0.2.x。** 本地流程、浏览器操作与隔离回归都有验收，付费模型仍受各家服务的额度、协议和可用性影响。当前适合个人在本机使用。
 
-这是每位用户各自运行的桌面工作台。页面默认绑定本机回环地址；不要把未部署身份认证的本地 API 直接暴露到公网。
+## 一起把它做顺手
 
-## 验证与开发
+如果它帮你少翻了几个文件夹，欢迎点个 Star，方便以后回来。如果某一步卡住了，欢迎 [提一个问题](https://github.com/CZ3744/video-generate-studio/issues)，告诉我你想做什么、实际发生了什么；请先遮住密钥与私人内容。
 
-```sh
-npx playwright install chromium # first browser-test setup
-npm run build          # TypeScript + production frontend
-npm test               # isolated unit / integration tests
-npm run test:browser    # actual Chromium UI + screenshots, isolated sample data
-npm run health:codebase # project health checks
-npm run check:privacy   # tracked release content privacy scan
-```
+[参与开发](CONTRIBUTING.md) · [版本说明](docs/RELEASE_NOTES.md) · [逐页验收截图](docs/VISUAL_REVIEW.md) · [AI 助手文档索引](llms.txt) · [安全问题](SECURITY.md) · [MIT 许可](LICENSE)
 
-测试运行在临时源码副本中，不继承真实密钥，也不读取使用者作品。浏览器测试会保存截图和结构化结果到 `.quality-reports/`。真实付费模型生成需要使用者自己的凭据，不作为离线回归成功的声明。
+<details>
+<summary>给开发者：结构与检查命令</summary>
 
-```
+```text
 apps/web       React · Vite · Tailwind
 apps/server    Express · TypeScript
-packages       core / drama / providers / document / library / render
-config         public presets and empty configuration examples
-prompts        editable prompt templates
-scripts        isolated verification and release tools
+packages       剧本 / 生成适配器 / 素材 / 文档 / 合成
+config         公开默认配置与空示例
+prompts        提示词模板
+scripts        隔离测试、环境检查与发布工具
 ```
 
-## 许可
+```sh
+npm run build
+npm test
+npm run test:browser
+npm run health:codebase
+npm run check:privacy
+```
 
-[MIT](LICENSE)。任何获得本项目副本的人都可以使用、修改和分发；第三方模型、服务和素材按各自条款使用。私有仓库的访问权限由仓库所有者管理。
+浏览器测试首次需要安装 Chromium，或指定已安装的 Edge；具体方法见 [贡献指南](CONTRIBUTING.md)。测试使用临时数据与空凭据，截图和报告保存在 `.quality-reports/`。
+
+</details>

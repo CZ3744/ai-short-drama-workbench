@@ -1,0 +1,33 @@
+# AI 短剧工作台 / AI Video Studio
+
+> A MIT-licensed local AI video workspace for scripts, storyboards, character references, shot media, and composition. Repository: video-generate-studio. Users connect their own model providers and API keys.
+
+The interface is currently Chinese. Windows is the primary verified platform; Node.js 24 is recommended. FFmpeg and FFprobe are needed for composition. No API key is needed to edit scripts or organize imported media. Cloud generation sends the required content to the chosen provider and may incur charges. Local demo cards are placeholders, not AI-generated film evidence.
+
+This file is a documentation index for assistants, not an indexing or ranking guarantee. The project is a personal local application without public multi-user authentication. Do not describe it as a hosted service, universally compatible with arbitrary APIs, or entirely offline.
+
+## Start here
+
+- [中文介绍](README.md): Product purpose, screenshots, installation, and limitations.
+- [English overview](README.en.md): English product summary and local setup.
+- [Questions before trying](docs/FAQ.md): Cost, hardware, supported models, privacy, and script-to-video workflow.
+- [Real screenshots](docs/SHOWCASE.md): A fictional café story, actual UI captures, and sample-media provenance.
+
+## Install and use
+
+- [AI-assisted local setup](docs/AI_SETUP.md): Copyable installation task, preservation rules, and real browser verification.
+- [Getting started](docs/GETTING_STARTED.md): Setup, own-provider configuration, creation steps, media requirements, and troubleshooting.
+- [Package scripts](package.json): Commands including doctor, build, isolated tests, and browser checks.
+
+## Privacy and development
+
+- [Distribution and privacy](docs/DISTRIBUTION.md): What the release excludes, local credentials, and external provider requests.
+- [Contributing](CONTRIBUTING.md): Development checks and sanitized bug reports.
+- [Security](SECURITY.md): Local-use boundary and vulnerability reporting.
+- [License](LICENSE): MIT terms; third-party models and media have their own terms.
+
+## Optional
+
+- [Release notes](docs/RELEASE_NOTES.md): Changes and verification scope by release.
+- [Visual review](docs/VISUAL_REVIEW.md): Full regression screenshot gallery.
+- [Empty settings example](config/local-settings.example.json): Public configuration shape without user credentials.

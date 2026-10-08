@@ -126,8 +126,10 @@ export function runProcess(command: string, args: string[], options?: ProcessOpt
 
     // Handle spawn failures where child.pid is undefined (e.g. ENOENT).
     if (!child.pid) {
-      const errMsg = "Failed to spawn process (no pid assigned — binary missing?)";
-      resolve({ code: 1, stdout: "", stderr: errMsg });
+      // Node emits ENOENT asynchronously. Returning without an error listener
+      // turns a missing optional tool into an uncaught server exception.
+      child.once("error", err => resolve({ code: 1, stdout: "", stderr: err.message }));
+      child.once("close", () => resolve({ code: 1, stdout: "", stderr: "Failed to spawn process (binary missing?)" }));
       return;
     }
 

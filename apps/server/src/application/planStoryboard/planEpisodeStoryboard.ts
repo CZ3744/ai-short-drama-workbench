@@ -60,6 +60,7 @@ import {
 // 2026-05-21 U-1: image_overrides 解析抽成共享函数, planSeries / batchSeries 也复用
 import { formatImagesHint, normalizeShotPlanShotTypes } from "./_shared";
 import { persistStoryboard } from "./persistStoryboard";
+import { readCurrentEpisodeScript } from "../../api/v2/orchestration/_shared/scriptText";
 
 export type PlanEpisodeStoryboardResult =
   | { kind: "validation"; status: number; errors: Array<{ path: string; message: string }> }
@@ -108,12 +109,7 @@ export async function planEpisodeStoryboard(
   const _episode = episode;
 
   const scriptPath = path.join(episodeBase(input.slug, input.episodeId), "script.md");
-  let scriptText = "";
-  try {
-    scriptText = await fs.readFile(scriptPath, "utf8");
-  } catch {
-    scriptText = episode.synopsis || episode.title || "";
-  }
+  const scriptText = await readCurrentEpisodeScript(episode, scriptPath);
 
   const characters = await listCharacters(input.slug);
   const scenes = await listScenes(input.slug);

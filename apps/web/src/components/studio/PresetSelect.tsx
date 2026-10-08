@@ -9,6 +9,8 @@ export interface PresetSelectProps {
   /** 附加查询参数，如 "provider=edge_tts"，拼接到请求 URL */
   query?: string;
   value?: string;
+  /** Label for a valid saved value absent from the current dictionary. */
+  currentValueLabel?: string;
   onValueChange?: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
@@ -24,6 +26,7 @@ export function PresetSelect({
   dictId,
   query,
   value,
+  currentValueLabel,
   onValueChange,
   placeholder = "请选择...",
   disabled,
@@ -73,7 +76,9 @@ export function PresetSelect({
       placeholder={placeholder}
       disabled={disabled || loading}
       error={error}
-      options={options}
+      options={value && currentValueLabel && !options.some((option) => option.value === value)
+        ? [{ value, label: currentValueLabel }, ...options]
+        : options}
       className={className}
     />
   );

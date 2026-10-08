@@ -4,10 +4,11 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import CharacterCount from "@tiptap/extension-character-count";
 import { Node, mergeAttributes, Extension, type Editor, type Extensions } from "@tiptap/core";
-import { Plugin, PluginKey } from "prosemirror-state";
+import { Plugin, PluginKey, Selection } from "prosemirror-state";
 import { Decoration, DecorationSet } from "prosemirror-view";
 import { ReplaceStep } from "prosemirror-transform";
 import { cn } from "../../../lib/cn";
+import { htmlToPlainText, plainTextToHtml } from "../../../lib/scriptText";
 import { MentionPopover } from "../../../components/mention/MentionPopover";
 // 2026-05-27 — MentionPreviewBar 删除 (见下方 JSX 内注释)
 import {
@@ -261,6 +262,26 @@ export interface ScriptCanvasProps {
 
 const EMPTY_CHARACTERS: Array<{ name: string }> = [];
 
+// Keep document navigation in the same transaction stream as typing. Native
+// Ctrl/Command+End can move the DOM caret before selectionchange updates the
+// editor state, so an immediately following Enter otherwise splits the old node.
+const DocumentNavigation = Extension.create({
+  name: "scriptDocumentNavigation",
+  addKeyboardShortcuts() {
+    const move = (end: boolean, extend: boolean) => {
+      const { doc, selection } = this.editor.state;
+      const head = (end ? Selection.atEnd(doc) : Selection.atStart(doc)).head;
+      return this.editor.chain().setTextSelection(extend ? { from: selection.anchor, to: head } : head).scrollIntoView().run();
+    };
+    return {
+      "Mod-Home": () => move(false, false),
+      "Mod-End": () => move(true, false),
+      "Mod-Shift-Home": () => move(false, true),
+      "Mod-Shift-End": () => move(true, true),
+    };
+  },
+});
+
 /** Tiptap nulls schema on destroy; a committed React effect can still hold the old instance. */
 function isLiveEditor(editor: Editor | null): editor is Editor {
   return Boolean(editor && !editor.isDestroyed && editor.schema);
@@ -294,12 +315,18 @@ export function ScriptCanvas({
     }),
     Placeholder.configure({ placeholder: "开始输入剧本..." }),
     CharacterCount,
+    DocumentNavigation,
     DialogueNode,
     VoiceoverNode,
     StageDirectionNode,
     EmotionHighlight,
     CharacterAutocomplete.configure({ characters }),
   ], [characters]);
+
+  // The parent persists Markdown and echoes normalized HTML. Reapplying that
+  // echo drops trailing empty paragraphs and resets the caret after Enter.
+  // Keep only the latest local echo: an older version must still replace it.
+  const lastLocalContent = useRef<string | null>(null);
 
   // ── Autocomplete emotion insertion ──
   const editor = useEditor({
@@ -311,7 +338,9 @@ export function ScriptCanvas({
     editable,
     onUpdate: ({ editor }) => {
       if (!isLiveEditor(editor)) return;
-      onChange?.(editor.getHTML());
+      const html = editor.getHTML();
+      lastLocalContent.current = plainTextToHtml(htmlToPlainText(html));
+      onChange?.(html);
     },
     onSelectionUpdate: ({ editor }) => {
       if (!isLiveEditor(editor)) return;
@@ -399,7 +428,9 @@ export function ScriptCanvas({
   }, [editor, editable]);
 
   useEffect(() => {
-    if (isLiveEditor(editor) && content !== editor.getHTML()) {
+    if (!isLiveEditor(editor) || content === lastLocalContent.current) return;
+    lastLocalContent.current = null;
+    if (content !== editor.getHTML()) {
       editor.commands.setContent(content, { emitUpdate: false });
     }
   }, [content, editor]);

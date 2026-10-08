@@ -687,13 +687,10 @@ export async function exportEpisode(
 export async function getFinalMp4(slug: string, episodeId: string): Promise<ExportUseCaseResult> {
   const baseDir = episodeBase(slug, episodeId);
   const composeDir = path.join(baseDir, "compose");
-  // X2-4 (A6/P3-1): 候选去重 — 原为 ["final.mp4","source.mp4","source.mp4"] 有重复 source.mp4,
-  // 同一文件被列两次 (无功能后果但冗余/误导). 去重为 final.mp4 优先, 其次 source.mp4 兜底。
-  const candidates = ["final.mp4", "source.mp4"];
-  for (const candidate of candidates) {
-    const fp = path.join(composeDir, candidate);
-    if (await pathExists(fp)) return { kind: "file", path: fp };
-  }
+  // source.mp4 is an internal render stage and may exist after a failed composition.
+  // Serving it as final would falsely report success and omit the reviewed audio/subtitles.
+  const finalPath = path.join(composeDir, "final.mp4");
+  if (await pathExists(finalPath)) return { kind: "file", path: finalPath };
   return {
     kind: "error",
     status: 404,

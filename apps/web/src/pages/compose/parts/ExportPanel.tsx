@@ -144,7 +144,7 @@ function defaultFormatForAspect(aspect?: string): string {
 
 /** 导出去向选项 — 随时可预选 */
 const TARGET_OPTIONS: Array<{ id: ExportTarget; label: string; icon: string; hint: string }> = [
-  { id: "zip", label: "下载 zip 包", icon: "download", hint: "打包成片 + 字幕 + 元数据" },
+  { id: "zip", label: "ZIP 压缩包", icon: "download", hint: "将成片、字幕和元数据打包保存到本机" },
   { id: "library", label: "本地资料库", icon: "archive", hint: "存入工作台资料库统一管理" },
   { id: "folder", label: "自定义文件夹", icon: "folder", hint: "导出到本机指定目录" },
 ];
@@ -496,7 +496,7 @@ export function ExportPanel({
       return `导出中… ${sec}s`;
     }
     const short =
-      exportTarget === "zip" ? "下载 zip"
+      exportTarget === "zip" ? "导出 ZIP"
       : exportTarget === "library" ? "存入资料库"
       : "导出到文件夹";
     if (exportDone) return `重新${short}`;

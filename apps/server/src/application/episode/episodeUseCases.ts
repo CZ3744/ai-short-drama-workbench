@@ -57,6 +57,7 @@ import { generateImagesWithProvider } from "../generation/imageGenerationService
 import { providerIdFromModelRef } from "../generation/modelRef";
 import { resolveCoverReference } from "./coverReference";
 import { buildCoverImagePrompt } from "../generation/coverPrompt";
+import { readCurrentEpisodeScript } from "../../api/v2/orchestration/_shared/scriptText";
 
 export type EpisodeUseCaseResult =
   | { kind: "validation"; status: number; errors: Array<{ path: string; message: string }> }
@@ -91,12 +92,7 @@ export async function extractEntities(
   if (!series) return { kind: "error", status: 404, body: { error: { code: "NotFound", message: "系列不存在" } } };
 
   const scriptPath = path.join(episodeBase(input.slug, input.episodeId), "script.md");
-  let fullScript = "";
-  try {
-    fullScript = await fs.readFile(scriptPath, "utf8");
-  } catch {
-    fullScript = episode.synopsis || episode.title || "";
-  }
+  const fullScript = await readCurrentEpisodeScript(episode, scriptPath);
 
   const ctx: Record<string, any> = {
     full_script: fullScript,

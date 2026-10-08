@@ -8,7 +8,18 @@
  */
 
 import type { z } from "zod";
+import fs from "node:fs/promises";
 import type { SeriesEpisodePlanSchema } from "./schemas";
+
+/** The editor saves script_md; old disk snapshots must not override current edits. */
+export async function readCurrentEpisodeScript(
+  episode: { script_md?: string; synopsis?: string; title?: string },
+  legacyScriptPath: string,
+): Promise<string> {
+  if (typeof episode.script_md === "string") return episode.script_md;
+  try { return await fs.readFile(legacyScriptPath, "utf8"); }
+  catch { return episode.synopsis || episode.title || ""; }
+}
 
 export function compactText(input: string, fallback = "未命名"): string {
   const text = input

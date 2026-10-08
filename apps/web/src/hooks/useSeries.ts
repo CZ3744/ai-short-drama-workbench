@@ -39,7 +39,10 @@ export interface SeriesEpisode {
 export function useSeries(slug: string | undefined) {
   return useSWR(
     slug ? ["series", slug] : null,
-    () => apiGet<Series>(`/api/v2/series/${slug}`),
+    async () => {
+      const data = await apiGet<{ series: Series }>(`/api/v2/series/${slug}`);
+      return data.series;
+    },
     {
       revalidateOnFocus: false,
       onError: (err) => {
