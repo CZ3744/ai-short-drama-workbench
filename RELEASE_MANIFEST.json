@@ -4053,8 +4053,8 @@
     },
     {
       "path": "packages/core/src/test/paths.test.ts",
-      "bytes": 2073,
-      "sha256": "50cdc92d368f446c34219c1f0bf6787b7762acf19de2917347a0d9db27dfb65f"
+      "bytes": 2266,
+      "sha256": "9da48eb04639a4346d1084f3c165399646c16bd14a151bde88df21bf113f3812"
     },
     {
       "path": "packages/core/src/test/presets.test.ts",
@@ -5263,8 +5263,8 @@
     },
     {
       "path": "scripts/verify-clean-install.mjs",
-      "bytes": 4981,
-      "sha256": "c2916d35b3d7184c813bf50d18ab43e0b44f06887024dc4f18f8e0123f1269b5"
+      "bytes": 4979,
+      "sha256": "8cae8c4dd11131d078475af2aa40e2ccfe9db784dfcd1c0ebb127e22e1d3c850"
     },
     {
       "path": "scripts/whisper_transcribe.py",

@@ -6,7 +6,7 @@ import { spawn, execFileSync } from 'node:child_process';
 import { browserOsEnvironmentKey, captureBrowserOsEnvironment } from './browser-test-environment.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const fixture = await fs.mkdtemp(path.join(os.tmpdir(), 'video-generate-install-'));
+const fixture = await fs.mkdtemp(path.join(os.tmpdir(), 'creative-tool-install-'));
 const reports = path.join(root, '.quality-reports', `clean-install-${Date.now()}`);
 await fs.mkdir(reports, { recursive: true });
 const npmCli = process.env.npm_execpath || path.join(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js');
@@ -62,5 +62,5 @@ try {
   await fs.writeFile(path.join(reports, 'summary.json'), JSON.stringify(summary, null, 2));
   console.log(JSON.stringify(summary));
   // Remove only the exact directory returned by mkdtemp, under the OS temp root.
-  if (path.dirname(fixture) === path.resolve(os.tmpdir()) && path.basename(fixture).startsWith('video-generate-install-')) await fs.rm(fixture, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+  if (path.dirname(fixture) === path.resolve(os.tmpdir()) && path.basename(fixture).startsWith('creative-tool-install-')) await fs.rm(fixture, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
 }

@@ -4,6 +4,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import path from "node:path";
+import { existsSync } from "node:fs";
 import {
   repoRoot,
   outputsRoot,
@@ -19,7 +20,8 @@ import {
 describe("paths constants", () => {
   it("repoRoot resolves to an absolute path", () => {
     assert.ok(path.isAbsolute(repoRoot), "repoRoot should be absolute");
-    assert.ok(repoRoot.includes("video-generate"), "repoRoot should contain project name");
+    assert.ok(existsSync(path.join(repoRoot, "package.json")), "repoRoot should contain the root package.json");
+    assert.ok(existsSync(path.join(repoRoot, "packages", "core", "src", "paths.ts")), "repoRoot should contain the core paths module");
   });
 
   it("outputsRoot is under repoRoot", () => {
