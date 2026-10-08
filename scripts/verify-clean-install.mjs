@@ -3,6 +3,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { spawn, execFileSync } from 'node:child_process';
+import { browserOsEnvironmentKey, captureBrowserOsEnvironment } from './browser-test-environment.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const fixture = await fs.mkdtemp(path.join(os.tmpdir(), 'video-generate-install-'));
@@ -18,7 +19,12 @@ env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || path.join
 if (process.env.VIDEO_GENERATE_TEST_PYTHON) env.VIDEO_GENERATE_TEST_PYTHON = process.env.VIDEO_GENERATE_TEST_PYTHON;
 const summary = { at: new Date().toISOString(), node: process.version, npm: '', fixture, commands: [] };
 async function run(args, name) {
-  const child = spawn(process.execPath, [npmCli, ...args], { cwd: fixture, env, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
+  const commandEnv = { ...env };
+  if (name === 'browser') {
+    if (process.platform === 'win32') commandEnv[browserOsEnvironmentKey] = captureBrowserOsEnvironment(process.env);
+    if (process.env.VIDEO_GENERATE_TEST_BROWSER === 'msedge') commandEnv.VIDEO_GENERATE_TEST_BROWSER = 'msedge';
+  }
+  const child = spawn(process.execPath, [npmCli, ...args], { cwd: fixture, env: commandEnv, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
   const chunks = []; child.stdout.on('data', b => chunks.push(b)); child.stderr.on('data', b => chunks.push(b));
   const code = await new Promise((resolve, reject) => { child.once('error', reject); child.once('close', resolve); });
   const output = Buffer.concat(chunks).toString('utf8');

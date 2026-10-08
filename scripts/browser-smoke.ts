@@ -18,6 +18,7 @@ import { createTaskRecord, updateTaskRecord } from "../apps/server/src/repositor
 import { SseBroker } from "../apps/server/src/api/v2/sseBroker";
 import { createCast } from "../apps/server/src/repositories/castRepo";
 import { verifyCreatorWorkflow } from "./browser-workflow-checks";
+import { edgeTestEnvironment } from "./browser-test-environment.mjs";
 
 if (process.env.NODE_ENV !== "test" || path.resolve(process.env.VIDEO_GENERATE_TEST_FIXTURE ?? "") !== process.cwd()) {
   throw new Error("浏览器验收必须通过隔离入口启动，禁止使用真实项目数据");
@@ -57,12 +58,15 @@ try {
   await new Promise<void>((resolve, reject) => { server!.once("listening", resolve); server!.once("error", reject); });
   const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
 
-  try {
+  if (process.env.VIDEO_GENERATE_TEST_BROWSER === "msedge") {
+    browser = await chromium.launch({ channel: "msedge", headless: true, timeout: 20_000, env: edgeTestEnvironment() });
+    report.browser = "Microsoft Edge (Chromium)";
+  } else try {
     browser = await chromium.launch({ headless: true, timeout: 20_000 });
     report.browser = "Playwright Chromium";
   } catch (firstError) {
     try {
-      browser = await chromium.launch({ channel: "msedge", headless: true, timeout: 20_000 });
+      browser = await chromium.launch({ channel: "msedge", headless: true, timeout: 20_000, env: edgeTestEnvironment() });
       report.browser = "Microsoft Edge (Chromium)";
     } catch (secondError) {
       throw new Error(`没有可启动的浏览器。Chromium: ${String(firstError)}；Edge: ${String(secondError)}`);
@@ -237,6 +241,15 @@ try {
   for (const label of ["图像模型", "视频模型", "语音模型", "真实视频锁", "链路", "预算", "用量", "关于"]) {
     await page.getByRole("button", { name: label, exact: true }).first().click();
     await inspect(`settings-${label}`, "");
+    if (label === "图像模型") {
+      const extension = page.locator('[data-model-id="local_sdxl_openclaw"]');
+      assert.equal(await extension.getByText("待配置", { exact: true }).isVisible(), true);
+      assert.match(await extension.innerText(), /本地执行器/);
+      assert.equal(await extension.getByRole("button", { name: "试一下", exact: true }).count(), 0);
+      const demo = page.locator('[data-model-id="local_card_image"]');
+      assert.equal(await demo.getByText("已配置", { exact: true }).isVisible(), true);
+      report.checks.at(-1)!.providerReadinessVerified = true;
+    }
   }
   await verifyCreatorWorkflow({ page, base, slug, inspect, checks: report.checks });
   for (const [name, route] of routes.filter(([name]) => !name.startsWith("elements-") && !name.startsWith("trash-"))) {

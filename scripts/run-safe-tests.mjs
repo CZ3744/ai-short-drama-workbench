@@ -8,6 +8,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawn, execFileSync } from 'node:child_process';
+import { browserOsEnvironmentKey, captureBrowserOsEnvironment } from './browser-test-environment.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // 非隐藏目录：Express 的媒体文件下载会拒绝路径中包含 dotfile 的测试副本。
@@ -84,8 +85,10 @@ try {
   });
   // An explicit test interpreter is safe to pass through; real provider configuration stays excluded.
   if (process.env.VIDEO_GENERATE_TEST_PYTHON) env.VIDEO_GENERATE_TEST_PYTHON = process.env.VIDEO_GENERATE_TEST_PYTHON;
+  if (browserMode && process.platform === 'win32') env[browserOsEnvironmentKey] = captureBrowserOsEnvironment(process.env);
+  if (browserMode && process.env.VIDEO_GENERATE_TEST_BROWSER === 'msedge') env.VIDEO_GENERATE_TEST_BROWSER = 'msedge';
   if (browserMode && process.platform === 'win32' && process.env.LOCALAPPDATA) {
-    // 仅复用已安装的浏览器二进制；新 profile 和用户目录仍在测试副本内。
+    // 仅复用已安装的浏览器二进制；新 profile 和后端用户目录仍在测试副本内。
     env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright');
   }
   const args = ['--import', 'tsx', '--import', pathToFileURL(path.join(fixture, 'scripts/test-network-guard.mjs')).href,

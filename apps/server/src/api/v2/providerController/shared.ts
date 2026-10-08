@@ -42,6 +42,8 @@ export interface ProviderConfig {
   notes?: string;
   enabled?: boolean;
   is_builtin?: boolean;
+  /** Derived from local presets; executor paths must never be sent to the UI. */
+  local_executor_configured?: boolean;
   /**
    * LLM dual builtin only: 两套 api_type 各自的配置 (供前端"切换看到对应配置"用).
    * 前端切 api_type 时直接从这里读字段填表, 不调后端. 保存时一次性 PATCH api_type + base_url + api_key + model_id.
@@ -475,6 +477,11 @@ export function getBuiltinPresets(): ProviderConfig[] {
   }
 
   function fromPreset(kind: ProviderConfig["kind"], p: Record<string, any>): ProviderConfig {
+    const needsLocalExecutor = /^local_.+_openclaw$/.test(p.id) || Object.hasOwn(p, "executor");
+    const executorConfigured = needsLocalExecutor
+      ? typeof p.executor?.python_path === "string" && p.executor.python_path.trim() !== ""
+        && typeof p.executor?.script_path === "string" && p.executor.script_path.trim() !== ""
+      : undefined;
     return {
       id: p.id,
       label_zh: p.label_zh,
@@ -485,6 +492,7 @@ export function getBuiltinPresets(): ProviderConfig[] {
       notes: p.notes ?? "",
       enabled: p.enabled !== false && hasGenerationCredential(p.id),
       is_builtin: true,
+      ...(needsLocalExecutor ? { local_executor_configured: executorConfigured } : {}),
     };
   }
 
@@ -531,21 +539,22 @@ export interface ProviderFourState {
 export function computeProviderStatus(p: ProviderConfig): ProviderFourState {
   const available = providerHasGenerationAdapter(p);
   const isKeyless = KEYLESS_PROVIDER_IDS.has(p.id);
+  const needsLocalExecutor = p.local_executor_configured !== undefined || /^local_.+_openclaw$/.test(p.id);
   const key = p.api_key ?? getResolvedKey(p.id);
-  const configured = p.id === "chatgpt_codex_image"
+  const configured = needsLocalExecutor ? p.local_executor_configured === true : p.id === "chatgpt_codex_image"
     ? getChatgptOauthStatus().logged_in
     : isKeyless || (!!key && key.trim() !== "");
 
   const healthEntry = getCachedHealth(p.id);
   const tested = healthEntry !== null;
-  const healthy = healthEntry?.ok === true;
+  const healthy = configured && healthEntry?.ok === true;
   const last_checked_at = healthEntry?.last_checked_at ?? new Date().toISOString();
 
   let reason: string | undefined;
   if (!available) {
     reason = "尚未接入生成适配器";
   } else if (!configured) {
-    reason = "未配置 API Key";
+    reason = needsLocalExecutor ? "未配置本地执行器" : "未配置 API Key";
   } else if (!tested) {
     reason = "尚未进行健康检查";
   } else if (!healthy) {
@@ -557,7 +566,7 @@ export function computeProviderStatus(p: ProviderConfig): ProviderFourState {
     configured,
     tested,
     healthy,
-    enabled_for_generation: available && configured && healthy,
+    enabled_for_generation: p.enabled !== false && available && configured && healthy,
     last_checked_at,
     reason,
   };
@@ -575,6 +584,9 @@ export function statusDotColor(s: ProviderFourState): "green" | "yellow" | "red"
 
 export function getQuotaStatus(p: ProviderConfig): { color: QuotaColor; label: string } {
   if (!providerHasGenerationAdapter(p)) return { color: "gray", label: "未接入" };
+  if ((p.local_executor_configured !== undefined || /^local_.+_openclaw$/.test(p.id)) && !p.local_executor_configured) {
+    return { color: "gray", label: "未配置本地执行器" };
+  }
   if (KEYLESS_PROVIDER_IDS.has(p.id)) {
     if (p.id === "chatgpt_codex_image" && !getChatgptOauthStatus().logged_in) return { color: "gray", label: "未登录" };
     return { color: "green", label: "免费可用" };

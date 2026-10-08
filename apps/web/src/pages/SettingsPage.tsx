@@ -765,7 +765,7 @@ function ProviderCard(props: {
   }
 
   return (
-    <div className="mk-card settings-provider-card" style={{ marginBottom: 12, padding: 18, minWidth: 0 }}>
+    <div className="mk-card settings-provider-card" data-model-id={p.id} style={{ marginBottom: 12, padding: 18, minWidth: 0 }}>
       {/* 顶部: label + pill + builtin 标记 */}
       <div className="settings-provider-heading" style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 10, marginBottom: 8 }}>
         <div className="settings-provider-title" style={{ fontSize: 15, fontWeight: 600, color: "var(--ink-900)", fontFamily: "'Noto Serif SC', serif", minWidth: 0, overflowWrap: "anywhere" }}>{p.label_zh}</div>

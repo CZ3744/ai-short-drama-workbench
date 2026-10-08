@@ -22,6 +22,8 @@ approvedScripts.add('dev.mjs');
 approvedScripts.add('studio-web-identity.ts');
 approvedScripts.add('browser-workflow-checks.ts');
 approvedScripts.add('release-preset-config.mjs');
+approvedScripts.add('browser-test-environment.mjs');
+approvedScripts.add('browser-test-environment.d.mts');
 const remote = git('remote', 'get-url', 'origin').trim();
 const owner = remote.match(/github\.com[/:]([^/]+)/)?.[1];
 const privateWords = [os.userInfo().username, owner].filter(word => word && word.length >= 4 && !['root', 'runner', 'user', 'example'].includes(word));
