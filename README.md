@@ -1,14 +1,14 @@
 <div align="center">
 
-# AI 短剧工作台
+# AI 短剧生成工作台
 
 ### 把故事拍出来，先从改好一个镜头开始。
 
-一个本地 AI 视频创作与分镜工具。写剧本、管素材、做短片，接自己的模型。
+AI Short Drama Workbench，面向 AI 短剧、AI 漫剧和剧情短片的本地创作工具。写剧本、管素材、做短片，接自己的模型。
 
 [开始使用](#开始使用) · [让 AI 帮你安装](docs/AI_SETUP.md) · [看真实界面](docs/SHOWCASE.md) · [English](README.en.md)
 
-![AI 短剧工作台：从剧本到镜头](docs/media/product-overview.png)
+![AI 短剧生成工作台：从剧本到镜头](docs/media/product-overview.png)
 
 </div>
 
@@ -35,8 +35,8 @@
 **推荐 Windows + Node.js 24。** 安装 [Node.js](https://nodejs.org/) 后，下载仓库，或运行：
 
 ```sh
-git clone https://github.com/CZ3744/video-generate-studio.git
-cd video-generate-studio
+git clone https://github.com/CZ3744/ai-short-drama-workbench.git
+cd ai-short-drama-workbench
 npm ci
 npm run doctor
 ```
@@ -60,11 +60,11 @@ Windows 双击 **`start-studio-hidden.vbs`**，准备好后会打开浏览器。
 - **工具免费，模型按服务商计费。** 本项目采用 MIT 许可，不提供共享 Key 或免费云端额度。支持范围以设置页现有适配器为准，并非任意视频 API 填进去都能用。
 - **作品在本机，云端请求会出网。** 调用模型时，必要的提示词、素材和认证信息会发送到你选的服务商。仓库不包含作者的私人作品、数据库或凭据。详见 [隐私说明](docs/DISTRIBUTION.md)。
 - **没有 Key 也能先整理创作。** 剧本编辑、分镜管理、素材导入可先用；本地演示卡片只用来试流程，不是 AI 生图效果。
-- **目前是持续打磨的 0.2.x。** 本地流程、浏览器操作与隔离回归都有验收，付费模型仍受各家服务的额度、协议和可用性影响。当前适合个人在本机使用。
+- **目前处于 0.2.x 公开测试阶段。** 本地流程、浏览器操作与隔离回归都有验收，付费模型仍受各家服务的额度、协议和可用性影响。当前适合个人在本机使用。
 
 ## 一起把它做顺手
 
-如果它帮你少翻了几个文件夹，欢迎点个 Star，方便以后回来。如果某一步卡住了，欢迎 [提一个问题](https://github.com/CZ3744/video-generate-studio/issues)，告诉我你想做什么、实际发生了什么；请先遮住密钥与私人内容。
+如果它帮你少翻了几个文件夹，欢迎点个 Star，方便以后回来。如果某一步卡住了，欢迎 [提一个问题](https://github.com/CZ3744/ai-short-drama-workbench/issues)，告诉我你想做什么、实际发生了什么；请先遮住密钥与私人内容。
 
 [参与开发](CONTRIBUTING.md) · [版本说明](docs/RELEASE_NOTES.md) · [逐页验收截图](docs/VISUAL_REVIEW.md) · [AI 助手文档索引](llms.txt) · [安全问题](SECURITY.md) · [MIT 许可](LICENSE)
 

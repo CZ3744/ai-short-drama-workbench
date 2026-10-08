@@ -465,7 +465,7 @@ function StudioShell() {
       [/\/script/, "剧本"], [/\/inbox/, "灵感收件箱"], [/\/elements/, "素材"],
       [/\/compose/, "合成"], [/\/timeline/, "时间线"], [/^\/studio\/[^/]+$/, "系列总览"],
     ];
-    document.title = `${sections.find(([pattern]) => pattern.test(location.pathname))?.[1] ?? "工作台"} · AI 短剧工作台`;
+    document.title = `${sections.find(([pattern]) => pattern.test(location.pathname))?.[1] ?? "工作台"} · AI 短剧生成工作台`;
     setNavigationOpen(false);
   }, [location.pathname]);
 

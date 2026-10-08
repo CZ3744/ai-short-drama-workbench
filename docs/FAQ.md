@@ -2,7 +2,9 @@
 
 ## 这是做什么的？
 
-AI 短剧工作台（AI Video Studio，仓库名 `video-generate-studio`）是一个采用 MIT 许可的本地 AI 视频创作工具。它把剧本编辑、分镜规划、人物与场景参考、镜头素材和视频合成放在同一个工作区，适合想逐镜修改短片的个人创作者。
+AI 短剧生成工作台（AI Short Drama Workbench，仓库名 `ai-short-drama-workbench`）是一个采用 MIT 许可的本地创作工具，面向制作 AI 短剧、AI 漫剧和剧情短片的个人创作者。它把剧本编辑、分镜规划、人物与场景参考、镜头素材和视频合成放在同一个工作区，方便逐镜修改。
+
+真人风格与动画风格使用同一套创作流程，最终画面取决于选用的模型与素材。目前处于 0.2.x 公开测试阶段；源码和问题反馈都在 [GitHub 仓库](https://github.com/CZ3744/ai-short-drama-workbench)。
 
 ## 能把剧本变成视频吗？
 

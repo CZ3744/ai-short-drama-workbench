@@ -1937,13 +1937,14 @@ function AboutSection() {
       </div>
       <div className="mk-card" style={{ padding: 18, display: "flex", alignItems: "center", gap: 14 }}>
         <div style={{ width: 48, height: 48, borderRadius: 12, background: "linear-gradient(135deg, var(--brand-400), var(--brand-700))", color: "#fff", display: "grid", placeItems: "center", fontSize: 18, fontWeight: 700, fontFamily: "'Noto Serif SC', serif" }}>
-          V
+          AI
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink-900)", marginBottom: 4, fontFamily: "'Noto Serif SC', serif" }}>
-            video-generate {version}
+            AI 短剧生成工作台 {version}
           </div>
-          <div style={{ fontSize: 11.5, color: "var(--ink-500)" }}>本地 Windows AI 视频短剧工作台 · 单用户本机使用</div>
+          <div style={{ fontSize: 11.5, color: "var(--ink-600)", marginBottom: 4 }}>AI Short Drama Workbench</div>
+          <div style={{ fontSize: 11.5, color: "var(--ink-500)" }}>AI 短剧、漫剧与剧情短片创作 · 单用户本机使用</div>
         </div>
       </div>
 

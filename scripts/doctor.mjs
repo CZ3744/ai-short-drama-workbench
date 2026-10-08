@@ -41,7 +41,7 @@ const result = {
 };
 if (json) console.log(JSON.stringify(result, null, 2));
 else {
-  console.log('AI 短剧工作台 · 安装检查\n');
+  console.log('AI 短剧生成工作台 / AI Short Drama Workbench · 安装检查\n');
   for (const check of checks) {
     console.log(`[${check.status.toUpperCase()}] ${check.name}: ${check.detail}`);
     if (check.action) console.log(`  ${check.action}`);

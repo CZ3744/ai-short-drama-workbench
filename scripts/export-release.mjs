@@ -34,7 +34,7 @@ const privateRoots = [root, path.dirname(root), path.dirname(path.dirname(root))
 function sanitize(text) {
   // The published project's clone URL is intentional attribution, not a local account secret.
   const projectUrls = [];
-  text = text.replace(/https:\/\/github\.com\/[A-Za-z0-9-]+\/video-generate-studio(?:\.git)?/g, url => {
+  text = text.replace(/https:\/\/github\.com\/[A-Za-z0-9-]+\/(?:ai-short-drama-workbench|video-generate-studio)(?:\.git)?/g, url => {
     projectUrls.push(url); return `__PROJECT_REPO_URL_${projectUrls.length - 1}__`;
   });
   for (const original of privateRoots) {

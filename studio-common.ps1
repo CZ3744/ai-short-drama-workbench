@@ -1,4 +1,4 @@
-﻿# AI 短剧工作台 — 启停脚本公用逻辑 (start-studio.ps1 / stop-studio.ps1 共用)
+﻿# AI 短剧生成工作台 — 启停脚本公用逻辑 (start-studio.ps1 / stop-studio.ps1 共用)
 #
 # 为什么单独抽一个文件: "后端端口上坐着的到底是不是我们自己" 这个判断,
 # 启动器和停止器必须用同一套标准 —— 启动器靠它认出端口被外人占了要报警,
@@ -117,7 +117,7 @@ function Show-StudioMessage {
         # 出错的弹窗等用户点掉(他必须读到); 报喜的弹窗 8 秒自动消失,
         # 免得在桌面上杵着等人点 —— 点"停止"就是想清净, 不该再收一个必须处理的对话框。
         $wait = if ($Level -eq "error") { 0 } else { 8 }
-        try { (New-Object -ComObject WScript.Shell).Popup($Message, $wait, "AI 短剧工作台", $icon) | Out-Null } catch { }
+        try { (New-Object -ComObject WScript.Shell).Popup($Message, $wait, "AI 短剧生成工作台", $icon) | Out-Null } catch { }
     } else {
         $color = if ($Level -eq "error") { "Red" } else { "Cyan" }
         Write-Host ""

@@ -1,6 +1,8 @@
-# AI 短剧工作台 / AI Video Studio
+# AI 短剧生成工作台 / AI Short Drama Workbench
 
-> A MIT-licensed local AI video workspace for scripts, storyboards, character references, shot media, and composition. Repository: video-generate-studio. Users connect their own model providers and API keys.
+> An MIT-licensed local workspace for AI short dramas, animated short dramas (AI 漫剧), and narrative short films. It brings scripts, storyboards, character references, shot media, and composition together. Users connect their own model providers and API keys.
+
+Repository: https://github.com/CZ3744/ai-short-drama-workbench. Default clone directory: `ai-short-drama-workbench`. Version 0.2.x is in public testing. Animated and live-action styles use the same creation workflow, with results depending on the selected models and media.
 
 The interface is currently Chinese. Windows is the primary verified platform; Node.js 24 is recommended. FFmpeg and FFprobe are needed for composition. No API key is needed to edit scripts or organize imported media. Cloud generation sends the required content to the chosen provider and may incur charges. Local demo cards are placeholders, not AI-generated film evidence.
 

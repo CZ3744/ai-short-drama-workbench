@@ -59,7 +59,7 @@ const STORYBOARD_SCHEMA_EXAMPLE = JSON.stringify(
 );
 
 // 直接给外部 AI 用的提示词模板 — 用户复制走粘到 ChatGPT 等
-const PROMPT_TEMPLATE_FOR_AI = `请按以下严格的 JSON Schema 输出短剧分镜数据。我会把你的输出直接粘贴到我的本地 AI 短剧工作台一键导入,所以请只输出 JSON,不要任何 markdown 包裹、注释、说明文字。
+const PROMPT_TEMPLATE_FOR_AI = `请按以下严格的 JSON Schema 输出短剧分镜数据。我会把你的输出直接粘贴到 AI 短剧生成工作台一键导入,所以请只输出 JSON,不要任何 markdown 包裹、注释、说明文字。
 
 要求:
 - 围绕主题 [在这里写你的剧本主题或灵感]

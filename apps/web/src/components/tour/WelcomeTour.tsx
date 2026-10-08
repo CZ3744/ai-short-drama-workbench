@@ -318,7 +318,7 @@ export function WelcomeTour({ active, onClose }: WelcomeTourProps) {
                 fontFamily: "'Noto Serif SC', serif",
               }}
             >
-              本地 AI 短剧工作台
+              AI 短剧生成工作台
             </h1>
             <p
               style={{

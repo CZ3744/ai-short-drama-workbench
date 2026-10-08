@@ -248,7 +248,7 @@ export default function StudioHome() {
       <div className="v24-studio-home studio-home">
         <header className="studio-home-heading">
           <div>
-            <div className="studio-eyebrow"><span />你的创作工作台</div>
+            <div className="studio-eyebrow"><span />AI 短剧生成工作台</div>
             <h1>{getGreeting()}，让故事发生。</h1>
             <p>从一个想法，到一部作品。按你的节奏，继续创造。</p>
           </div>

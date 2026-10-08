@@ -1,13 +1,14 @@
-# 让 AI 助手帮你装好
+# 让 AI 助手安装 AI 短剧生成工作台
 
-把下面这段话交给能操作你电脑的 AI 编程助手，例如 Codex、Claude Code 或 Cursor。它会在你的电脑安装工作台；模型仍然由你自己选、自己付费。
+把下面这段话交给能操作你电脑的 AI 编程助手，例如 Codex、Claude Code 或 Cursor，让它安装 AI Short Drama Workbench 并验证本地流程。工作台面向 AI 短剧、AI 漫剧和剧情短片创作；模型由你自己选、自己付费。
 
 ```text
-请帮我在本机安装并验证 AI 短剧工作台：
-https://github.com/CZ3744/video-generate-studio
+请帮我在本机安装并验证 AI 短剧生成工作台（AI Short Drama Workbench）：
+https://github.com/CZ3744/ai-short-drama-workbench
 
 先阅读仓库 README.md、docs/GETTING_STARTED.md 和 docs/AI_SETUP.md。
-使用独立目录；如果已有安装，先检查 Git 状态并保留 data/、outputs/、
+新安装时将仓库克隆到独立的 ai-short-drama-workbench 目录。
+如果已有安装，先检查 Git 状态并保留 data/、outputs/、
 config/local-settings.json 和 .env，不覆盖已有作品或凭据。
 
 1. 检查 Node.js，推荐 24 LTS；运行 npm ci。

@@ -165,9 +165,9 @@ export function AppSideNav() {
 
   return (
     <nav className="studio-sidenav" aria-label="主导航">
-      <button type="button" className="studio-brand" onClick={() => navigate("/studio")} aria-label="AI 短剧工作台，返回主页">
+      <button type="button" className="studio-brand" onClick={() => navigate("/studio")} aria-label="AI 短剧生成工作台，返回主页">
         <span className="studio-brand-symbol"><Icon name="sparkles" size={23} /></span>
-        <span><strong>创作工作台</strong><small>让灵感成为作品</small></span>
+        <span><strong>AI 短剧生成工作台</strong><small>让灵感成为作品</small></span>
       </button>
       <button type="button" className={`studio-nav-item studio-nav-home${isStudioHome ? " is-active" : ""}`} aria-current={isStudioHome ? "page" : undefined} onClick={() => navigate("/studio")}><Icon name="home" size={17} /><span>我的系列</span></button>
       {!isStudioHome && activeSlug && <div className="studio-current-episode">

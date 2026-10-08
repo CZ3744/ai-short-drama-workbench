@@ -1,20 +1,20 @@
 <div align="center">
 
-# AI Video Studio
+# AI Short Drama Workbench
 
 ### Make the story work. Then make the shot.
 
-Scripts, storyboards, references, clips, and export — in one local workspace, with your own model providers.
+A local workspace for AI short dramas, animated short dramas, and narrative short films. Bring scripts, storyboards, references, clips, and export together with your own model providers.
 
 [简体中文](README.md) · [Real screenshots](docs/SHOWCASE.md) · [Setup guide](docs/GETTING_STARTED.md)
 
-![AI Video Studio product overview](docs/media/product-overview.png)
+![AI Short Drama Workbench product overview](docs/media/product-overview.png)
 
 </div>
 
 Making an AI short film involves more than pressing Generate. You revise a scene, find the right character reference, adjust a prompt, compare clips, and do it again.
 
-This studio keeps that work together. Go back to one shot and keep editing. Bring in scripts and media you already have, or connect your own providers when you need new material.
+AI Short Drama Workbench (AI 短剧生成工作台) keeps that work together. Go back to one shot and keep editing. Bring in scripts and media you already have, or connect your own providers when you need new material. Live-action and animated styles use the same script, storyboard, and media workflow; the visual result depends on your chosen models and source material.
 
 ## What you can do
 
@@ -31,8 +31,8 @@ The app currently uses a Chinese interface. The overview image is a promotional 
 Recommended: **Windows and Node.js 24**. Windows has received the most complete hands-on verification; macOS and Linux have not received equivalent testing.
 
 ```sh
-git clone https://github.com/CZ3744/video-generate-studio.git
-cd video-generate-studio
+git clone https://github.com/CZ3744/ai-short-drama-workbench.git
+cd ai-short-drama-workbench
 npm ci
 npm run doctor
 ```
@@ -51,8 +51,8 @@ The tool is MIT licensed. You supply your own API keys and pay your chosen provi
 
 Projects and settings live on your computer. Cloud generation sends the necessary prompts, media, and credentials to the provider you choose. Local demo cards are placeholders for learning the workflow, not AI image results. This is a personal local application, not an authenticated multi-user hosting service.
 
-Version 0.2.x is under active refinement. Isolated tests and browser checks cover local behavior; they do not guarantee every paid provider's availability or output quality.
+Version 0.2.x is in public testing and under active refinement. Isolated tests and browser checks cover local behavior; they do not guarantee every paid provider's availability or output quality.
 
 [FAQ](docs/FAQ.md) · [Privacy](docs/DISTRIBUTION.md) · [Contributing](CONTRIBUTING.md) · [Release notes](docs/RELEASE_NOTES.md) · [Assistant documentation index](llms.txt) · [MIT](LICENSE)
 
-If it helps your workflow, a Star makes it easier to find again. If a step gets in your way, [open an issue](https://github.com/CZ3744/video-generate-studio/issues) with a small, sanitized example.
+If it helps your workflow, a Star makes it easier to find again. If a step gets in your way, [open an issue](https://github.com/CZ3744/ai-short-drama-workbench/issues) with a small, sanitized example.
