@@ -8,8 +8,8 @@
     },
     {
       "path": ".github/workflows/quality.yml",
-      "bytes": 1504,
-      "sha256": "0cb3af83ee0e03bf147aa11d741f5d95c5ceaa9c468b07c8805e2ff34d93179e"
+      "bytes": 1516,
+      "sha256": "c46f2a29239566ae0e34e8796b623a4e3312b87d82ef798df71daa8d4ffeb90a"
     },
     {
       "path": ".gitignore",

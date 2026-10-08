@@ -27,7 +27,8 @@ jobs:
       - run: npm ci
       # windows-latest includes Edge; verify a real headless launch instead of downloading a second browser.
       - name: Verify installed Chromium browser
-        run: node --input-type=module -e "import { chromium } from 'playwright'; const browser = await chromium.launch({ channel: 'msedge', headless: true }); console.log(await browser.version()); await browser.close();"
+        run: |
+          node --input-type=module -e "import { chromium } from 'playwright'; const browser = await chromium.launch({ channel: 'msedge', headless: true }); console.log(await browser.version()); await browser.close();"
       - name: Install media test tools
         run: choco install ffmpeg --no-progress -y
       - name: Verify FFmpeg
